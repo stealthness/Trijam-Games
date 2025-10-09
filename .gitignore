@@ -1,3 +1,12 @@
+# Exclude all directories except any directory named "_Scripts" (and their contents)
+# - Ignore all directories recursively
+# - Re-include any directory named _Scripts and everything in them
+# Note: already-tracked files/directories won't be removed from Git automatically; to apply changes to tracked paths you must git rm --cached ...
+**/*/
+!**/_Scripts/
+!**/_Scripts/**
+
+
 # This .gitignore file should be placed at the root of your Unity project directory
 #
 # Get latest from https://github.com/github/gitignore/blob/main/Unity.gitignore
