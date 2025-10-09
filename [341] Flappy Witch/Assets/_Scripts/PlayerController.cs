@@ -8,7 +8,9 @@ namespace _Scripts
     {
         
         private Rigidbody2D _rigidbody2D;
-        [SerializeField] private float jumpForce;
+        [SerializeField] private float flapForce = 5f;
+        [SerializeField] private bool canFlap = true;
+        [SerializeField] private float delayFlapCooldownTimer = 0.3f;
 
         private void Awake()
         {
@@ -17,9 +19,18 @@ namespace _Scripts
 
         public void OnJump()
         {
+            if (!canFlap) return;
             
-            _rigidbody2D.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            
+            _rigidbody2D.AddForce(Vector2.up * flapForce, ForceMode2D.Impulse);
             Debug.Log("Player Jumped");
+            canFlap = false;
+            Invoke(nameof(DelayFlapCooldown), delayFlapCooldownTimer);
+        }
+        
+        private void DelayFlapCooldown()
+        {
+            canFlap = true;
         }
     }
 }
