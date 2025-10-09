@@ -22,7 +22,16 @@ namespace _Scripts
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.CompareTag("BrokenTree"))
+            if (other.CompareTag("Player"))
+            {
+                Debug.Log("Player Hit BrokenTree");
+                Time.timeScale = 0;
+            }
+        }
+
+        private void OnCollisionEnter(Collision collision)
+        {
+            if (collision.gameObject.CompareTag("BrokenTree"))
             {
                 Debug.Log("Player Hit BrokenTree");
                 Time.timeScale = 0;
