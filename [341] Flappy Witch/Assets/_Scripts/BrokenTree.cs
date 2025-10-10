@@ -20,7 +20,7 @@ namespace _Scripts
             
             if (transform.position.x < -10f)
             {
-                transform.position = new Vector3(10f, transform.position.y, transform.position.z);
+                transform.position = new Vector3(20f, transform.position.y, transform.position.z);
             }
         }
 
