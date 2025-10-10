@@ -12,30 +12,17 @@ namespace _Scripts
             _worldMovementSpeed = 2f;
         }
 
-        
-        
+
+
         private void Update()
         {
             transform.Translate(Vector3.left * (_worldMovementSpeed * Time.deltaTime));
-        }
-
-
-        private void OnTriggerEnter(Collider other)
-        {
-            if (other.CompareTag("Player"))
+            
+            if (transform.position.x < -10f)
             {
-                Debug.Log("Player Hit BrokenTree");
-                Time.timeScale = 0;
+                transform.position = new Vector3(10f, transform.position.y, transform.position.z);
             }
         }
 
-        private void OnCollisionEnter(Collision collision)
-        {
-            if (collision.gameObject.CompareTag("BrokenTree"))
-            {
-                Debug.Log("Player Hit BrokenTree");
-                Time.timeScale = 0;
-            }
-        }
     }
 }

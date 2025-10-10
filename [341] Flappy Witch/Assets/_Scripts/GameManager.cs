@@ -27,5 +27,10 @@ namespace _Scripts
             Debug.Log("GameManager Start");
         }
 
+
+        public void GameOver()
+        {
+            Debug.Log("Game Over!");
+        }
     }
 }
