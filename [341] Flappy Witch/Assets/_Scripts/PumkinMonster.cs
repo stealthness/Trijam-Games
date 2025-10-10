@@ -2,8 +2,7 @@
 
 namespace _Scripts
 {
-    public class PumkinMonster : MonoBehaviour
+    public class PumkinMonster : BaseMovement
     {
-        public GameObject pumkinBulletPrefab;
     }
 }

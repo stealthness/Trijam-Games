@@ -3,26 +3,15 @@ using UnityEngine;
 
 namespace _Scripts
 {
-    public class BrokenTree : MonoBehaviour
-    {
-        private float _worldMovementSpeed;
-
-        private void Awake()
+    public class BrokenTree : BaseMovement
+    {    
+        public Sprite[] TreeSprites;
+        
+        
+        protected override void ResetPosition()
         {
-            _worldMovementSpeed = 2f;
-        }
-
-
-
-        private void Update()
-        {
-            transform.Translate(Vector3.left * (_worldMovementSpeed * Time.deltaTime));
             
-            if (transform.position.x < -10f)
-            {
-                transform.position = new Vector3(20f, transform.position.y, transform.position.z);
-            }
         }
-
     }
+
 }
