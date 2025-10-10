@@ -8,10 +8,6 @@ namespace _Scripts
         public Sprite[] TreeSprites;
         
         
-        protected override void ResetPosition()
-        {
-            
-        }
     }
 
 }
