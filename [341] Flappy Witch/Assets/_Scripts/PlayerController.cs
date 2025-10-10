@@ -1,9 +1,11 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Random = UnityEngine.Random;
 
 namespace _Scripts
 {
+    [RequireComponent(typeof(AudioSource))]
     [RequireComponent (typeof(Rigidbody2D))]
     [RequireComponent (typeof(SpriteRenderer))]
     public class PlayerController : MonoBehaviour
@@ -11,7 +13,11 @@ namespace _Scripts
         
         private Rigidbody2D _rigidbody2D;
         private SpriteRenderer _spriteRenderer;
+        private AudioSource _audioSource;
         
+        public AudioClip jumpSound;
+        public AudioClip deathSound;
+        public AudioClip laughSound;
         
         [SerializeField] private float flapForce = 5f;
         [SerializeField] private bool canFlap = true;
@@ -23,13 +29,19 @@ namespace _Scripts
         {
             _rigidbody2D = GetComponent<Rigidbody2D>();
             _spriteRenderer = GetComponent<SpriteRenderer>();
+            _audioSource = GetComponent<AudioSource>();
+        }
+
+        private void Start()
+        {
+            Invoke(nameof(Laugh), Random.Range(5f, 10f));
         }
 
         public void OnJump()
         {
             if (!canFlap || _isDead ) return;
             
-            
+            _audioSource.PlayOneShot(jumpSound);
             _rigidbody2D.AddForce(Vector2.up * flapForce, ForceMode2D.Impulse);
             Debug.Log("Player Jumped");
             canFlap = false;
@@ -57,12 +69,14 @@ namespace _Scripts
             if (other.CompareTag("BrokenTree"))
             {
                 Debug.Log("Player Hit BrokenTree");
+                _audioSource.PlayOneShot(deathSound);
                 Die();
             }
         }
         
         private void Die()
         {
+            CancelInvoke();
             _isDead = true;
             Debug.Log("Player Died");
             _spriteRenderer.color = Color.red;
@@ -73,7 +87,6 @@ namespace _Scripts
         {
             if (_isDead)
             {
-                
             }
             
             // dead player move off screen
@@ -81,6 +94,15 @@ namespace _Scripts
             {
                 SceneManager.LoadScene("MenuScene");
             }
+            
+            
+        }
+        private void Laugh()
+        {
+            if (_isDead) return;
+            
+            _audioSource.PlayOneShot(laughSound);
+            Invoke(nameof(Laugh), Random.Range(5f, 10f));
         }
     }
 }
