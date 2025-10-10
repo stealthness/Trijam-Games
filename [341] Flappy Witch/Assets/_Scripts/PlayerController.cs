@@ -24,6 +24,7 @@ namespace _Scripts
         [SerializeField] private float delayFlapCooldownTimer = 0.3f;
         
         private bool _isDead = false;
+        private bool isFrozen = false;
 
         private void Awake()
         {
@@ -39,7 +40,7 @@ namespace _Scripts
 
         public void OnJump()
         {
-            if (!canFlap || _isDead ) return;
+            if (!canFlap || _isDead || isFrozen ) return;
             
             _audioSource.PlayOneShot(jumpSound);
             _rigidbody2D.AddForce(Vector2.up * flapForce, ForceMode2D.Impulse);
@@ -72,6 +73,12 @@ namespace _Scripts
                 _audioSource.PlayOneShot(deathSound);
                 Die();
             }
+            
+            if (other.CompareTag("FlyingMonkey"))
+            {
+                Debug.Log("Player Hit FlyingMonkey");
+                Die();
+            }
         }
         
         private void Die()
@@ -85,6 +92,7 @@ namespace _Scripts
 
         private void Update()
         {
+            
             if (_isDead)
             {
             }
@@ -94,15 +102,53 @@ namespace _Scripts
             {
                 SceneManager.LoadScene("MenuScene");
             }
+
+            if (isFrozen)
+            {
+                return;
+            }
+            
+            
+            if (transform.position.y > 8f)
+            {
+                Debug.Log("Freeze Player");
+                Freeze();
+            }
             
             
         }
+
+        private void Freeze()
+        {
+            _spriteRenderer.color = Color.lightSkyBlue;
+            isFrozen = true;
+            Invoke(nameof(UnFreeze), 3f);
+            _rigidbody2D.linearVelocityY = 0f;
+            _rigidbody2D.gravityScale = 0.1f;
+        }
+
+        private void UnFreeze()
+        {
+            
+            _rigidbody2D.gravityScale = 0.5f;
+            _spriteRenderer.color = Color.white;
+            isFrozen = false;
+        }
+
         private void Laugh()
         {
             if (_isDead) return;
-            
-            _audioSource.PlayOneShot(laughSound);
-            Invoke(nameof(Laugh), Random.Range(5f, 10f));
+
+            if (isFrozen)
+            {
+                Invoke(nameof(Laugh), Random.Range(2f, 4f));
+            }
+            else
+            {
+               _audioSource.PlayOneShot(laughSound);
+               Invoke(nameof(Laugh), Random.Range(5f, 10f)); 
+            }
+
         }
     }
 }

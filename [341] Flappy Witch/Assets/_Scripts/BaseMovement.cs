@@ -16,7 +16,7 @@ namespace _Scripts
 
         
         
-        private void Update()
+        protected virtual void Update()
         {
             transform.Translate(Vector3.left * (_worldMovementSpeed * Time.deltaTime));
              
