@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace _Scripts
 {
@@ -31,6 +32,11 @@ namespace _Scripts
         public void GameOver()
         {
             Debug.Log("Game Over!");
+        }
+
+        public void RestartGame()
+        {
+            SceneManager.LoadScene("GameScene");
         }
     }
 }

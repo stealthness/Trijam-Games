@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace _Scripts
 {
@@ -66,6 +67,20 @@ namespace _Scripts
             Debug.Log("Player Died");
             _spriteRenderer.color = Color.red;
             GameManager.Instance.GameOver();
-        }   
+        }
+
+        private void Update()
+        {
+            if (_isDead)
+            {
+                
+            }
+            
+            // dead player move off screen
+            if (transform.position.x < -10f)
+            {
+                SceneManager.LoadScene("MenuScene");
+            }
+        }
     }
 }
