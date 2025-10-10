@@ -46,6 +46,9 @@ namespace _Scripts
             {
                 Debug.Log("Player Hit Ground");
                 Die();
+                _rigidbody2D.bodyType = RigidbodyType2D.Kinematic;
+                _rigidbody2D.constraints = RigidbodyConstraints2D.FreezePositionY;
+                _rigidbody2D.linearVelocityX = -2f;
             }   
             
             if (_isDead) return;
