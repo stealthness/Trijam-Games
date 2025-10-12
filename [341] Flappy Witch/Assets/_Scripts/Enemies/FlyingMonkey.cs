@@ -1,8 +1,8 @@
-﻿using System;
+﻿using _Scripts.Core;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace _Scripts
+namespace _Scripts.Enemies
 {
     public class FlyingMonkey : BaseMovement
     {

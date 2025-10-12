@@ -1,8 +1,7 @@
-﻿using System;
-using Unity.VisualScripting;
+﻿using _Scripts.Core;
 using UnityEngine;
 
-namespace _Scripts
+namespace _Scripts.Enemies
 {
     public class PumkinMonster : BaseMovement
     {

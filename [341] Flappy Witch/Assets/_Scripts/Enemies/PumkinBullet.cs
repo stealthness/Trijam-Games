@@ -1,7 +1,6 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace _Scripts
+namespace _Scripts.Enemies
 {
     [RequireComponent(typeof(Rigidbody2D))]
     public class PumkinBullet : MonoBehaviour

@@ -662,6 +662,8 @@ MonoBehaviour:
   backgroundSprites:
   - {fileID: 951263275}
   - {fileID: 741750748}
+  backgroundScrollSpeedRation: 2
+  backgroundWidth: 35
 --- !u!1 &581271627
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,7 +1,7 @@
-﻿using System;
+﻿using _Scripts.Core;
 using UnityEngine;
 
-namespace _Scripts
+namespace _Scripts.Enemies
 {
     public class BrokenTree : BaseMovement
     {    
