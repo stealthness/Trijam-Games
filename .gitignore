@@ -23,6 +23,12 @@
 **/[Pp]ackages/
 **/[Ss]ettings/
 **/[Pp]roject[Ss]ettings/
+**/[Aa]rt/
+**/[Pp]refabs/
+**/[Ss]ounds/
+**/SFX/
+**/[Mm]usic/
+**/[Ff]onts/
 *.log
 
 **.meta
