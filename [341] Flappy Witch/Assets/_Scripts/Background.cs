@@ -3,18 +3,27 @@ using UnityEngine;
 
 namespace _Scripts
 {
+    /// <summary>
+    /// Controls the background scrolling effect.
+    /// </summary>
     public class Background : MonoBehaviour
     {
         public GameObject[] backgroundSprites;
+        
+        [SerializeField] private float backgroundScrollSpeedRation = 2f;
+        [SerializeField] private float backgroundWidth = 35f;
 
         private void Update()
         {
-            foreach (GameObject sprite in backgroundSprites)
+            
+            foreach (var sprite in backgroundSprites)
             {
-                sprite.transform.position += Vector3.left * (GameManager.Instance.gameSpeed * Time.deltaTime);
-                if (sprite.transform.position.x <= -35f)
+                var backgroundScrollSpeed = GameManager.Instance.gameSpeed / backgroundScrollSpeedRation;
+                
+                sprite.transform.position += Vector3.left * (backgroundScrollSpeed * Time.deltaTime);
+                if (sprite.transform.position.x <= -backgroundWidth)
                 {
-                    sprite.transform.position += Vector3.right * 70f;
+                    sprite.transform.position += Vector3.right * (2 * backgroundWidth);
                 }
             }
         }
