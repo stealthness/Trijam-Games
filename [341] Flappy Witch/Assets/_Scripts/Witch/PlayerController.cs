@@ -20,6 +20,8 @@ namespace _Scripts
         public AudioClip deathSound;
         public AudioClip laughSound;
         
+        public GameObject FrozenBlockEffect;
+        
         [SerializeField] private float flapForce = 5f;
         [SerializeField] private bool canFlap = true;
         [SerializeField] private float delayFlapCooldownTimer = 0.3f;
@@ -123,6 +125,7 @@ namespace _Scripts
         {
             _spriteRenderer.color = Color.lightSkyBlue;
             isFrozen = true;
+            FrozenBlockEffect.SetActive(true);
             Invoke(nameof(UnFreeze), 3f);
             _rigidbody2D.linearVelocityY = 0f;
             _rigidbody2D.gravityScale = 0.1f;
@@ -130,7 +133,7 @@ namespace _Scripts
 
         private void UnFreeze()
         {
-            
+            FrozenBlockEffect.SetActive(false);
             _rigidbody2D.gravityScale = 0.5f;
             _spriteRenderer.color = Color.white;
             isFrozen = false;
