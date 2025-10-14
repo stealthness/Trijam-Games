@@ -883,6 +883,7 @@ GameObject:
   - component: {fileID: 250609813}
   - component: {fileID: 250609812}
   - component: {fileID: 250609815}
+  - component: {fileID: 250609816}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -907,8 +908,8 @@ Camera:
   m_GameObject: {fileID: 250609811}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0.019607844, g: 0.12941177, b: 0.20000002, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -1008,6 +1009,19 @@ MonoBehaviour:
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
   m_Version: 2
+--- !u!114 &250609816
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 250609811}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a231160102a04da39374608f310458d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_Scripts.Core.CamaraManager
+  player: {fileID: 1640840708}
 --- !u!4 &292919906 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4854231934783260085, guid: 2cfe168d1ae1f734e94a9a0c698aa0f1, type: 3}
@@ -2929,7 +2943,7 @@ Animator:
   m_GameObject: {fileID: 1640840708}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: -5981622711090225652, guid: 5a90db540c2cb5440a58cf186ad5b1aa, type: 3}
+  m_Controller: {fileID: 9100000, guid: a0d451eb863f45a4dbe7142ffbeb3324, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
