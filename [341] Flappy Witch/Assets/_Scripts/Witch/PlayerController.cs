@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using _Scripts.Managers;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -35,6 +36,8 @@ namespace _Scripts
         private bool _isDead = false;
         private bool _isFrozen = false;
         private float _savedAnimatorSpeed;
+        
+        private Coroutine _laughCoroutine;
 
         // Inherit from MonoBehaviour
         
@@ -49,7 +52,7 @@ namespace _Scripts
 
         private void Start()
         {
-            Invoke(nameof(Laugh), Random.Range(5f, 10f));
+            _laughCoroutine = StartCoroutine(LaughRoutine());
         }
         
         private void Update()
@@ -96,9 +99,9 @@ namespace _Scripts
                 Die();
                 _rigidbody2D.bodyType = RigidbodyType2D.Kinematic;
                 _rigidbody2D.constraints = RigidbodyConstraints2D.FreezePositionY;
-                _rigidbody2D.linearVelocityX = GameManager.Instance.gameSpeed;
-            }   
-            
+                _rigidbody2D.linearVelocityX = -2f;
+            }
+
             if (_isDead) return;
             
             if (other.CompareTag("BrokenTree"))
@@ -111,6 +114,9 @@ namespace _Scripts
             if (other.CompareTag("FlyingMonkey"))
             {
                 Debug.Log("Player Hit FlyingMonkey");
+                _rigidbody2D.bodyType = RigidbodyType2D.Kinematic;
+                _rigidbody2D.constraints = RigidbodyConstraints2D.FreezePositionY;
+                _rigidbody2D.linearVelocityX = other.GetComponent<Rigidbody2D>().linearVelocityX;
                 Die();
             }
         }
@@ -127,7 +133,6 @@ namespace _Scripts
         private void Die()
         {
             Debug.Log("Player Died");
-            
             CancelInvoke();
             _isDead = true;
             _animator.SetTrigger(DieAnimationClip);
@@ -146,13 +151,15 @@ namespace _Scripts
             _spriteRenderer.color = Color.lightSkyBlue;
             _isFrozen = true;
             frozenBlockEffect.SetActive(true);
-            Invoke(nameof(UnFreeze), laughFrozenTime);
+            StartCoroutine(UnFreeze());
             _rigidbody2D.linearVelocityY = 0f;
             _rigidbody2D.gravityScale = 0.1f;
         }
 
-        private void UnFreeze()
+        private IEnumerator UnFreeze()
         {
+            yield return new WaitForSeconds(laughFrozenTime);
+            
             _animator.speed = _savedAnimatorSpeed;
             frozenBlockEffect.SetActive(false);
             _rigidbody2D.gravityScale = 0.5f;
@@ -162,15 +169,22 @@ namespace _Scripts
         /// <summary>
         /// Witch laughs at random intervals
         /// </summary>
-        private void Laugh()
+        private IEnumerator LaughRoutine()
         {
-            if (_isDead) return;
+            // Initial delay before the first laugh
+            yield return new WaitForSeconds(Random.Range(nextLaughMinTime, nextLaughMaxTime));
 
-            if (!_isFrozen)
+            while (!_isDead)
             {
-               _audioSource.PlayOneShot(laughSound);
+                if (!_isFrozen)
+                {
+                    _audioSource.PlayOneShot(laughSound);
+                }
+                var min = Mathf.Min(nextLaughMinTime, nextLaughMaxTime);
+                var max = Mathf.Max(nextLaughMinTime, nextLaughMaxTime);
+                yield return new WaitForSeconds(Random.Range(min, max));
             }
-            Invoke(nameof(Laugh), Random.Range(nextLaughMaxTime, nextLaughMaxTime)); 
+            
         }
     }
 }
