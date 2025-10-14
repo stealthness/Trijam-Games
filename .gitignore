@@ -29,6 +29,8 @@
 **/SFX/
 **/[Mm]usic/
 **/[Ff]onts/
+**/[Tt]ilemaps/
+**/[Aa]nimated [Tt]ilemaps/
 *.log
 
 **.meta
