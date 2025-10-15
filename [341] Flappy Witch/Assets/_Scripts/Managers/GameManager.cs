@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -31,7 +32,15 @@ namespace _Scripts.Managers
         public void GameOver()
         {
             Debug.Log("Game Over!");
+            StartCoroutine(DelayedMenuLoad());
         }
+
+        private IEnumerator DelayedMenuLoad()
+        {
+            yield return new WaitForSeconds(3f);
+            SceneManager.LoadScene("MenuScene");
+        }
+
 
         public void RestartGame()
         {

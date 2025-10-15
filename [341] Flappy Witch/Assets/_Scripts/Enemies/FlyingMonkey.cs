@@ -9,7 +9,7 @@ namespace _Scripts.Enemies
         
         
         [SerializeField] private float minYStartPos = 1f;
-        [SerializeField] private float maxYStartPos = 4f;
+        [SerializeField] private float maxYStartPos = 10f;
 
         private void Start()
         {
@@ -19,7 +19,8 @@ namespace _Scripts.Enemies
         protected override void ResetPosition()
         {
             var startY = Random.Range(minYStartPos, maxYStartPos);
-            transform.position = new Vector3(_startPositionX, startY, transform.position.z);
+            var startX = Random.Range(_startPositionX - 4f, _startPositionX + 4f);
+            transform.position = new Vector3(startX, startY, transform.position.z);
         }
         
     }
