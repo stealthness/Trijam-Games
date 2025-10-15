@@ -2735,10 +2735,13 @@ MonoBehaviour:
   jumpSound: {fileID: 8300000, guid: 9b5ace451d3deeb41bdcaabd9ed6c68e, type: 3}
   deathSound: {fileID: 8300000, guid: 7386be16843264340a04bbf2d1cc0b3e, type: 3}
   laughSound: {fileID: 8300000, guid: 176320824f0f5c04eb27045ab1f66ccb, type: 3}
-  FrozenBlockEffect: {fileID: 1809730704}
+  frozenBlockEffect: {fileID: 1809730704}
   flapForce: 5
   canFlap: 1
   delayFlapCooldownTimer: 0.3
+  nextLaughMinTime: 5
+  nextLaughMaxTime: 10
+  laughFrozenTime: 3
 --- !u!82 &1640840715
 AudioSource:
   m_ObjectHideFlags: 0

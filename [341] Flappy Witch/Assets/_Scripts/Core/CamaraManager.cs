@@ -18,7 +18,8 @@ namespace _Scripts.Core
 
         private void LateUpdate()
         {
-            var newCameraPosition = new Vector3( _camera.transform.position.x, player.transform.position.y, _camera.transform.position.z);
+            var posY = Mathf.Clamp(player.transform.position.y, 0, 10f);
+            var newCameraPosition = new Vector3( _camera.transform.position.x, posY, _camera.transform.position.z);
             _camera.transform.position = newCameraPosition;
 
         }
