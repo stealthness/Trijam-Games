@@ -1,5 +1,5 @@
-﻿using _Scripts.Core;
-using _Scripts.Witch;
+﻿using System.Collections;
+using _Scripts.Core;
 using UnityEngine;
 
 namespace _Scripts.Enemies
@@ -20,10 +20,14 @@ namespace _Scripts.Enemies
             {
                 hasThrown = true;
                 var bullet = Instantiate(pumpkinPrefab, transform.position, Quaternion.identity);
-                var playerPos = FindAnyObjectByType<PlayerController>().gameObject.transform.position;
-                var direction = (playerPos - transform.position).normalized;
-                bullet.GetComponent<Rigidbody2D>().AddForce(direction * pumkinForce, ForceMode2D.Impulse);
+                StartCoroutine(ThrowAgainAfterDelay(8f));
             }
+        }
+
+        private IEnumerator ThrowAgainAfterDelay(float f)
+        {
+            yield return new WaitForSeconds(f);
+            var bullet = Instantiate(pumpkinPrefab, transform.position, Quaternion.identity);
         }
 
         protected override void ResetPosition()
