@@ -1,4 +1,5 @@
 ﻿using _Scripts.Core;
+using _Scripts.Witch;
 using UnityEngine;
 
 namespace _Scripts.Enemies

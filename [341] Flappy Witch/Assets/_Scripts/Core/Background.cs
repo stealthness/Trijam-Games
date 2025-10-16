@@ -31,8 +31,6 @@ namespace _Scripts.Core
         /// The current game scroll speed, derived from the GameManager's game speed.
         /// </summary>
         private float _backgroundScrollSpeed;
-        
-        
 
         private void Start()
         {
