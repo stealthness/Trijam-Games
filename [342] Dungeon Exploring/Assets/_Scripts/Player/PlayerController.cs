@@ -1,3 +1,4 @@
+using _Scripts.Managers;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -74,6 +75,11 @@ namespace _Scripts.Player
         public void DisableControl()
         {
             playerIsDiabled = true;
+        }
+
+        public void OnRestartGame()
+        {
+            GameManager.Instance.RestartGame();
         }
     }
 }
