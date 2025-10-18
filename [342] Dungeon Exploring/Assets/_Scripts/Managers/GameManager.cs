@@ -27,5 +27,13 @@ namespace _Scripts.Managers
             Debug.Log("Game Restarted");
             SceneManager.LoadScene(0);
         }
+        
+        
+        public void GameOver()
+        {
+            Debug.Log("Game Over");
+            Time.timeScale = 0;
+            
+        }
     }
 }

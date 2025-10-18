@@ -1,4 +1,5 @@
 ﻿using System;
+using _Scripts.Managers;
 using UnityEngine;
 
 namespace _Scripts.Player
@@ -36,6 +37,14 @@ namespace _Scripts.Player
         {
             _playerController.DisableControl();
             _animator.SetTrigger("Melt");
+            float length = _animator.GetCurrentAnimatorClipInfo(0)[0].clip.length;
+            Invoke(nameof(GameOver), length);
+            
+        }
+
+        private void GameOver()
+        {
+            GameManager.Instance.GameOver();
         }
 
         private void Burn()
