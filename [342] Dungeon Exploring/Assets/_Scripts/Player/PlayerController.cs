@@ -16,6 +16,7 @@ namespace _Scripts.Player
         [SerializeField] private float speed = 5f;
         [SerializeField] private float jumpForce = 10f;
         [SerializeField] private Vector2 direction;
+        private bool playerIsDiabled = false;
         private const float Tol = 0.01f;
 
         private void Awake()
@@ -33,6 +34,8 @@ namespace _Scripts.Player
         /// </summary>
         public void OnMove(InputValue value)
         {
+            
+            if (playerIsDiabled) return;
 
                 direction = value.Get<Vector2>();
                 ChangeDirection();
@@ -42,7 +45,16 @@ namespace _Scripts.Player
 
         private void LateUpdate()
         {
-            _rb.linearVelocity = speed * new Vector2(direction.x, direction.y);
+            if (playerIsDiabled)
+            {
+                _rb.linearVelocity = Vector2.zero;
+            }
+            else
+            {
+                 _rb.linearVelocity = speed * new Vector2(direction.x, direction.y);
+            }
+            
+           
         }
 
         /// <summary>
@@ -57,6 +69,11 @@ namespace _Scripts.Player
                 //else => _sr.flipX // If the direction is zero, keep the current flip state
                 _ => _sr.flipX
             };
+        }
+
+        public void DisableControl()
+        {
+            playerIsDiabled = true;
         }
     }
 }
