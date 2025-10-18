@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace _Scripts
@@ -24,16 +25,27 @@ namespace _Scripts
         /// </summary>
         private bool _stopFollowing;
 
+
+        private void Start()
+        {
+            if (target == null)
+            {
+                Debug.LogError("CameraFollow: No target set for camera to follow.");
+            }
+        }
+
         /// <summary>
         /// A smoothed out camera follow
         /// </summary>
         private void LateUpdate()
         {
-            if (_stopFollowing) return;
+            if (_stopFollowing || !target) return;
             
             var desiredPosition = target.position + offset;
             var smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);
             transform.position = smoothedPosition;
+
+
         }
         
         /// <summary>

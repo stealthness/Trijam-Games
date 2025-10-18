@@ -74,6 +74,7 @@ namespace _Scripts.Player
 
         public void DisableControl()
         {
+            Debug.Log("DisableControl");
             playerIsDiabled = true;
         }
 
@@ -81,5 +82,8 @@ namespace _Scripts.Player
         {
             GameManager.Instance.RestartGame();
         }
+        
+        
+
     }
 }
