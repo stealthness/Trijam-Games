@@ -1,4 +1,5 @@
-﻿using _Scripts.Managers;
+﻿using _Scripts.Enemies;
+using _Scripts.Managers;
 using UnityEngine;
 
 namespace _Scripts.Player
@@ -29,6 +30,16 @@ namespace _Scripts.Player
                     Debug.Log("Player hit enemy!");
                     Melt();
                     break;
+            }
+        }
+
+
+        private void OnCollisionEnter2D(Collision2D other)
+        {
+            if (other.gameObject.CompareTag("Door"))
+            {
+                var door = other.gameObject.GetComponentInParent<DoorScript>();
+                door.CheckAndOpenDoor();
             }
         }
 

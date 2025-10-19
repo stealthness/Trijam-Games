@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 
 namespace _Scripts.Enemies
@@ -9,11 +10,21 @@ namespace _Scripts.Enemies
         public GameObject windyObject;
         
         
-        [SerializeField] private float speed = 5;
+        [SerializeField] private float speed;
         [SerializeField] private int pointIndex;
-        [SerializeField] private float waitTime = 2f;
-        
-        
+        [SerializeField] private float waitTime;
+
+        private void Awake()
+        {
+            speed = 5f;
+            waitTime = 1f;
+            if (points.Length == 0)
+            {
+                Debug.LogError("No points assigned for Windy movement.");
+            }
+        }
+
+
         private void Start()
         {
             pointIndex = 0;
