@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -25,7 +24,7 @@ namespace _Scripts.Managers
         {
             // Logic to restart the game
             Debug.Log("Game Restarted");
-            SceneManager.LoadScene(0);
+            SceneManager.LoadScene("BWGameScene");
         }
         
         
