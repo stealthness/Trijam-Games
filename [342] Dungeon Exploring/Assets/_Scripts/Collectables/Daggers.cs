@@ -1,5 +1,4 @@
-﻿using System;
-using _Scripts.Player;
+﻿using _Scripts.Player;
 using UnityEngine;
 
 namespace _Scripts.Collectables

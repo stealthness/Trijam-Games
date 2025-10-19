@@ -6,15 +6,20 @@ namespace _Scripts.Player
 {
     [RequireComponent(typeof(Animator))]
     [RequireComponent(typeof(PlayerController))]
+    [RequireComponent(typeof(AudioSource))]
     public class PlayerCollisionsController : MonoBehaviour
     {
         private Animator _animator;
         private PlayerController _playerController;
+        private AudioSource _audioSource;
+        
+        public AudioClip deathSound;
 
         private void Awake()
         {
             _playerController = GetComponent<PlayerController>();
             _animator = GetComponent<Animator>();
+            _audioSource = GetComponent<AudioSource>();
         }
 
         private void OnTriggerEnter2D(Collider2D other)
@@ -48,6 +53,7 @@ namespace _Scripts.Player
         {
             _playerController.DisableControl();
             _animator.SetTrigger("Melt");
+            _audioSource.PlayOneShot(deathSound);
             float length = _animator.GetCurrentAnimatorClipInfo(0)[0].clip.length;
             Invoke(nameof(GameOver), length);
             
@@ -63,5 +69,6 @@ namespace _Scripts.Player
             _playerController.DisableControl();
             GetComponent<SpriteRenderer>().color = Color.red;
         }
+
     }
 }
