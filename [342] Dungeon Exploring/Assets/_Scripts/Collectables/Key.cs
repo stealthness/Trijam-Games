@@ -4,10 +4,9 @@ using UnityEngine;
 
 namespace _Scripts.Collectables
 {
-    public class Coin : MonoBehaviour
+    public class Key : MonoBehaviour
     {
-        
-
+        public AudioSource keyPickupSound;
         
         private void OnTriggerEnter2D(Collider2D other)
         {
@@ -15,7 +14,8 @@ namespace _Scripts.Collectables
             {
                 // Here you can add code to update the player's coin count
                 Debug.Log("Coin collected!");
-                CoinCollectorManager.Instance.AddCoin();
+                GameUIManager.Instance.AddKey();
+                keyPickupSound.Play();
                 gameObject.SetActive(false);
             }
         }

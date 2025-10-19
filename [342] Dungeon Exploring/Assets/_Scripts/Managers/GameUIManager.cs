@@ -9,6 +9,7 @@ namespace _Scripts.Managers
         public static GameUIManager Instance;
         
         public TextMeshProUGUI keyText;
+        public TextMeshProUGUI coinText;
         
         [SerializeField] private int keyCount;
 
@@ -51,7 +52,12 @@ namespace _Scripts.Managers
         {
             return keyCount > 0;
         }
-        
+
+
+        public void UpdateCoinText(int coinTextValue)
+        {
+            coinText.text = "Coins: " + coinTextValue;
+        }
         
     }
 }

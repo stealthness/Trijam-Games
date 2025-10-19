@@ -24,6 +24,7 @@ namespace _Scripts.Managers
         {
             // Logic to restart the game
             Debug.Log("Game Restarted");
+            Time.timeScale = 1;
             SceneManager.LoadScene("BWGameScene");
         }
         

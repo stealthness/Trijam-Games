@@ -1,11 +1,12 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace _Scripts.Managers
 {
     [RequireComponent(typeof(AudioSource))]
-    public class ScoreManager : MonoBehaviour
+    public class CoinCollectorManager : MonoBehaviour
     {
-        public static ScoreManager Instance;
+        public static CoinCollectorManager Instance;
         public AudioSource _audioSource;
         public AudioClip _coin;
         
@@ -25,10 +26,17 @@ namespace _Scripts.Managers
         }
 
 
+        private void Start()
+        {
+            coinScore = 0;
+            GameUIManager.Instance.UpdateCoinText(coinScore);
+        }
+
         public void AddCoin()
         {
             coinScore++;
-            Debug.Log("Coins Collected: " + coinScore);        
+            Debug.Log("Coins: " + coinScore);        
+            GameUIManager.Instance.UpdateCoinText(coinScore);
             _audioSource.Play();
             _audioSource.PlayOneShot(_coin);
         }
