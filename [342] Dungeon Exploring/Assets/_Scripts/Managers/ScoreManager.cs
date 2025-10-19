@@ -6,7 +6,8 @@ namespace _Scripts.Managers
     public class ScoreManager : MonoBehaviour
     {
         public static ScoreManager Instance;
-        private AudioSource _audioSource;
+        public AudioSource _audioSource;
+        public AudioClip _coin;
         
         
         [SerializeField] private int coinScore;
@@ -21,7 +22,6 @@ namespace _Scripts.Managers
             {
                 Destroy(gameObject);
             }
-            _audioSource = GetComponent<AudioSource>();
         }
 
 
@@ -30,6 +30,7 @@ namespace _Scripts.Managers
             coinScore++;
             Debug.Log("Coins Collected: " + coinScore);        
             _audioSource.Play();
+            _audioSource.PlayOneShot(_coin);
         }
     }
 }
