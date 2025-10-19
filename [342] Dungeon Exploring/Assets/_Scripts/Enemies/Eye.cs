@@ -23,18 +23,9 @@ namespace _Scripts.Enemies
 
         protected new virtual void Start()
         {
-            ShootTime();
             base.Start();
         }
         
-        
-        private void ShootTime()
-        {
-            Debug.Log("EyE Shooting");
-            
-            
-
-        }
 
         private IEnumerator ShootTimeRoutine()
         {

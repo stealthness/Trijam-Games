@@ -37,8 +37,7 @@ namespace _Scripts.Enemies
             while (true)
             {
                 
-                Debug.Log(gameObject.name + ":MoveToPoint");
-                Transform targetPoint = waypoints[pointIndex];
+                var targetPoint = waypoints[pointIndex];
                 while (Vector2.Distance(enemyObject.transform.position, targetPoint.position) > 0.1f)
                 {
                     
