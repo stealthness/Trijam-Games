@@ -27,6 +27,7 @@ namespace _Scripts.Player
                     Burn();
                     break;
                 case "Enemy":
+                case "Bullet":
                     Debug.Log("Player hit enemy!");
                     Melt();
                     break;
