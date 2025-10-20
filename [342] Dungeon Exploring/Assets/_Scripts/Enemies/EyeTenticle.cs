@@ -6,7 +6,7 @@ namespace _Scripts.Enemies
     [RequireComponent(typeof(Rigidbody2D))]
     [RequireComponent(typeof(Collider2D))]
     [RequireComponent(typeof(Animator))]
-    public class Bullet : MonoBehaviour
+    public class EyeTenticle : MonoBehaviour
     {
         private Rigidbody2D _rigidbody2D;
         private Collider2D _collider2D;
