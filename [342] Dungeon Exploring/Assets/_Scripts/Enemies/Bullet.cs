@@ -5,23 +5,60 @@ namespace _Scripts.Enemies
 {
     [RequireComponent(typeof(Rigidbody2D))]
     [RequireComponent(typeof(Collider2D))]
+    [RequireComponent(typeof(Animator))]
     public class Bullet : MonoBehaviour
     {
-        private Rigidbody2D rb;
-        private Collider2D coll;
+        private Rigidbody2D _rigidbody2D;
+        private Collider2D _collider2D;
+        private Animator _animator;
+        private const float MinSqrVelocity = 0.01f;
+        private const float DirectionalThreshold = 0.3f;
         
         private void Awake()
         {
-            rb = GetComponent<Rigidbody2D>();
-            coll = GetComponent<Collider2D>();
+            _rigidbody2D = GetComponent<Rigidbody2D>();
+            _collider2D = GetComponent<Collider2D>();
+            _animator = GetComponent<Animator>();
         }
 
         private void Start()
         {
-            rb.gravityScale = 0;
-            rb.constraints = RigidbodyConstraints2D.FreezeRotation;
-            coll.isTrigger = true;
+            _rigidbody2D.gravityScale = 0;
+            _rigidbody2D.constraints = RigidbodyConstraints2D.FreezeRotation;
+            _collider2D.isTrigger = true;
+            if (_rigidbody2D.linearVelocity.sqrMagnitude < MinSqrVelocity)
+            {
+                Debug.Log("Bullet has no velocity, default animation played.");
+                _animator.Play("Crawl-Left");
+            }
+            else
+            {
+
+                // Copoilot suggestion to determine direction based on velocity (with modification by me)
+                
+                var vel = _rigidbody2D.linearVelocity.normalized;
+                var absX = Mathf.Abs(vel.x);
+                var absY = Mathf.Abs(vel.y);
+                
+                // Determine signs (-1, 0, 1)
+                int dx = absX > DirectionalThreshold ? (int)Mathf.Sign(vel.x) : 0;
+                int dy = absY > DirectionalThreshold ? (int)Mathf.Sign(vel.y) : 0;
+                
+                Debug.Log(dx + ", " + dy);
+
+                // Choose trigger based on 8-way direction
+                if (dx == 0 && dy == 1) _animator.SetTrigger("Up");
+                else if (dx == 0 && dy == -1) _animator.SetTrigger("Up"); // down
+                else if (dx == 1 && dy == 0) _animator.SetTrigger("Left"); // right
+                else if (dx == -1 && dy == 0) _animator.SetTrigger("Left"); // left
+                else if (dx == 1 && dy == 1) _animator.SetTrigger("Diagonal"); // up-right
+                else if (dx == -1 && dy == 1) _animator.SetTrigger("Diagonal"); // up-left
+                else if (dx == 1 && dy == -1) _animator.SetTrigger("Diagonal"); // down-right
+                else if (dx == -1 && dy == -1) _animator.SetTrigger("Diagonal"); // down-left
+                else _animator.SetTrigger("Left"); // fallback
+            }
         }
+
 
         private void OnTriggerEnter2D(Collider2D other)
         {
