@@ -72,7 +72,6 @@ namespace _Scripts.Player
 
         private IEnumerator ShootDaggers()
         {
-            Debug.Log("Playershoots daggers");
             _onCooldown = true;
             CreateDaggers();
             yield return new WaitForSeconds(0.1f);
@@ -81,17 +80,17 @@ namespace _Scripts.Player
 
         private void CreateDaggers()
         {
-            Debug.Log("Creating daggers");
             var daggers = Instantiate(daggersPrefab, transform.position, transform.rotation);
             if (GetComponent<SpriteRenderer>().flipX)
             {
                 daggers.GetComponent<Rigidbody2D>().linearVelocity = Vector2.left * 10f;
-                daggers.GetComponent<SpriteRenderer>().flipX = false;
             }
             else
             {
                 daggers.GetComponent<Rigidbody2D>().linearVelocity = Vector2.right * 10f;
             }
+            
+            daggers.GetComponent<SpriteRenderer>().flipX = GetComponent<SpriteRenderer>().flipX;
             StartCoroutine(DestroyDaggersAfterTime(daggers));
         }
 

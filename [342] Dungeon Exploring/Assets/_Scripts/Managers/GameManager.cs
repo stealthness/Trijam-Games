@@ -33,7 +33,15 @@ namespace _Scripts.Managers
         {
             Debug.Log("Game Over");
             Time.timeScale = 0;
+            GameUIManager.Instance.ShowDiedScreen();
             
+        }
+
+        public void GameOverWon()
+        {
+            Time.timeScale = 0;
+            Debug.Log("You Won!");
+            GameUIManager.Instance.ShowWinningScreen();
         }
     }
 }

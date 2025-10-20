@@ -10,6 +10,9 @@ namespace _Scripts.Managers
         
         public TextMeshProUGUI keyText;
         public TextMeshProUGUI coinText;
+        public GameObject gameOverWonScreen;
+        public GameObject gameOverDiedScreen;
+        public TextMeshProUGUI completedText;
         
         [SerializeField] private int keyCount;
 
@@ -58,6 +61,17 @@ namespace _Scripts.Managers
         {
             coinText.text = "Coins: " + coinTextValue;
         }
+
+        public void ShowWinningScreen()
+        {
+            var percentCompleted = (int)((CoinCollectorManager.Instance.GetCoinCount()/ 20f) * 100);
+            completedText.text = $"You Completed {percentCompleted}%";
+            gameOverWonScreen.SetActive(true);
+        }
         
+        public void ShowDiedScreen()
+        {
+            gameOverDiedScreen.SetActive(true);
+        }
     }
 }

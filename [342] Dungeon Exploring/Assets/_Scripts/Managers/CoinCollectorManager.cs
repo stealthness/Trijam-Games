@@ -39,5 +39,10 @@ namespace _Scripts.Managers
             _audioSource.Play();
             _audioSource.PlayOneShot(_coin);
         }
+
+        public int GetCoinCount()
+        {
+            return coinScore;
+        }
     }
 }

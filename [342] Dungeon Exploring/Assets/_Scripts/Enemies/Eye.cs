@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -9,7 +8,6 @@ namespace _Scripts.Enemies
     public class Eye : WaypointFollower
     {
         public GameObject bulletPrefab;
-        [SerializeField] private int health = 100;
 
         [SerializeField] private float shootTime;
         
@@ -74,19 +72,9 @@ namespace _Scripts.Enemies
             }
         }
 
-        private void OnTriggerEnter2D(Collider2D other)
+        public void OnDisable()
         {
-            if (other.CompareTag("PlayerBullet"))
-            {
-                Debug.Log("Eye hit by player weapon");
-                health -= 25;
-                if (health <= 0)
-                {
-                    Debug.Log("Eye defeated");
-                    Destroy(gameObject);
-                }
-                
-            }
+            StopAllCoroutines();
         }
     }
 }
