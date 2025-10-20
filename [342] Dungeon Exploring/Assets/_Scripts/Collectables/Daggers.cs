@@ -3,17 +3,17 @@ using UnityEngine;
 
 namespace _Scripts.Collectables
 {
+    /// <summary>
+    /// This class handles the collection of daggers by the player.
+    /// </summary>
     public class Daggers : MonoBehaviour
     {
         private void OnTriggerExit2D(Collider2D other)
         {
-            if (other.CompareTag("Player"))
-            {
-                // Here you can add code to update the player's coin count
-                Debug.Log("Daggers collected!");
-                PlayerWeaponController.Instance.PickUpWeapon(WeaponTypes.Daggers);
-                gameObject.SetActive(false);
-            }
+            if (!other.CompareTag("Player")) return;
+            
+            PlayerWeaponController.Instance.PickUpWeapon(WeaponTypes.Daggers);
+            gameObject.SetActive(false);
         }
     }
 }

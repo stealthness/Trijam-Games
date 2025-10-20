@@ -3,20 +3,18 @@ using UnityEngine;
 
 namespace _Scripts.Collectables
 {
+    /// <summary>
+    /// This class handles the collection of coins by the player.
+    /// </summary>
     public class Coin : MonoBehaviour
     {
         
-
-        
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.CompareTag("Player"))
-            {
-                // Here you can add code to update the player's coin count
-                Debug.Log("Coin collected!");
-                CoinCollectorManager.Instance.AddCoin();
-                gameObject.SetActive(false);
-            }
+            if (!other.CompareTag("Player")) return;
+            
+            CoinCollectorManager.Instance.AddCoin();
+            gameObject.SetActive(false);
         }
     }
 }
