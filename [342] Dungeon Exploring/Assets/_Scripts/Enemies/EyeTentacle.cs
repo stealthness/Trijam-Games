@@ -6,11 +6,12 @@ namespace _Scripts.Enemies
     [RequireComponent(typeof(Rigidbody2D))]
     [RequireComponent(typeof(Collider2D))]
     [RequireComponent(typeof(Animator))]
-    public class EyeTenticle : MonoBehaviour
+    public class EyeTentacle : MonoBehaviour
     {
         private Rigidbody2D _rigidbody2D;
         private Collider2D _collider2D;
         private Animator _animator;
+        
         private const float MinSqrVelocity = 0.01f;
         private const float DirectionalThreshold = 0.3f;
         
