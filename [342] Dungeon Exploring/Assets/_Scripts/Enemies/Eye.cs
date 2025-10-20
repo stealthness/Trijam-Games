@@ -10,8 +10,10 @@ namespace _Scripts.Enemies
         public GameObject bulletPrefab;
 
         [SerializeField] private float shootTime;
-        
-        
+        [SerializeField] private float bitSize = 1f;
+        [SerializeField] private Vector2 eyeOffset = new Vector2(0,1f);
+
+
         private void Awake()
         {
             speed = 3f;
@@ -34,19 +36,22 @@ namespace _Scripts.Enemies
             
             while (numberOfWaves > 0)
             {
-                ShootCircle();
+                var numberOfTentacles = 15 - numberOfWaves * 3;
+                ShootCircle(numberOfTentacles);
                 yield return new WaitForSeconds(1f);
                 numberOfWaves--;
             }
         }
         
 
-        private void ShootCircle()
+        private void ShootCircle(int numberOfTentacles)
         {
-            for (var i = 0; i < 10; i++){
-                var bullet = Instantiate(bulletPrefab, enemyObject.transform.position, Quaternion.identity);
-                var randomDirection = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f)).normalized;
-                bullet.GetComponent<Rigidbody2D>().linearVelocity = randomDirection * 5f;
+            for (var i = 0; i < numberOfTentacles; i++){
+                var randomDirection = Random.insideUnitCircle.normalized;
+                var abit = new Vector3(randomDirection.x, randomDirection.y, 0) * bitSize + new Vector3(eyeOffset.x, eyeOffset.y, 0);
+                var tentacle = Instantiate(bulletPrefab, enemyObject.transform.position + abit, Quaternion.identity);
+                tentacle.GetComponent<EyeTentacle>().SetDirection(randomDirection);
+                tentacle.GetComponent<Rigidbody2D>().linearVelocity = randomDirection * 5f;
             }
         }
 

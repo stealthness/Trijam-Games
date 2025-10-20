@@ -15,6 +15,9 @@ namespace _Scripts.Enemies
         private const float MinSqrVelocity = 0.01f;
         private const float DirectionalThreshold = 0.3f;
         
+        [SerializeField] private float maxTentacleSpeed = 5.5f;
+        [SerializeField] private float minTentacleSpeed = 4.5f;
+        
         private void Awake()
         {
             _rigidbody2D = GetComponent<Rigidbody2D>();
@@ -76,6 +79,11 @@ namespace _Scripts.Enemies
                 // Destroy the bullet when it hits an obstacle
                 Destroy(gameObject);
             }
+        }
+
+        public void SetDirection(Vector2 randomDirection)
+        {
+            _rigidbody2D.linearVelocity = randomDirection * Random.Range(minTentacleSpeed, maxTentacleSpeed);
         }
     }
 }
