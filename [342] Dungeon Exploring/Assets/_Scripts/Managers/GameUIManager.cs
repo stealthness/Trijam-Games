@@ -7,6 +7,8 @@ namespace _Scripts.Managers
     {
      
         public static GameUIManager Instance;
+		public AudioSource audioSource;
+        public AudioClip _key;
         
         public TextMeshProUGUI keyText;
         public TextMeshProUGUI coinText;
@@ -34,6 +36,7 @@ namespace _Scripts.Managers
             keyCount++;
             Debug.Log("Keys Collected: " + keyCount);
             keyText.text = "Keys: "+ keyCount;
+			audioSource.PlayOneShot(_key);
             
         }
 

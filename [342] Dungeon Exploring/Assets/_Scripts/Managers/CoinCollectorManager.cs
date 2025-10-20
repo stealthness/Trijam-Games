@@ -36,7 +36,6 @@ namespace _Scripts.Managers
             coinScore++;
             Debug.Log("Coins: " + coinScore);        
             GameUIManager.Instance.UpdateCoinText(coinScore);
-            _audioSource.Play();
             _audioSource.PlayOneShot(_coin);
         }
 

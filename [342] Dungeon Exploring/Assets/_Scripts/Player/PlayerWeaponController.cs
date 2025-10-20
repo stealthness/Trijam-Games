@@ -9,6 +9,7 @@ namespace _Scripts.Player
     {
         public static PlayerWeaponController Instance;
         public AudioClip daggersPickup;
+        public AudioClip daggersThrown;
 
         private AudioSource _audioSource;
         [SerializeField] private WeaponTypes playerWeapon = WeaponTypes.None;
@@ -91,6 +92,7 @@ namespace _Scripts.Player
             }
             
             daggers.GetComponent<SpriteRenderer>().flipX = GetComponent<SpriteRenderer>().flipX;
+            _audioSource.PlayOneShot(daggersThrown);
             StartCoroutine(DestroyDaggersAfterTime(daggers));
         }
 

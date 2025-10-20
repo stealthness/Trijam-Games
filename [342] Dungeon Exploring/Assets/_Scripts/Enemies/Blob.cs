@@ -8,6 +8,7 @@ namespace _Scripts.Enemies
         public GameObject blobIdle;
         public GameObject blobExplode;
 
+        public AudioSource audioSource;
 
         private void OnCollisionEnter2D(Collision2D other)
         {
@@ -35,6 +36,7 @@ namespace _Scripts.Enemies
         {
             blobExplode.SetActive(true);
             blobIdle.SetActive(false);
+            audioSource.Play();
             var animationLength = GetCurrentAnimationClipLength();
             Debug.Log("Animation Length: " + animationLength);
             Destroy(gameObject, animationLength);
