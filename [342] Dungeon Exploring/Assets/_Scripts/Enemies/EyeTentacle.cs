@@ -15,8 +15,8 @@ namespace _Scripts.Enemies
         private const float MinSqrVelocity = 0.01f;
         private const float DirectionalThreshold = 0.3f;
         
-        [SerializeField] private float maxTentacleSpeed = 5.5f;
-        [SerializeField] private float minTentacleSpeed = 4.5f;
+        [SerializeField] private float maxTentacleSpeed = 6.5f;
+        [SerializeField] private float minTentacleSpeed = 3.5f;
         
         private void Awake()
         {

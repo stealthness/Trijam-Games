@@ -12,6 +12,9 @@ namespace _Scripts.Enemies
         [SerializeField] private float shootTime;
         [SerializeField] private float bitSize = 1f;
         [SerializeField] private Vector2 eyeOffset = new Vector2(0,1f);
+        [SerializeField] private int maxTentaclesWaves = 3;
+        [SerializeField] private int startNumberOfTentacles = 10;
+        [SerializeField] private int tentacleIncreasePerWave = 4;
 
 
         private void Awake()
@@ -32,11 +35,11 @@ namespace _Scripts.Enemies
 
         private IEnumerator ShootTimeRoutine()
         {
-            var numberOfWaves = 3;
+            var numberOfWaves = maxTentaclesWaves;
             
             while (numberOfWaves > 0)
             {
-                var numberOfTentacles = 15 - numberOfWaves * 3;
+                var numberOfTentacles = startNumberOfTentacles + (maxTentaclesWaves - numberOfWaves) * tentacleIncreasePerWave;
                 ShootCircle(numberOfTentacles);
                 yield return new WaitForSeconds(1f);
                 numberOfWaves--;
@@ -51,7 +54,6 @@ namespace _Scripts.Enemies
                 var abit = new Vector3(randomDirection.x, randomDirection.y, 0) * bitSize + new Vector3(eyeOffset.x, eyeOffset.y, 0);
                 var tentacle = Instantiate(bulletPrefab, enemyObject.transform.position + abit, Quaternion.identity);
                 tentacle.GetComponent<EyeTentacle>().SetDirection(randomDirection);
-                tentacle.GetComponent<Rigidbody2D>().linearVelocity = randomDirection * 5f;
             }
         }
 
