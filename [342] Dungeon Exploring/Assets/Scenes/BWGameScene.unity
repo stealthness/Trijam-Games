@@ -26164,6 +26164,8 @@ MonoBehaviour:
   waitTime: 3
   bulletPrefab: {fileID: 1242283901789069027, guid: 990a76843aa548d48813cc998ac0e2b4, type: 3}
   shootTime: 2.5
+  bitSize: 1
+  eyeOffset: {x: 0, y: 1}
 --- !u!4 &1839550464 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5786859239009044596, guid: b03258303bec1794686747ea50a11021, type: 3}
