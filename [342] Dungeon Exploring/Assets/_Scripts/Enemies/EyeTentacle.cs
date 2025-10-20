@@ -52,10 +52,10 @@ namespace _Scripts.Enemies
                 else if (dx == 0 && dy == -1) _animator.SetTrigger("Up"); // down
                 else if (dx == 1 && dy == 0) _animator.SetTrigger("Left"); // right
                 else if (dx == -1 && dy == 0) _animator.SetTrigger("Left"); // left
-                else if (dx == 1 && dy == 1) _animator.SetTrigger("Diagonal"); // up-right
-                else if (dx == -1 && dy == 1) _animator.SetTrigger("Diagonal"); // up-left
-                else if (dx == 1 && dy == -1) _animator.SetTrigger("Diagonal"); // down-right
-                else if (dx == -1 && dy == -1) _animator.SetTrigger("Diagonal"); // down-left
+                else if (dx == 1 && dy == 1) _animator.SetTrigger("DiagonalUp"); // up-right
+                else if (dx == -1 && dy == 1) _animator.SetTrigger("DiagonalDown"); // up-left
+                else if (dx == 1 && dy == -1) _animator.SetTrigger("DiagonalDown"); // down-right
+                else if (dx == -1 && dy == -1) _animator.SetTrigger("DiagonalUp"); // down-left
                 else _animator.SetTrigger("Left"); // fallback
             }
         }
