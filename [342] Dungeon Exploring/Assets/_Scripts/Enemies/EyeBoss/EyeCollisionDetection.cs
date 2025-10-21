@@ -1,5 +1,4 @@
-﻿using System;
-using _Scripts.Managers;
+﻿using _Scripts.Collectables;
 using _Scripts.Player;
 using UnityEngine;
 
@@ -8,6 +7,8 @@ namespace _Scripts.Enemies
     public class EyeCollisionDetection : MonoBehaviour
     {
         [SerializeField] private int health = 100;
+        public GameObject EyeBoss;
+        public GameObject DeadEyeBoss;
         private void OnTriggerEnter2D(Collider2D other)
         {
             
@@ -20,7 +21,10 @@ namespace _Scripts.Enemies
                 if (health <= 0)
                 {
                     Debug.Log("Eye defeated");
-                    GameManager.Instance.GameOverWon();
+                    FindAnyObjectByType<SpecialKey>().ShowKey();
+                    EyeBoss.SetActive(false);
+                    Instantiate(DeadEyeBoss, transform.position, Quaternion.identity);
+                    //GameManager.Instance.GameOverWon();
                 }
                    
             }

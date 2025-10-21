@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using _Scripts.Core;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -8,6 +9,7 @@ namespace _Scripts.Enemies
     public class Eye : WaypointFollower
     {
         public GameObject bulletPrefab;
+        public CameraShake cameraShake;
 
         [SerializeField] private float shootTime;
         [SerializeField] private float bitSize = 1f;
@@ -53,6 +55,7 @@ namespace _Scripts.Enemies
         private void ShootCircle(int numberOfTentacles)
         {
             audioSource.PlayOneShot(shotSound);
+            cameraShake.TriggerShake(transform.position);
             
             for (var i = 0; i < numberOfTentacles; i++){
                 var randomDirection = Random.insideUnitCircle.normalized;

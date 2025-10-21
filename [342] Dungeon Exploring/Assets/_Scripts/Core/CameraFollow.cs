@@ -19,6 +19,8 @@ namespace _Scripts
         [Tooltip("The offset of the camera from the target")]
         [SerializeField] private Vector3 offset = new(0, 0, -10f);
         
+        public bool IsPaused {get; set;}
+        
         /// <summary>
         /// A flag to stop following the target
         /// </summary>
@@ -38,7 +40,7 @@ namespace _Scripts
         /// </summary>
         private void LateUpdate()
         {
-            if (_stopFollowing || !target) return;
+            if (_stopFollowing || !target || IsPaused) return;
             
             var desiredPosition = target.position + offset;
             var smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);
@@ -80,5 +82,7 @@ namespace _Scripts
             target = newTarget;
             _stopFollowing = false;
         }
+        
+        
     }
 }

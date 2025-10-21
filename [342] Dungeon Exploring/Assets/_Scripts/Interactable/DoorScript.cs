@@ -9,6 +9,8 @@ namespace _Scripts.Enemies
     {
         public GameObject openDoor;
         public GameObject closedDoor;
+
+        [SerializeField] private bool isSpecial;
         
         private AudioSource _audioSource;
 
@@ -29,11 +31,27 @@ namespace _Scripts.Enemies
             Debug.Log("CheckAndOpenDoor");
             if (GameUIManager.Instance.HasAvailableKey())
             {
-                openDoor.SetActive(true);
-                closedDoor.SetActive(false);
-                _audioSource.Play();
+                OpenDoor();
                 GameUIManager.Instance.UseKey();
             }
+        }
+
+
+        public void OpenSpecialDoor()
+        {
+            if (!isSpecial)
+            {
+                Debug.Log("OpenSpecialDoor is not special");
+            }
+            
+            OpenDoor();
+        }
+
+        private void OpenDoor()
+        {
+            openDoor.SetActive(true);
+            closedDoor.SetActive(false);
+            _audioSource.Play();
         }
     }
 }
