@@ -1,4 +1,5 @@
-﻿using _Scripts.Player;
+﻿using System;
+using _Scripts.Player;
 using TMPro;
 using UnityEngine;
 
@@ -16,6 +17,7 @@ namespace _Scripts.Managers
         public GameObject weaponImagePanel;
         public GameObject gameOverWonScreen;
         public GameObject gameOverDiedScreen;
+        public GameObject firstTimeScreen;
         public TextMeshProUGUI completedText;
         
         [SerializeField] private int keyCount;
@@ -41,6 +43,7 @@ namespace _Scripts.Managers
 			audioSource.PlayOneShot(_key);
             
         }
+        
 
         public void UseKey()
         {
@@ -72,6 +75,12 @@ namespace _Scripts.Managers
             var percentCompleted = (int)((CoinCollectorManager.Instance.GetCoinCount()/ 20f) * 100);
             completedText.text = $"You Completed {percentCompleted}%";
             gameOverWonScreen.SetActive(true);
+        }
+
+        public void ShowFirstTimeScreen(bool show)
+        {
+            Debug.Log("ShowFirstTime(" + show + ")");
+            firstTimeScreen.SetActive(show);
         }
         
         public void ShowDiedScreen()

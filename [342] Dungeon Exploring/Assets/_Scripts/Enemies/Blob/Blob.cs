@@ -69,7 +69,6 @@ namespace _Scripts.Enemies
         {
             SetBlobState(BlobState.Attacking);
             var animationLength = GetCurrentAnimationClipLength();
-            Debug.Log("Attack Animation Length: " + animationLength);
             Invoke(nameof(ResetToIdle), animationLength);
             leftCloud.SetActive(true);
             rightCloud.SetActive(true);
