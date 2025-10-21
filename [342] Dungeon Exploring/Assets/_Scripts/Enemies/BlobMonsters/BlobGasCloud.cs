@@ -1,8 +1,6 @@
-﻿
-using System;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace _Scripts.Enemies
+namespace _Scripts.Enemies.BlobMonsters
 {
     public class BlobGasCloud : MonoBehaviour
     {

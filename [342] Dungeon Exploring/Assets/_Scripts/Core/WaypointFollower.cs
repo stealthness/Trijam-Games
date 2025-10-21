@@ -31,17 +31,14 @@ namespace _Scripts.Core
 
         protected void Start()
         {
-            pointIndex = 0;
             StartCoroutine(nameof(MoveToPoint));
         }
         
 
         protected IEnumerator MoveToPoint()
         {
-
             while (true)
             {
-                
                 var targetPoint = waypoints[pointIndex];
                 while (Vector2.Distance(enemyObject.transform.position, targetPoint.position) > 0.1f)
                 {

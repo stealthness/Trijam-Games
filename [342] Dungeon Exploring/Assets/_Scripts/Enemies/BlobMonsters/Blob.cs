@@ -1,7 +1,6 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace _Scripts.Enemies
+namespace _Scripts.Enemies.BlobMonsters
 {
     public class Blob : MonoBehaviour
     {
@@ -15,16 +14,16 @@ namespace _Scripts.Enemies
         
         private GameObject _activeBlobState;
         
+        [Tooltip("If true, the attack delay will be randomized between 0 and 5 seconds. otherwise, attacks will be" +
+                 "syncronised at fixed at 5 seconds delay.")]
+        [SerializeField] private bool randomizeAttackDelay = true;
+        
          private void Start()
          {
              SetBlobState(BlobState.Idle);
-             InvokeRepeating(nameof(BlobAttack), 5f, 5f);
+             var attackDelay = (randomizeAttackDelay)?UnityEngine.Random.Range(0f, 5f):5f;
+             InvokeRepeating(nameof(BlobAttack), attackDelay, 5f);
          }       
-
-        private void OnCollisionEnter2D(Collision2D other)
-        {
-            Debug.Log("Blob hit by player  " + other.gameObject.name);
-        }
 
         private void OnTriggerEnter2D(Collider2D other)
         {
