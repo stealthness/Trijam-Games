@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using _Scripts.Core;
+using UnityEngine;
 
 namespace _Scripts.Enemies
 {

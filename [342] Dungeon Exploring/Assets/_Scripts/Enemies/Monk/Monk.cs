@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using _Scripts.Core;
 using UnityEngine;
 
 namespace _Scripts.Enemies.Monk

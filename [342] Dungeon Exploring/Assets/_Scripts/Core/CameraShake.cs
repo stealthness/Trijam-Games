@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using _Scripts.Player;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace _Scripts.Core
 {
@@ -16,39 +17,30 @@ namespace _Scripts.Core
         [SerializeField] private float maxPlayerDistanceDropoff = 14f;
 
         public Transform floatEyeTransform;
-        public Transform PlayerTransform;
+        public Transform playerTransform;
         
         public void TriggerShake(Vector2 eyePosition)
         {
 
             if (CheckPlayerDistanceToTarget())
             {
-                var distanceToPlayer = Vector3.Distance(PlayerTransform.position, floatEyeTransform.position);
-                var shakeMaginitude = 1 - Vector3.Distance(transform.position, eyePosition) / maxPlayerDistanceDropoff;
-                Debug.Log("Applying camera shake with magnitude: " + shakeMaginitude + " at distance: " + distanceToPlayer);
-                StartCoroutine(Shake(shakeDuration, shakeMaginitude));
-
+                //var shakeMagnitudeByDistance = 1 - Vector3.Distance(transform.position, eyePosition) / maxPlayerDistanceDropoff;
+                StartCoroutine(Shake(shakeDuration, shakeMagnitude));
+                
             }
-            else
-            {
-                Debug.Log("Player too far from shake target, no shake applied.");
-            }
-
-
         }
 
         private bool CheckPlayerDistanceToTarget()
         {
-            var playerDistance = Vector3.Distance(PlayerTransform.position, floatEyeTransform.position);
+            var playerDistance = Vector3.Distance(playerTransform.position, floatEyeTransform.position);
             return playerDistance <= maxPlayerDistanceDropoff;
         }
 
 
-        public IEnumerator Shake(float duration, float magnitude)
+        private IEnumerator Shake(float duration, float magnitude)
         {
-            Debug.Log("Shaking");
-            Vector3 originalPos = transform.localPosition;
-            float elapsed = 0.0f;
+            var originalPos = transform.localPosition;
+            var elapsed = 0.0f;
             cameraFollow.IsPaused = true;
             while (elapsed < duration)
             {

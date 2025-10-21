@@ -1,22 +1,27 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-namespace _Scripts.Enemies
+namespace _Scripts.Core
 {
+    /// <summary>
+    /// WaypointFollower moves an enemy GameObject along a series of waypoints in a loop.
+    /// </summary>
     public class WaypointFollower : MonoBehaviour
     {
+        [Tooltip("Array of waypoints for the enemy to follow.")]
         public Transform[] waypoints;
+        [Tooltip("The enemy GameObject that will move along the waypoints.")]
         public GameObject enemyObject;
         
-        
-        [SerializeField] protected float speed;
+        [Tooltip("Movement speed of the enemy.")]
+        [SerializeField] protected float speed = 5f;
+        [Tooltip("Current index of the waypoint the enemy is moving towards.")]
         [SerializeField] protected int pointIndex;
-        [SerializeField] protected float waitTime;
+        [Tooltip("Time to wait at each waypoint.")]
+        [SerializeField] protected float waitTime = 1f;
 
         private void Awake()
         {
-            speed = 5f;
-            waitTime = 1f;
             if (waypoints.Length == 0)
             {
                 Debug.LogError("No points assigned for enemy movement.");
