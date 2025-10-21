@@ -16,6 +16,9 @@ namespace _Scripts.Enemies
         [SerializeField] private int startNumberOfTentacles = 10;
         [SerializeField] private int tentacleIncreasePerWave = 4;
 
+        public AudioClip shotSound;
+        
+        public AudioSource audioSource;
 
         private void Awake()
         {
@@ -49,6 +52,8 @@ namespace _Scripts.Enemies
 
         private void ShootCircle(int numberOfTentacles)
         {
+            audioSource.PlayOneShot(shotSound);
+            
             for (var i = 0; i < numberOfTentacles; i++){
                 var randomDirection = Random.insideUnitCircle.normalized;
                 var abit = new Vector3(randomDirection.x, randomDirection.y, 0) * bitSize + new Vector3(eyeOffset.x, eyeOffset.y, 0);

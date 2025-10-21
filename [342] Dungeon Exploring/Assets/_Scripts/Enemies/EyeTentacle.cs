@@ -48,8 +48,6 @@ namespace _Scripts.Enemies
                 int dx = absX > DirectionalThreshold ? (int)Mathf.Sign(vel.x) : 0;
                 int dy = absY > DirectionalThreshold ? (int)Mathf.Sign(vel.y) : 0;
                 
-                Debug.Log(dx + ", " + dy);
-
                 // Choose trigger based on 8-way direction
                 if (dx == 0 && dy == 1) _animator.SetTrigger("Up");
                 else if (dx == 0 && dy == -1) _animator.SetTrigger("Up"); // down

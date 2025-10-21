@@ -1,4 +1,6 @@
-﻿using _Scripts.Managers;
+﻿using System;
+using _Scripts.Managers;
+using _Scripts.Player;
 using UnityEngine;
 
 namespace _Scripts.Enemies
@@ -8,7 +10,7 @@ namespace _Scripts.Enemies
         [SerializeField] private int health = 100;
         private void OnTriggerEnter2D(Collider2D other)
         {
-
+            
 
             if (other.CompareTag("PlayerBullet"))
             {
@@ -22,6 +24,15 @@ namespace _Scripts.Enemies
                 }
                    
             }
+        }
+
+        private void OnCollisionEnter2D(Collision2D other)
+        {
+            if (other.gameObject.CompareTag("Player"))
+            {
+                other.gameObject.GetComponent<PlayerCollisionsController>().Melt();
+            }
+            
         }
     }
 }

@@ -15,6 +15,8 @@ namespace _Scripts.Player
         [SerializeField] private WeaponTypes playerWeapon = WeaponTypes.None;
         private bool _onCooldown = false;
         public GameObject daggersPrefab;
+        
+        private GameObject daggersInstance;
 
         private void Awake()
         {
@@ -84,16 +86,18 @@ namespace _Scripts.Player
             var daggers = Instantiate(daggersPrefab, transform.position, transform.rotation);
             if (GetComponent<SpriteRenderer>().flipX)
             {
+                daggers.transform.localScale = new Vector3(-1, 1, 1);
                 daggers.GetComponent<Rigidbody2D>().linearVelocity = Vector2.left * 10f;
+                
             }
             else
             {
                 daggers.GetComponent<Rigidbody2D>().linearVelocity = Vector2.right * 10f;
             }
             
-            daggers.GetComponent<SpriteRenderer>().flipX = GetComponent<SpriteRenderer>().flipX;
             _audioSource.PlayOneShot(daggersThrown);
             StartCoroutine(DestroyDaggersAfterTime(daggers));
+            daggersInstance = daggers;
         }
 
         private IEnumerator DestroyDaggersAfterTime(GameObject daggers)
@@ -101,8 +105,22 @@ namespace _Scripts.Player
             yield return new WaitForSeconds(0.3f);
             Destroy(daggers);
         }
+
+        private void OnDrawGizmos()
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(transform.position, 0.5f);
+            if (daggersInstance != null)
+            {
+                var box = daggersInstance.GetComponent<BoxCollider2D>();
+                Gizmos.color = Color.green;
+                Gizmos.DrawWireCube(box.bounds.center, box.bounds.size);
+            }
+        }
     }
 
+
+    
 
     public enum WeaponTypes
     {

@@ -1,4 +1,5 @@
-﻿using _Scripts.Enemies;
+﻿using System;
+using _Scripts.Enemies;
 using _Scripts.Managers;
 using UnityEngine;
 
@@ -14,6 +15,8 @@ namespace _Scripts.Player
         private AudioSource _audioSource;
         
         public AudioClip deathSound;
+        
+        private bool _isDead;
 
         private void Awake()
         {
@@ -22,10 +25,16 @@ namespace _Scripts.Player
             _audioSource = GetComponent<AudioSource>();
         }
 
+        private void Start()
+        {
+            _isDead = false;
+        }
+
         private void OnTriggerEnter2D(Collider2D other)
         {
-            var tag = other.gameObject.tag;
-            switch (tag)
+            if (_isDead) return;
+            
+            switch (other.gameObject.tag)
             {
                 case "Fire":
                     Debug.Log("Player hit fire!");
@@ -39,9 +48,19 @@ namespace _Scripts.Player
             }
         }
 
+        
 
         private void OnCollisionEnter2D(Collision2D other)
         {
+            if (_isDead) return;
+            
+            Debug.Log(">" + other.gameObject.tag);
+            
+            if (other.gameObject.CompareTag("Enemy"))
+            {
+                Melt();
+            }
+            
             if (other.gameObject.CompareTag("Door"))
             {
                 var door = other.gameObject.GetComponentInParent<DoorScript>();
@@ -49,8 +68,12 @@ namespace _Scripts.Player
             }
         }
 
-        private void Melt()
+        public void Melt()
         {
+            if (_isDead) return;
+            
+            _isDead = true;
+            GetComponent<Collider2D>().enabled = false;
             _playerController.DisableControl();
             _animator.SetTrigger("Melt");
             _audioSource.PlayOneShot(deathSound);
