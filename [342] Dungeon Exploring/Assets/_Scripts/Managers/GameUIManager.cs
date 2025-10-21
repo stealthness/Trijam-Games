@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using _Scripts.Player;
+using TMPro;
 using UnityEngine;
 
 namespace _Scripts.Managers
@@ -12,6 +13,7 @@ namespace _Scripts.Managers
         
         public TextMeshProUGUI keyText;
         public TextMeshProUGUI coinText;
+        public GameObject weaponImagePanel;
         public GameObject gameOverWonScreen;
         public GameObject gameOverDiedScreen;
         public TextMeshProUGUI completedText;
@@ -75,6 +77,20 @@ namespace _Scripts.Managers
         public void ShowDiedScreen()
         {
             gameOverDiedScreen.SetActive(true);
+        }
+        
+        public void UpdateWeaponImage(WeaponTypes type)
+        {
+            switch (type)
+            {
+                case WeaponTypes.Daggers:
+                    weaponImagePanel.SetActive(true);
+                    break;
+                case WeaponTypes.None:
+                default:
+                    weaponImagePanel.SetActive(false);
+                    break;
+            }
         }
     }
 }

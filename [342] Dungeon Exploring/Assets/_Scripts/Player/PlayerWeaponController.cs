@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using _Scripts.Managers;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -39,6 +40,7 @@ namespace _Scripts.Player
                     Debug.Log("Player picked up Daggers");
                     _audioSource.PlayOneShot(daggersPickup);
                     playerWeapon = WeaponTypes.Daggers;
+                    GameUIManager.Instance.UpdateWeaponImage(WeaponTypes.Daggers);
                     break;
                 default:
                     Debug.Log("Unknown weapon type");

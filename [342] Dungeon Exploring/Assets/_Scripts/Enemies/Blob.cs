@@ -46,7 +46,7 @@ namespace _Scripts.Enemies
         private void OnDrawGizmos()
         {
             var box = GetComponent<BoxCollider2D>();
-            Gizmos.color = Color.red;
+            Gizmos.color = (box.enabled)? Color.red:Color.green;
             Gizmos.DrawWireCube(transform.position + (Vector3)box.offset, box.size);
         }
 
@@ -55,6 +55,9 @@ namespace _Scripts.Enemies
         private void ExplodeBlob()
         {
             SetBlobState(BlobState.Exploding);
+            // Disable all 2D colliders on this GameObject and its children
+            foreach (var col in GetComponentsInChildren<Collider2D>())
+                col.enabled = false;
             audioSource.Play();
             var animationLength = GetCurrentAnimationClipLength();
             Debug.Log("Animation Length: " + animationLength);
