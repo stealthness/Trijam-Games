@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace _Scripts.Managers
 {
@@ -11,6 +12,7 @@ namespace _Scripts.Managers
             if (!Instance)
             {
                 Instance = this;
+                DontDestroyOnLoad(gameObject);
             }
             else
             {
@@ -23,6 +25,13 @@ namespace _Scripts.Managers
             Debug.Log("Game Manager Started");
             Time.timeScale = 0;
             MenuManager.Instance.ShowMainMenu();
+        }
+
+        public void StartGame()
+        {
+            Debug.Log("Game Started");
+            SceneManager.LoadScene("GameScene");
+            Time.timeScale = 1;
         }
     }
 }

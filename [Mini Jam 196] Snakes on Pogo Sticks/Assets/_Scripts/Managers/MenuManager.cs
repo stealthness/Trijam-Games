@@ -22,5 +22,12 @@ namespace _Scripts.Managers
         {
             Debug.Log("Main Menu Shown");
         }
+        
+        
+        public void OnStartButtonClicked()
+        {
+            Debug.Log("Start Button Clicked");
+            GameManager.Instance.StartGame();
+        }
     }
 }
