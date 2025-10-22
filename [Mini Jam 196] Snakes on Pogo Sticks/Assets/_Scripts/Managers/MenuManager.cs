@@ -1,11 +1,11 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace _Scripts.Managers
 {
-    public class GameManager : MonoBehaviour
+    public class MenuManager : MonoBehaviour
     {
-        public static GameManager Instance;
-
+        public static MenuManager Instance;
+        
         private void Awake()
         {
             if (!Instance)
@@ -18,11 +18,9 @@ namespace _Scripts.Managers
             }
         }
 
-        private void Start()
+        public void ShowMainMenu()
         {
-            Debug.Log("Game Manager Started");
-            Time.timeScale = 0;
-            MenuManager.Instance.ShowMainMenu();
+            Debug.Log("Main Menu Shown");
         }
     }
 }
