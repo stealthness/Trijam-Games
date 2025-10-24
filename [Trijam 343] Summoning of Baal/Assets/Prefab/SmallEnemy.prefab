@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8662526450242390240}
   - component: {fileID: 8862960778884073317}
   - component: {fileID: 872869011370668886}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SmallEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -194,4 +194,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::_Scripts.Enemies.Base2DCollision
   hitLayers:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 64
+  damageAmount: 10
+  attackOnCooldown: 0
+  attackCooldownTimer: 1
