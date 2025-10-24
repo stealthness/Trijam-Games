@@ -105,6 +105,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30b5161b00ba47a19824a74c2560b767, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_Scripts.Enemies.Base2DMovement
+  hitLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
   moveSpeed: 1
 --- !u!61 &8662526450242390240
 BoxCollider2D:
