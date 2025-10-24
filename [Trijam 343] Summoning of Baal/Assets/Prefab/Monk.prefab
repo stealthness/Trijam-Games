@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7254393532067338516}
   - component: {fileID: 5043471383480109770}
   m_Layer: 0
-  m_Name: BaalSpritesheet_83
+  m_Name: BloodPoolSmall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -101,7 +101,7 @@ GameObject:
   - component: {fileID: 4407286822831247400}
   - component: {fileID: 3934541363525455247}
   m_Layer: 0
-  m_Name: BaalSpritesheet_81
+  m_Name: Shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -363,6 +363,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::_Scripts.MonkHealth
   health: 50
   maxHealth: 50
+  bloodPoolSmall: {fileID: 6124416793352489607}
+  bloodPoolMedium: {fileID: 8485902392518608785}
+  deadMonkSprite: {fileID: -1110925662, guid: 683022f24dd16e042b6bfee5da2c372f, type: 3}
 --- !u!1 &8485902392518608785
 GameObject:
   m_ObjectHideFlags: 0
@@ -374,7 +377,7 @@ GameObject:
   - component: {fileID: 4425470552573299512}
   - component: {fileID: 5793475088955933303}
   m_Layer: 0
-  m_Name: BaalSpritesheet_84
+  m_Name: BloodPoolMed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

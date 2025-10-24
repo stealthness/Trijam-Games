@@ -6,7 +6,6 @@ namespace _Scripts.Enemies
     public class Base2DCollision : MonoBehaviour
     {
         public static event Action<int> OnPlayerHit;
-        public static event Action<int> OnMonkHit;
 
         public LayerMask hitLayers;
 
@@ -60,15 +59,15 @@ namespace _Scripts.Enemies
                 if (hit.transform.CompareTag("Monk"))
                 {
                     Debug.Log("Monk hit");
-                    AttackMonk();
+                    AttackMonk(hit);
+                    Destroy(gameObject);
                 }
             }
         }
 
-        private void AttackMonk()
+        private void AttackMonk(Collider2D hit)
         {
-            OnMonkHit?.Invoke(damageAmount);
-            gameObject.SetActive(false);
+            hit.transform.GetComponent<MonkHealth>().TakeDamage(damageAmount);
         }
 
 
@@ -78,7 +77,6 @@ namespace _Scripts.Enemies
             {
                 return;
             }
-
 
             OnPlayerHit?.Invoke(damageAmount);
             attackOnCooldown = true;

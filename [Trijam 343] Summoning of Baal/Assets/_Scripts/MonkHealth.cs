@@ -10,20 +10,15 @@ namespace _Scripts
         [SerializeField] private int health = 50;
         [SerializeField] private int maxHealth = 50;
 
+        public GameObject bloodPoolSmall;
+        public GameObject bloodPoolMedium;
+        public Sprite deadMonkSprite;
+
         private void Start()
         {
             health = maxHealth;
         }
-
-        private void OnEnable()
-        {
-            Base2DCollision.OnMonkHit += TakeDamage;
-        }
-
-        private void OnDisable()
-        {
-            Base2DCollision.OnMonkHit -= TakeDamage;
-        }
+        
 
 
         public void TakeDamage(int damageAmount)
@@ -31,8 +26,18 @@ namespace _Scripts
             Debug.Log("Monk took damage");
             health -= damageAmount;
 
+            if (health <= 30)
+            {
+                bloodPoolSmall.SetActive(true);
+            }
+            if (health <= 15)
+            {
+                bloodPoolMedium.SetActive(true);
+            }
+
             if (health <= 0)
             {
+                GetComponent<SpriteRenderer>().sprite = deadMonkSprite;
                 MonkHasDied();
             }
         }
@@ -40,7 +45,9 @@ namespace _Scripts
         private void MonkHasDied()
         {
             Debug.Log("Monk has died");
-            Destroy(gameObject);
+            GetComponent<SpriteRenderer>().sprite = deadMonkSprite;
+            GetComponent<Collider2D>().enabled = false;
+            
         }
 
 

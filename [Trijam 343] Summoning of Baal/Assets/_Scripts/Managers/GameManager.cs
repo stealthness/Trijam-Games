@@ -1,7 +1,7 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
-namespace a
+namespace _Scripts.Managers
 {
     public class GameManager : MonoBehaviour
     {
@@ -24,6 +24,13 @@ namespace a
         private void Start()
         {
             Debug.Log("Game Manager Started");
+        }
+        
+        
+        
+        public void GameRestart()
+        {
+            SceneManager.LoadScene(0);
         }
     }
 }

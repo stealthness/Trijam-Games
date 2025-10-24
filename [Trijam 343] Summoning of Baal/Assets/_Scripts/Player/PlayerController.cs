@@ -1,4 +1,5 @@
 using System;
+using _Scripts.Managers;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -22,6 +23,11 @@ namespace _Scripts.Player
         {
             _moveInput = value.Get<Vector2>();
             CheckDirectionForSpriteFlip();
+        }
+
+        public void OnGameRestart()
+        {
+            GameManager.Instance.GameRestart();
         }
 
         private void CheckDirectionForSpriteFlip()
