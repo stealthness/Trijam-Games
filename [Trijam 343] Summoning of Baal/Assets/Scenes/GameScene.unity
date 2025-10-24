@@ -4839,6 +4839,7 @@ GameObject:
   - component: {fileID: 545034483}
   - component: {fileID: 545034482}
   - component: {fileID: 545034486}
+  - component: {fileID: 545034487}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -5035,6 +5036,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_Scripts.Player.PlayerController
   playerSpeed: 3
+--- !u!114 &545034487
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 545034480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8732cb9501d4b988575e911499b5220, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_Scripts.Player.PlayerHealth
+  health: 100
+  maxHealth: 100
 --- !u!4 &614776774 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3482523487482680224, guid: 50e8647fb72a3444d8f3e636b05e1033, type: 3}
@@ -5873,10 +5888,6 @@ PrefabInstance:
     - target: {fileID: 3482523487482680224, guid: 50e8647fb72a3444d8f3e636b05e1033, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6293564107762692975, guid: 50e8647fb72a3444d8f3e636b05e1033, type: 3}
-      propertyPath: hitLayers.m_Bits
-      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 8533024751688422428, guid: 50e8647fb72a3444d8f3e636b05e1033, type: 3}
       propertyPath: m_Name
