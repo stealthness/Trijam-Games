@@ -22,5 +22,10 @@ namespace _Scripts.Enemies
         {
             transform.Translate(_direction * (moveSpeed * Time.deltaTime), Space.World);
         }
+
+        public void SetMovementDirection(Vector2 dir)
+        {
+            _direction = dir;
+        }
     }
 }
