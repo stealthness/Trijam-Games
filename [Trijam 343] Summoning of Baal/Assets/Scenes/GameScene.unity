@@ -5874,6 +5874,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6293564107762692975, guid: 50e8647fb72a3444d8f3e636b05e1033, type: 3}
+      propertyPath: hitLayers.m_Bits
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 8533024751688422428, guid: 50e8647fb72a3444d8f3e636b05e1033, type: 3}
       propertyPath: m_Name
       value: SmallEnemy
