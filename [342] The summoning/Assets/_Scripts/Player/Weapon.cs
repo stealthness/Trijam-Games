@@ -47,9 +47,31 @@ namespace _Scripts.Player
 
         private void OnDrawGizmos()
         {
-            Gizmos.color = Color.red;
+            // > generated code
             BoxCollider2D box = GetComponent<BoxCollider2D>();
-            Gizmos.DrawWireCube(transform.position, box.size);
+            if (box == null) return;
+
+            Vector2 size = box.size;
+            Vector2 offset = box.offset;
+            Transform t = transform;
+            Vector2 halfSize = size * 0.5f;
+
+            Vector2[] localPoints = new Vector2[]
+            {
+                offset + new Vector2(-halfSize.x, -halfSize.y),
+                offset + new Vector2(-halfSize.x,  halfSize.y),
+                offset + new Vector2( halfSize.x,  halfSize.y),
+                offset + new Vector2( halfSize.x, -halfSize.y)
+            };
+
+            Gizmos.color = Color.red;
+            for (int i = 0; i < 4; i++)
+            {
+                Vector2 p1 = t.TransformPoint(localPoints[i]);
+                Vector2 p2 = t.TransformPoint(localPoints[(i + 1) % 4]);
+                Gizmos.DrawLine(p1, p2);
+            }
+            // < generated code
         }
     }
 }
