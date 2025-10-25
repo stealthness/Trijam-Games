@@ -27,10 +27,27 @@ namespace _Scripts.Enemy
         {
             var box = GetComponent<BoxCollider2D>();
             var hit = Physics2D.OverlapBox(box.bounds.center, box.bounds.size, 0);
-            if (hit != null && hit.CompareTag("Monk"))
+            if (!hit)
             {
-                Debug.Log("Enemy hit Monk!");
+                return;
+            }
+            
+            
+            
+            if (hit.CompareTag("Monk"))
+            {
+                Debug.Log("Enemy: Enemy hit Monk!");
                 Destroy(gameObject);
+            }
+
+            if (hit.CompareTag("Player"))
+            {
+                Debug.Log("Enemy: Enemy hit Player!");
+            }
+            
+            if (hit.CompareTag("Weapon"))
+            {
+                Debug.Log("Enemy: Hit by weapon!");
             }
         }
 

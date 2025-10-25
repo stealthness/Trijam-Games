@@ -40,7 +40,7 @@ namespace _Scripts.Player
             
             if (hit.CompareTag("Enemy"))
             {
-                Debug.Log("Weapon hit Enemy!");
+                Debug.Log("Weapon: Weapon hit Enemy!");
                 Destroy(hit.gameObject);
             }
         }
