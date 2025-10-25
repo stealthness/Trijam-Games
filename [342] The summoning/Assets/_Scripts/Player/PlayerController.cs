@@ -2,14 +2,16 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace _Scripts
+namespace _Scripts.Player
 {
     public class PlayerController : MonoBehaviour
     {
 
+        public  Weapon weapon;
+        
         private Vector2 _dir;
         [SerializeField] private float playerSpeed = 3f;
-
+        
 
         public void OnMove(InputValue value)
         {
@@ -17,6 +19,14 @@ namespace _Scripts
             _dir = new Vector2(moveInput.x, 0);
             CheckDirection();
         }
+        
+        public void OnAttack()
+        {
+            Debug.Log("Attack!");
+            weapon.OnAttack();
+            
+        }
+        
 
         private void CheckDirection()
         {
