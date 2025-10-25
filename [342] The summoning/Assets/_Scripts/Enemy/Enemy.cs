@@ -1,4 +1,6 @@
 ﻿using System;
+using _Scripts.Monk;
+using _Scripts.Player;
 using UnityEditor;
 using UnityEngine;
 
@@ -11,6 +13,7 @@ namespace _Scripts.Enemy
         private Vector2 _direction;
         [SerializeField] private float enemySpeed = 2f;
         [SerializeField] private SmallEnemyState state;
+        [SerializeField] private int damageAmount = 5;
 
         private void Awake()
         {
@@ -24,6 +27,11 @@ namespace _Scripts.Enemy
 
         private void Update()
         {
+            if (state == SmallEnemyState.Dying)
+            {
+                return;
+            }
+            
             _direction = transform.position.x > 0 ? Vector2.left : Vector2.right;
             checkCollision();
         }
@@ -42,12 +50,18 @@ namespace _Scripts.Enemy
                 if (hit.CompareTag("Monk"))
                 {
                     Debug.Log("Enemy: Enemy hit Monk!");
+                    hit.GetComponent<MonkHealth>().TakeDamage(damageAmount);
+                    GetComponent<SpriteRenderer>().color = Color.darkViolet;
+                    Explode();
                     Destroy(gameObject);
                 }
 
                 if (hit.CompareTag("Player"))
                 {
                     Debug.Log("Enemy: Enemy hit Player!");
+                    hit.GetComponent<PlayerHealth>().TakeDamage(damageAmount);
+                    GetComponent<SpriteRenderer>().color = Color.red;
+                    Explode();
                 }
 
                 if (hit.CompareTag("Weapon"))
@@ -62,6 +76,8 @@ namespace _Scripts.Enemy
         {
             state = SmallEnemyState.Dying;
             _animator.SetTrigger("Explode");
+            GetComponent<BoxCollider2D>().enabled = false;
+            Destroy(gameObject, 1f);
         }
 
 
