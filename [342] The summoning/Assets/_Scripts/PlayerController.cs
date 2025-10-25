@@ -15,6 +15,17 @@ namespace _Scripts
         {
             var moveInput = value.Get<Vector2>();
             _dir = new Vector2(moveInput.x, 0);
+            CheckDirection();
+        }
+
+        private void CheckDirection()
+        {
+            transform.localScale = _dir.x switch
+            {
+                > 0 => new Vector3(1, 1, 1),
+                < 0 => new Vector3(-1, 1, 1),
+                _ => transform.localScale
+            };
         }
 
 
