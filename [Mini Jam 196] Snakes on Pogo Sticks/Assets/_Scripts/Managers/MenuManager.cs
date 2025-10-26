@@ -6,6 +6,8 @@ namespace _Scripts.Managers
     {
         public static MenuManager Instance;
         
+        public GameObject menu;
+        
         private void Awake()
         {
             if (!Instance)
@@ -21,6 +23,7 @@ namespace _Scripts.Managers
         public void ShowMainMenu()
         {
             Debug.Log("Main Menu Shown");
+            menu.SetActive(true);
         }
         
         
@@ -28,6 +31,7 @@ namespace _Scripts.Managers
         {
             Debug.Log("Start Button Clicked");
             GameManager.Instance.StartGame();
+            menu.SetActive(false);
         }
     }
 }

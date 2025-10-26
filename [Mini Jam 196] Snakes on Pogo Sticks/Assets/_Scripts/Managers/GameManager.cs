@@ -6,6 +6,7 @@ namespace _Scripts.Managers
     public class GameManager : MonoBehaviour
     {
         public static GameManager Instance;
+        public TurnType gameTurn;
 
         private void Awake()
         {
@@ -25,13 +26,33 @@ namespace _Scripts.Managers
             Debug.Log("Game Manager Started");
             Time.timeScale = 0;
             MenuManager.Instance.ShowMainMenu();
+            gameTurn = TurnType.NoTurn;
         }
 
         public void StartGame()
         {
             Debug.Log("Game Started");
-            SceneManager.LoadScene("GameScene");
+            SceneManager.LoadScene("TurnGameScene");
             Time.timeScale = 1;
+            gameTurn = TurnType.PlayerTurn;
+        }
+
+        public void NextTurn()
+        {
+            if (gameTurn == TurnType.PlayerTurn)
+            {
+                gameTurn = TurnType.EnemyTurn;
+                StartEnemyTurn();
+            }
+            else if (gameTurn == TurnType.EnemyTurn)
+            {
+                gameTurn = TurnType.PlayerTurn;
+            }
+        }
+
+        private void StartEnemyTurn()
+        {
+            Invoke(nameof(NextTurn), 2f);
         }
     }
 }
