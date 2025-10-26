@@ -22,6 +22,9 @@ namespace _Scripts.Snakes
         public void Start()
         {
             _position = BoardPosition.CreateBoardPosition(startRow, startCol);
+            var anim = GetComponent<Animator>();
+            var randomStart = Random.Range(0f, 1f);
+            anim.Play("Green-Snake-Pogoing_Clip", -1, randomStart);
         }
 
 
