@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using _Scripts.Board;
 using _Scripts.Core;
 using _Scripts.Managers;
 using UnityEngine;
@@ -14,8 +15,21 @@ namespace _Scripts.Player
         [SerializeField] private bool moveMade = false;
         [SerializeField] private float playerMoveDistance = 1.5f;
         [SerializeField] private float playerTimeToMove = 0.5f;
+        [SerializeField] private int startRow = 1;
+        [SerializeField] private int startCol = 1;
+        private BoardPosition _position;
         private bool _isMoving = false;
         private Vector3 _previousPosition;
+
+
+        private void Start()
+        {
+            _position = BoardPosition.CreateBoardPosition(startRow, startCol);
+            var x = (startCol - 1) * 1.5f;
+            var y = (startRow - 1) * 1.5f;
+
+            transform.position = new Vector3(x, y, 0);
+        }
 
 
         private void Update()
