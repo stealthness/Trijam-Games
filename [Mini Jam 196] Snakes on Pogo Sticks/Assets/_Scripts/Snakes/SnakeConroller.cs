@@ -13,13 +13,15 @@ namespace _Scripts.Snakes
         [SerializeField] private bool moveMade = false;
         [SerializeField] private float playerMoveDistance = 1.5f;
         [SerializeField] private float playerTimeToMove = 0.5f;
+        [SerializeField] private int startRow = 1;
+        [SerializeField] private int startCol = 1;
         private bool _isMoving = false;
         private BoardPosition _position;
 
 
         public void Start()
         {
-            _position = BoardPosition.CreateBoardPosition(0, 0);
+            _position = BoardPosition.CreateBoardPosition(startRow, startCol);
         }
 
 
@@ -38,23 +40,23 @@ namespace _Scripts.Snakes
         {
             var possibleDirections = new List<Vector2>{Vector2.up, Vector2.down, Vector2.left, Vector2.right};
             
-            switch (_position.row)
+            switch (_position.Row)
             {
-                case 0:
-                    possibleDirections.Remove(Vector2.right);
+                case 1:
+                    possibleDirections.Remove(Vector2.down);
                     break;
-                case 7:
-                    possibleDirections.Remove(Vector2.left);
+                case 8:
+                    possibleDirections.Remove(Vector2.up);
                     break;
             }
 
-            switch (_position.col)
+            switch (_position.Col)
             {
-                case 0:
-                    possibleDirections.Remove(Vector2.up);
+                case 1:
+                    possibleDirections.Remove(Vector2.left);
                     break;
-                case 7:
-                    possibleDirections.Remove(Vector2.down);
+                case 8:
+                    possibleDirections.Remove(Vector2.right);
                     break;
             }
             var randomDirection = possibleDirections[UnityEngine.Random.Range(0, possibleDirections.Count)];
@@ -62,7 +64,7 @@ namespace _Scripts.Snakes
             {
                 Debug.Log(v);
             }
-            Debug.Log("Snake: random direction" + randomDirection + ", from position: " + _position.row );
+            Debug.Log("Snake: random direction" + randomDirection + ", from position: " + _position.Row );
             direction = randomDirection;
 
         }

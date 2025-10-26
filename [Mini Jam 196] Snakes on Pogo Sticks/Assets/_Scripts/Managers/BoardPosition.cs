@@ -2,69 +2,74 @@
 
 namespace _Scripts.Managers
 {
+    /// <summary>
+    /// BoardPosition class represents a position on an 8x8 game board.
+    /// The position is defined by row and column indices.
+    /// The position wil be 1 to 8 
+    /// define position 1,1 as the bottlem-left corner of the board
+    /// </summary>
     public class BoardPosition
     {
         
         private static int MaxRows = 8;
         private static int MaxCols = 8;
 
-        public int row { get; set; }
-        public int col { get; set; }
+        public int Row { get; private set; }
+        public int Col { get; private set; }
 
         private BoardPosition(int row, int col)
         {
-            this.row = row;
-            this.col = col;
+            Row = row;
+            Col = col;
         }
 
         public void SetPosition(int row, int col)
         {
-            if ((row >= MaxRows || col >= MaxCols) && (row < 0 || col < 0)) return;
+            if (IsValidPosition(row, col)) return;
             
-            this.row = row;
-            this.col = col;
+            Row = row;
+            Col = col;
 
         }
         
         public static BoardPosition CreateBoardPosition(int row, int col)
         {
-            if ((row >= MaxRows || col >= MaxCols) && (row < 0 || col < 0)) return null;
-            return new BoardPosition(row, col);
+            return !IsValidPosition(row, col) ? null : new BoardPosition(row, col);
         }
 
         public static bool IsValidPosition(int row, int col)
         {
-            return row >= 0 && row < MaxRows && col >= 0 && col < MaxCols;
+            return row > 0 && row <= MaxRows && col > 0 && col <= MaxCols;
         }
 
         public void MovePosition(Vector2 direction)
         {
             if (direction == Vector2.up)
             {
-                if (IsValidPosition(row + 1, col))
+                if (IsValidPosition(Row + 1, Col))
                 {
-                    row -= 1;
+                    Row += 1;
                 }
             }
             else if (direction == Vector2.down)
             {
-                if (IsValidPosition(row - 1, col))
+                if (IsValidPosition(Row - 1, Col))
                 {
-                    row += 1;
+                    Row -= 1;
                 }
             }
             else if (direction == Vector2.left)
             {
-                if (IsValidPosition(row, col - 1))
+                if (IsValidPosition(Row, Col - 1))
                 {
-                    col -= 1;
+                    Col -= 1;
                 }
             }
             else if (direction == Vector2.right)
             {
-                if (IsValidPosition(row, col + 1))
+                if (IsValidPosition(Row, Col + 1))
                 {
-                    col += 1;
+                    Col += 1;
                 }
             }
         }
