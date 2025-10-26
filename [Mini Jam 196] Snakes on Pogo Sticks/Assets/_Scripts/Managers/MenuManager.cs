@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace _Scripts.Managers
 {
@@ -7,9 +9,12 @@ namespace _Scripts.Managers
         public static MenuManager Instance;
         
         public GameObject menu;
+        public GameObject endMenu;
         public GameObject enemyTurnPanel;
         public GameObject playerTurnPanel;
         public GameObject noTurnPanel;
+        
+        public TextMeshProUGUI responseText;
 
         private void Awake()
         {
@@ -37,6 +42,11 @@ namespace _Scripts.Managers
             GameManager.Instance.StartGame();
             menu.SetActive(false);
         }
+
+        public void OnRestartButtonClicked()
+        {
+            SceneManager.LoadScene("TurnGameScene");
+        }
         
         public void ShowTurnMenu(TurnType gameTurn)
         {
@@ -58,6 +68,12 @@ namespace _Scripts.Managers
             }
             menu.SetActive(true);
         }
-        
+
+        public void ShowEndMenu(string eatonByASnake)
+        {
+            ShowTurnMenu(TurnType.NoTurn);
+            endMenu.SetActive(true);
+            responseText.text = eatonByASnake;
+        }
     }
 }

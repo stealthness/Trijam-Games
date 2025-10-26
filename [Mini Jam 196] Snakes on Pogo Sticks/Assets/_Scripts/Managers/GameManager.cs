@@ -72,5 +72,11 @@ namespace _Scripts.Managers
             MenuManager.Instance.ShowTurnMenu(gameTurn);
             StartEnemyTurn();
         }
+
+        public void GameOver()
+        {
+            Time.timeScale = 0;
+            MenuManager.Instance.ShowEndMenu("eaton by a snake");
+        }
     }
 }

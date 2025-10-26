@@ -47,6 +47,7 @@ namespace _Scripts.Player
                 if (hit.gameObject.CompareTag("Snake"))
                 {
                     Debug.Log("Player collided with Snake!");
+                    GameManager.Instance.GameOver();
                    
                 }
 
