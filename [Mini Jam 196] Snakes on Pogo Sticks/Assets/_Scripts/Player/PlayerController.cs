@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using _Scripts.Core;
 using _Scripts.Managers;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -54,7 +55,7 @@ namespace _Scripts.Player
                 if (hit.gameObject.CompareTag("Coin"))
                 {
                     Debug.Log("Player collided with Coin!");
-                    Destroy(hit.gameObject);
+                    WaveManager.Instance.CollectCoin(hit.gameObject);
                 }
                 
                 if (hit.gameObject.CompareTag("PowerUp"))

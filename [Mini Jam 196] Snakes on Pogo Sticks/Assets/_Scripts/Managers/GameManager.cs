@@ -1,3 +1,4 @@
+using _Scripts.Core;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -77,6 +78,12 @@ namespace _Scripts.Managers
         {
             Time.timeScale = 0;
             MenuManager.Instance.ShowEndMenu("eaton by a snake");
+        }
+
+        public void NextWave()
+        {
+            Debug.Log("Wave Complete");
+            WaveManager.Instance.StartNextWave();
         }
     }
 }

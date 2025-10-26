@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace _Scripts.Managers
+namespace _Scripts.Board
 {
     /// <summary>
     /// BoardPosition class represents a position on an 8x8 game board.

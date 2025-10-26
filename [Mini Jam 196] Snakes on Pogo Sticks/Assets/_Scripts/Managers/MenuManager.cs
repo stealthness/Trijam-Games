@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using _Scripts.Core;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
