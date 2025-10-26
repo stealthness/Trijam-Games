@@ -30,7 +30,6 @@ namespace _Scripts.Player
                     return;
                 }
 
-                moveMade = false;
                 _previousPosition = transform.position;
                 StartCoroutine(MoveByDirection(playerMoveDistance, playerTimeToMove));
             }
@@ -41,9 +40,11 @@ namespace _Scripts.Player
         {
             if (GameManager.Instance.gameTurn != TurnType.PlayerTurn) return;
 
+            if (moveMade && !_isMoving) return;
+
 
             Vector2 inputDirection = value.Get<Vector2>();
-            if (inputDirection.x == 0)
+            if (inputDirection.x == 0 || inputDirection.sqrMagnitude < 0.1f)
             {
                 direction = Vector2.zero;
             }
@@ -63,6 +64,7 @@ namespace _Scripts.Player
 
         private IEnumerator MoveByDirection(float distance, float duration)
         {
+            Debug.Log("Player moving " + direction);
             _isMoving = true;
             Vector3 startPos = transform.position;
             Vector3 targetPos = startPos + (Vector3)direction.normalized * distance;
@@ -77,8 +79,10 @@ namespace _Scripts.Player
             }
 
             transform.position = targetPos;
+            GameManager.Instance.EnemyTurn();
             _isMoving = false;
-            GameManager.Instance.NextTurn();
+            moveMade = false;
+            direction = Vector2.zero;
         }
 
 

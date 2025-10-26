@@ -56,7 +56,21 @@ namespace _Scripts.Managers
 
         private void StartEnemyTurn()
         {
-            Invoke(nameof(NextTurn), 2f);
+            Invoke(nameof(PlayerTurn), 2f);
+        }
+
+        public void PlayerTurn()
+        {
+            gameTurn = TurnType.PlayerTurn;
+            MenuManager.Instance.ShowTurnMenu(gameTurn);
+        }
+        
+        
+        public void EnemyTurn()
+        {
+            gameTurn = TurnType.EnemyTurn;
+            MenuManager.Instance.ShowTurnMenu(gameTurn);
+            StartEnemyTurn();
         }
     }
 }
