@@ -1,11 +1,15 @@
 ﻿using System;
+using System.Collections.Generic;
 using _Scripts.Managers;
+using TMPro;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace _Scripts.Core
 {
     public class WaveManager : MonoBehaviour
     {
+        public TextMeshProUGUI waveText;
         public static WaveManager Instance;
         [SerializeField] private int currentWave = 0;
         [SerializeField] private int coinsCollected = 0;
@@ -37,19 +41,44 @@ namespace _Scripts.Core
         
         private void Start()
         {
-            SpawnCoins();
-            coinsPerWave = coins.Length;
+            SpawnCoins(5);
+            coinsPerWave = 5;
             coinsCollected = 0;
         }
 
-        private void SpawnCoins()
+        private void SpawnCoins(int numberOfCoins = 5)
         {
+            DeactivateAllCoins();
+
+            // create index list and shuffle (Fisher-Yates)
+            List<int> indices = new List<int>(coins.Length);
+            for (int i = 0; i < coins.Length; i++) indices.Add(i);
+
+            for (int i = indices.Count - 1; i > 0; i--)
+            {
+                var j = Random.Range(0, i + 1);
+                int tmp = indices[i];
+                indices[i] = indices[j];
+                indices[j] = tmp;
+            }
+            
+            for (var i = 0; i < numberOfCoins; i++)
+            {
+                var idx = indices[i];
+                coins[idx].SetActive(true);
+            }
+            
+        }
+
+        private void DeactivateAllCoins()
+        {
+            // deactivate all coins first
             foreach (var coin in coins)
             {
-                coin.SetActive(true);
+                if (coin != null) coin.SetActive(false);
             }
         }
-        
+
         public void CollectCoin(GameObject coin)
         {
             coin.SetActive(false);
@@ -60,9 +89,11 @@ namespace _Scripts.Core
 
         public void StartNextWave()
         {
-            SpawnCoins();
             coinsCollected = 0;
             currentWave++;
+            SpawnCoins(5 + currentWave * 2);
+            
+            waveText.text = "Wave: " + currentWave;
         }
     }
 }
