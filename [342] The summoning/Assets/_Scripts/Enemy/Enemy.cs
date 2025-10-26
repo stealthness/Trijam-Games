@@ -1,7 +1,6 @@
-﻿using System;
+﻿using _Scripts.Managers;
 using _Scripts.Monk;
 using _Scripts.Player;
-using UnityEditor;
 using UnityEngine;
 
 namespace _Scripts.Enemy
@@ -77,6 +76,7 @@ namespace _Scripts.Enemy
             state = SmallEnemyState.Dying;
             _animator.SetTrigger("Explode");
             GetComponent<BoxCollider2D>().enabled = false;
+            EnemySpawnManager.EnemyCount--;
             Destroy(gameObject, 1f);
         }
 

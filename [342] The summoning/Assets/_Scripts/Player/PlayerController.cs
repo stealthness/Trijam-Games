@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -10,7 +9,7 @@ namespace _Scripts.Player
         public  Weapon weapon;
         
         private Vector2 _dir;
-        [SerializeField] private float playerSpeed = 3f;
+        [SerializeField] private float playerSpeed = 5f;
         
 
         public void OnMove(InputValue value)
@@ -42,6 +41,14 @@ namespace _Scripts.Player
         private void LateUpdate()
         {
             transform.Translate(_dir * (Time.deltaTime * playerSpeed));
+            if (transform.position.x > 14f)
+            {
+                transform.position = new Vector3(14f, transform.position.y, transform.position.z);
+            }
+            else if (transform.position.x < -14f)
+            {
+                transform.position = new Vector3(-14f, transform.position.y, transform.position.z);
+            }
         }
     }
 }
