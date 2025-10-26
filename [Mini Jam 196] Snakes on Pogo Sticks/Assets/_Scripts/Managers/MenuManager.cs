@@ -27,6 +27,7 @@ namespace _Scripts.Managers
         {
             Debug.Log("Main Menu Shown");
             menu.SetActive(true);
+            ShowTurnMenu(TurnType.NoTurn);
         }
         
         

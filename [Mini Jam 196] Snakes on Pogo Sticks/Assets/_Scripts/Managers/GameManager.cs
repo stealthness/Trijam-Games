@@ -25,8 +25,9 @@ namespace _Scripts.Managers
         {
             Debug.Log("Game Manager Started");
             Time.timeScale = 0;
-            MenuManager.Instance.ShowMainMenu();
             gameTurn = TurnType.NoTurn;
+            MenuManager.Instance.ShowMainMenu();
+            
         }
 
         public void StartGame()
@@ -35,6 +36,7 @@ namespace _Scripts.Managers
             SceneManager.LoadScene("TurnGameScene");
             Time.timeScale = 1;
             gameTurn = TurnType.PlayerTurn;
+            MenuManager.Instance.ShowTurnMenu(TurnType.PlayerTurn);
         }
 
         public void NextTurn()
@@ -42,11 +44,13 @@ namespace _Scripts.Managers
             if (gameTurn == TurnType.PlayerTurn)
             {
                 gameTurn = TurnType.EnemyTurn;
+                MenuManager.Instance.ShowTurnMenu(gameTurn);
                 StartEnemyTurn();
             }
             else if (gameTurn == TurnType.EnemyTurn)
             {
                 gameTurn = TurnType.PlayerTurn;
+                MenuManager.Instance.ShowTurnMenu(gameTurn);
             }
         }
 
