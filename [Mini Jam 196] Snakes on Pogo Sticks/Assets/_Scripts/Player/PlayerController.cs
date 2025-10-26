@@ -19,6 +19,8 @@ namespace _Scripts.Player
 
         private void Update()
         {
+            CheckForCollisions();
+            
             if (GameManager.Instance.gameTurn != TurnType.PlayerTurn) return;
             
             if (moveMade && !_isMoving)
@@ -32,6 +34,33 @@ namespace _Scripts.Player
 
                 _previousPosition = transform.position;
                 StartCoroutine(MoveByDirection(playerMoveDistance, playerTimeToMove));
+            }
+        }
+
+        private void CheckForCollisions()
+        {
+            if (_isMoving) return;
+
+            var hits = Physics2D.OverlapCircleAll(transform.position, 0.1f);
+            foreach (var hit in hits)
+            {
+                if (hit.gameObject.CompareTag("Snake"))
+                {
+                    Debug.Log("Player collided with Snake!");
+                   
+                }
+
+                if (hit.gameObject.CompareTag("Coin"))
+                {
+                    Debug.Log("Player collided with Coin!");
+                    Destroy(hit.gameObject);
+                }
+                
+                if (hit.gameObject.CompareTag("PowerUp"))
+                {
+                    Debug.Log("Player collided with PowerUp!");
+                    Destroy(hit.gameObject);
+                }
             }
         }
 
