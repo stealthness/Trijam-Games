@@ -11,7 +11,7 @@ namespace _Scripts.Player
         [SerializeField] private Vector2 direction = Vector2.up;
         [SerializeField] private float speed = 3f;
         [SerializeField] private bool moveMade = false;
-        [SerializeField] private float playerMoveDistance = 1.25f;
+        [SerializeField] private float playerMoveDistance = 1.5f;
         [SerializeField] private float playerTimeToMove = 0.5f;
         private bool _isMoving = false;
         private Vector3 _previousPosition;
