@@ -1,4 +1,4 @@
-﻿using System;
+﻿
 using System.Collections;
 using _Scripts.Board;
 using _Scripts.Core;
@@ -17,6 +17,8 @@ namespace _Scripts.Player
         [SerializeField] private float playerTimeToMove = 0.5f;
         [SerializeField] private int startRow = 1;
         [SerializeField] private int startCol = 1;
+        [SerializeField] private int currentRow = 0;
+        [SerializeField] private int currentCol = 0;
         private BoardPosition _position;
         private bool _isMoving = false;
         private Vector3 _previousPosition;
@@ -27,6 +29,8 @@ namespace _Scripts.Player
             _position = BoardPosition.CreateBoardPosition(startRow, startCol);
             var x = (startCol - 1) * 1.5f;
             var y = (startRow - 1) * 1.5f;
+            currentRow = startRow;
+            currentCol = startCol;
 
             transform.position = new Vector3(x, y, 0);
         }
@@ -87,23 +91,81 @@ namespace _Scripts.Player
 
             if (moveMade && !_isMoving) return;
 
-
-            Vector2 inputDirection = value.Get<Vector2>();
+            
+            var inputDirection = value.Get<Vector2>();
             if (inputDirection.x == 0 || inputDirection.sqrMagnitude < 0.1f)
             {
                 direction = Vector2.zero;
             }
 
+            if (!CheckForValidMove(inputDirection))
+            {
+                Debug.Log("Invalid move");
+                direction = Vector2.zero;
+                return;
+            }
+            MakeMove(inputDirection);
+        }
+
+        private void MakeMove(Vector2 dir)
+        {
+            if (Mathf.Abs(dir.y) > Mathf.Abs(dir.x))
+            {
+                if (dir.y > 0)
+                {
+                    direction = Vector2.up;
+                    currentRow += 1;
+                }
+                else
+                {
+                    currentRow -= 1;
+                    direction = Vector2.down;
+                }
+                moveMade = true;
+            }
+            else if (Mathf.Abs(dir.x) > Mathf.Abs(dir.y))
+            {
+                if (dir.x > 0)
+                {
+                    direction = Vector2.right;
+                    currentCol += 1;
+                }
+                else
+                {
+                    direction = Vector2.left;
+                    currentCol -= 1;
+                }
+                    
+                moveMade = true;
+            }
+            
+            _position = BoardPosition.CreateBoardPosition(currentRow, currentCol);
+        }
+
+        private bool CheckForValidMove(Vector2 inputDirection)
+        {
             if (Mathf.Abs(inputDirection.y) > Mathf.Abs(inputDirection.x))
             {
-                direction = inputDirection.y > 0 ? Vector2.up : Vector2.down;
-                moveMade = true;
+                if (inputDirection.y > 0)
+                {
+                    return BoardPosition.IsValidPosition(_position.Row + 1, _position.Col);
+                }
+                else
+                {
+                    return BoardPosition.IsValidPosition(_position.Row - 1, _position.Col);
+                }
 
             }
-            else if (Mathf.Abs(inputDirection.x) > Mathf.Abs(inputDirection.y))
+            else // (Mathf.Abs(inputDirection.x) > Mathf.Abs(inputDirection.y))
             {
-                direction = inputDirection.x > 0 ? Vector2.right : Vector2.left;
-                moveMade = true;
+                if (inputDirection.x > 0)
+                {
+                    return BoardPosition.IsValidPosition(_position.Row, _position.Col + 1);
+                }
+                else
+                {
+                    return  BoardPosition.IsValidPosition(_position.Row, _position.Col - 1);
+                }
             }
         }
 
@@ -113,6 +175,8 @@ namespace _Scripts.Player
             _isMoving = true;
             Vector3 startPos = transform.position;
             Vector3 targetPos = startPos + (Vector3)direction.normalized * distance;
+            
+            UpdateBoardPosition();
 
             float elapsed = 0f;
             while (elapsed < duration)
@@ -130,6 +194,10 @@ namespace _Scripts.Player
             direction = Vector2.zero;
         }
 
-
+        private void UpdateBoardPosition()
+        {
+            _position.SetPosition(currentRow, currentCol);
+            Debug.Log("Player Board Position updated to: Row " + _position.Row + ", Col " + _position.Col);
+        }
     }
 }
