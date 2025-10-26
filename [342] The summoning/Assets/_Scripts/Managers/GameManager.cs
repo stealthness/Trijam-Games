@@ -1,22 +1,36 @@
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+namespace _Scripts.Managers
 {
-    public static GameManager Instance;
-
-    private void Awake()
+    public class GameManager : MonoBehaviour
     {
-        if (Instance == null)
+        public static GameManager Instance;
+
+        private void Awake()
         {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
+            if (Instance == null)
+            {
+                Instance = this;
+                DontDestroyOnLoad(gameObject);
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
         }
-        else
+
+
+        private void Start()
         {
-            Destroy(gameObject);
+            Time.timeScale = 0;
+            StartManager.Instance.ShowPanel(UIState.Start);
         }
+
+        public void StartGame()
+        {
+            Debug.Log("StartGame");
+            Time.timeScale = 1;
+        }
+    
     }
-    
-    
-    
 }
