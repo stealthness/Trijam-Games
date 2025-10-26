@@ -1,4 +1,5 @@
 ﻿using System;
+using TMPro;
 using UnityEngine;
 
 namespace _Scripts.Managers
@@ -10,6 +11,7 @@ namespace _Scripts.Managers
         public GameObject GameUI;
         public GameObject StartUI;
         public GameObject EndUI;
+        public TextMeshProUGUI reasonText;
 
         private void Awake()
         {
@@ -53,7 +55,13 @@ namespace _Scripts.Managers
             StartUI.SetActive(false);
             EndUI.SetActive(false);
         }
-        
+
+        public void ShowGameOverPanel(string reason)
+        {
+            HideAllUI();
+            EndUI.SetActive(true);
+            reasonText.text = reason;
+        }
     }
 
     public enum UIState

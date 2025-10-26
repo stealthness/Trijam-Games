@@ -7,6 +7,8 @@ namespace _Scripts.Player
     {
         [SerializeField] private Vector2 direction = Vector2.up;
         [SerializeField] private float speed = 5f;
+        
+        
 
         public void OnMove(InputValue value)
         {

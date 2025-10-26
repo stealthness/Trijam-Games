@@ -31,6 +31,11 @@ namespace _Scripts.Managers
             Debug.Log("StartGame");
             Time.timeScale = 1;
         }
-    
+
+        public void GameOver(string reason)
+        {
+            StartManager.Instance.ShowGameOverPanel(reason);
+            Time.timeScale = 0;
+        }
     }
 }

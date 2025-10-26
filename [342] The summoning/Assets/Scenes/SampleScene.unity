@@ -1388,6 +1388,7 @@ MonoBehaviour:
   GameUI: {fileID: 1118686101}
   StartUI: {fileID: 1450045749}
   EndUI: {fileID: 1579012532}
+  reasonText: {fileID: 1883409947}
 --- !u!1 &516804218
 GameObject:
   m_ObjectHideFlags: 0
@@ -2010,7 +2011,7 @@ GameObject:
   - component: {fileID: 699790912}
   - component: {fileID: 699790911}
   m_Layer: 5
-  m_Name: Value
+  m_Name: PlayerHealthValueText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2446,6 +2447,7 @@ GameObject:
   - component: {fileID: 1118686102}
   - component: {fileID: 1118686104}
   - component: {fileID: 1118686103}
+  - component: {fileID: 1118686105}
   m_Layer: 5
   m_Name: GameUIPanel
   m_TagString: Untagged
@@ -2512,6 +2514,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1118686101}
   m_CullTransparentMesh: 1
+--- !u!114 &1118686105
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1118686101}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df604d6317a94d089bb157184ba7ef1c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_Scripts.Managers.GameUIManager
+  PlayerHealthText: {fileID: 699790911}
+  MonksHealthText: {fileID: 1333774137}
 --- !u!1 &1247837471
 GameObject:
   m_ObjectHideFlags: 0
@@ -2642,7 +2658,7 @@ GameObject:
   - component: {fileID: 1333774138}
   - component: {fileID: 1333774137}
   m_Layer: 5
-  m_Name: Value
+  m_Name: MonksHealthValueTest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

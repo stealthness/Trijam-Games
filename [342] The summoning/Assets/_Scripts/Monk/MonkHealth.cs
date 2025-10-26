@@ -1,5 +1,6 @@
 ﻿using System;
 using _Scripts.Core;
+using _Scripts.Managers;
 using UnityEngine;
 
 namespace _Scripts.Monk
@@ -8,17 +9,26 @@ namespace _Scripts.Monk
     public class MonkHealth : Health
     {
 
+        public static int monksHealth;
+
         public SpriteRenderer bloodSpriteRenderer;
         
         public Sprite deadMonkSprite;
         public Sprite hurtMonkSprite;
         public Sprite nearDeathMonkSprite;
 
+        private void Start()
+        {
+            monksHealth = 400;
+            
+        }
 
 
         public override void TakeDamage(int damage)
         {
-            var extraDamage = damage + 15;
+            MonkHealth.monksHealth -= damage;
+            
+            var extraDamage = damage;
             base.TakeDamage(extraDamage);
             if (currentHealth is <= 70 and > 30)
             {
@@ -29,6 +39,12 @@ namespace _Scripts.Monk
             {
                 Debug.Log("MonkHealth: Monk is near death!");
                 bloodSpriteRenderer.sprite = nearDeathMonkSprite;
+            }
+
+            if (monksHealth <= 0)
+            {
+                Debug.Log("MonkHealth: All Monks are dead!");
+                GameManager.Instance.GameOver("All Monks have been defeated!");
             }
         }
         
