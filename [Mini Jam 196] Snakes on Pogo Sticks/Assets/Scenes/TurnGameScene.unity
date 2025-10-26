@@ -311,7 +311,7 @@ MonoBehaviour:
   direction: {x: 0, y: 1}
   speed: 5
   moveMade: 0
-  playerMoveDistance: 1.25
+  playerMoveDistance: 1.5
   playerTimeToMove: 0.5
 --- !u!1 &208527581
 GameObject:
@@ -325,12 +325,12 @@ GameObject:
   - component: {fileID: 208527584}
   - component: {fileID: 208527583}
   m_Layer: 5
-  m_Name: EnemyTurnPanel (1)
+  m_Name: NoTurnPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &208527582
 RectTransform:
   m_ObjectHideFlags: 0
@@ -455,7 +455,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -180, y: 0}
+  m_AnchoredPosition: {x: -180, y: 141}
   m_SizeDelta: {x: 320, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &414203008
@@ -905,6 +905,7 @@ GameObject:
   - component: {fileID: 771362212}
   - component: {fileID: 771362214}
   - component: {fileID: 771362213}
+  - component: {fileID: 771362215}
   m_Layer: 0
   m_Name: Snake
   m_TagString: Untagged
@@ -941,6 +942,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::_Scripts.Snakes.SnakeController
   direction: {x: 0, y: 1}
   speed: 3
+  moveMade: 0
+  playerMoveDistance: 1.5
+  playerTimeToMove: 0.5
 --- !u!212 &771362214
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -999,6 +1003,28 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &771362215
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 771362211}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 8196397519162475937, guid: 75751cf76e05ffe46b224b3012df201c, type: 3}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1011265219
 GameObject:
   m_ObjectHideFlags: 0
@@ -3361,9 +3387,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_Scripts.Managers.MenuManager
   menu: {fileID: 1210205175}
-  enemyTurnPanel: {fileID: 0}
-  playerTurnPanel: {fileID: 0}
-  noTurnPanel: {fileID: 0}
+  enemyTurnPanel: {fileID: 414203006}
+  playerTurnPanel: {fileID: 1599003294}
+  noTurnPanel: {fileID: 208527581}
 --- !u!1 &2122538747
 GameObject:
   m_ObjectHideFlags: 0
@@ -3460,7 +3486,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.4414381, g: 0.5632687, b: 0.7547169, a: 0}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0

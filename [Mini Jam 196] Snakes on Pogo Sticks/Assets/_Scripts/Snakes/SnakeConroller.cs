@@ -1,8 +1,8 @@
-﻿using System;
+﻿
 using System.Collections;
+using System.Collections.Generic;
 using _Scripts.Managers;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 namespace _Scripts.Snakes
 {
@@ -14,7 +14,13 @@ namespace _Scripts.Snakes
         [SerializeField] private float playerMoveDistance = 1.5f;
         [SerializeField] private float playerTimeToMove = 0.5f;
         private bool _isMoving = false;
-        private Vector3 _previousPosition;
+        private BoardPosition _position;
+
+
+        public void Start()
+        {
+            _position = BoardPosition.CreateBoardPosition(0, 0);
+        }
 
 
         private void Update()
@@ -25,27 +31,46 @@ namespace _Scripts.Snakes
             
             
             SelectDirection();
-            _previousPosition = transform.position;
             StartCoroutine(MoveByDirection(playerMoveDistance, playerTimeToMove));
         }
 
         private void SelectDirection()
         {
-            System.Random rand = new System.Random();
-            var dir = rand.Next(0, 4);
-            direction = dir switch
+            var possibleDirections = new List<Vector2>{Vector2.up, Vector2.down, Vector2.left, Vector2.right};
+            
+            switch (_position.row)
             {
-                0 => Vector2.up,
-                1 => Vector2.down,
-                2 => Vector2.left,
-                3 => Vector2.right,
-                _ => direction
-            };
+                case 0:
+                    possibleDirections.Remove(Vector2.right);
+                    break;
+                case 7:
+                    possibleDirections.Remove(Vector2.left);
+                    break;
+            }
+
+            switch (_position.col)
+            {
+                case 0:
+                    possibleDirections.Remove(Vector2.up);
+                    break;
+                case 7:
+                    possibleDirections.Remove(Vector2.down);
+                    break;
+            }
+            var randomDirection = possibleDirections[UnityEngine.Random.Range(0, possibleDirections.Count)];
+            foreach (var v in possibleDirections)
+            {
+                Debug.Log(v);
+            }
+            Debug.Log("Snake: random direction" + randomDirection + ", from position: " + _position.row );
+            direction = randomDirection;
+
         }
 
 
         private IEnumerator MoveByDirection(float distance, float duration)
         {
+            _position.MovePosition(direction);
             _isMoving = true;
             Vector3 startPos = transform.position;
             Vector3 targetPos = startPos + (Vector3)direction.normalized * distance;
