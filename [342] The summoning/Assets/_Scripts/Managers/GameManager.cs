@@ -8,6 +8,7 @@ namespace _Scripts.Managers
         public static GameManager Instance;
 
 		public GameObject[] monks;
+        private MonkHealth[] _monksHealth;
 
 		
 
@@ -27,18 +28,21 @@ namespace _Scripts.Managers
 		public void Update()
 		{
 			bool allMonksDefeated = true;
-            foreach (GameObject monk in monks)
+            var totalhealth = 0;
+            foreach (MonkHealth health in _monksHealth)
             {
-                if (monk != null)
+                if (health.currentHealth > 0)
                 {
-					if (monk.GetComponent<MonkHealth>().GetHealth() > 0){
-                   		allMonksDefeated = false;
-                    	break;
-					}
-
+                    allMonksDefeated = false;
+                    totalhealth += health.currentHealth;
                 }
             }
 
+            if (GameUIManager.Instance != null)
+            {
+                GameUIManager.Instance.UpdateMonksHealth(totalhealth);
+            }
+            
 			if (allMonksDefeated)
             {
                 GameOver("All monks have been defeated!");
@@ -53,12 +57,23 @@ namespace _Scripts.Managers
             Time.timeScale = 0;
             StartManager.Instance.ShowPanel(UIState.Start);
 			monks = GameObject.FindGameObjectsWithTag("Monk");
+            _monksHealth = new MonkHealth[monks.Length];
+            for (int i = 0; i < monks.Length; i++)
+            {
+                _monksHealth[i] = monks[i].GetComponent<MonkHealth>();
+            }
 
         }
 
         public void StartGame()
         {
             Debug.Log("StartGame");
+            MusicManager.Instance.StartMusic();
+            if (GameUIManager.Instance != null)
+            {
+                GameUIManager.Instance.UpdatePlayerHealth(100);
+            }
+            
             Time.timeScale = 1;
         }
 

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using _Scripts.Managers;
+using UnityEngine;
 
 namespace _Scripts.Player
 {
@@ -22,19 +23,20 @@ namespace _Scripts.Player
         public void TakeDamage(int damage)
         {
             currentHealth -= damage;
-            Debug.Log($"PlayerHealth: Player took {damage} damage. Current health: {currentHealth}");
             _grunts.PlayRandomGrunt();
 
             if (currentHealth <= 0)
             {
                 currentHealth = 0;
+                GameUIManager.Instance.UpdatePlayerHealth(currentHealth);
                 Die();
             }
+            GameUIManager.Instance.UpdatePlayerHealth(currentHealth);
         }
 
         private void Die()
         {
-            Debug.Log("PlayerHealth: Player has died!");
+            GameManager.Instance.GameOver("You have died, and summoning has failed!");
             Time.timeScale = 0;
         }
     }

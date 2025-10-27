@@ -5,7 +5,7 @@ namespace _Scripts.Player
 {
     public class Weapon : MonoBehaviour
     {
-        
+        private AudioSource _audioSource;
         private Animator _swordAnimator;
         private BoxCollider2D _swordCollider;
         public LayerMask layerMask;
@@ -14,12 +14,14 @@ namespace _Scripts.Player
         {
             _swordAnimator = GetComponent<Animator>();
             _swordCollider = GetComponent<BoxCollider2D>();
+            _audioSource = GetComponent<AudioSource>();
         }
 
 
         public void OnAttack()
         {
             _swordAnimator.SetTrigger("Attack");
+            _audioSource.Play();
             if (_swordCollider.isActiveAndEnabled)
             {
                 CheckCollision();

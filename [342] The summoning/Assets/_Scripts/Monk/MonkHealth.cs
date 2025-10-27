@@ -27,6 +27,13 @@ namespace _Scripts.Monk
         public override void TakeDamage(int damage)
         {
             MonkHealth.monksHealth -= damage;
+            GameUIManager.Instance.UpdatePlayerHealth(currentHealth);
+            if (MonkHealth.monksHealth < 0)
+            {
+                MonkHealth.monksHealth = 0;
+                GameUIManager.Instance.UpdatePlayerHealth(currentHealth);
+                GameManager.Instance.GameOver("All Monks have been defeated!");
+            }
             
             var extraDamage = damage;
             base.TakeDamage(extraDamage);

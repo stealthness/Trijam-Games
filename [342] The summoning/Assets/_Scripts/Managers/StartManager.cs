@@ -14,6 +14,8 @@ namespace _Scripts.Managers
         public GameObject EndUI;
         public TextMeshProUGUI reasonText;
 
+        private AudioSource _audioSource;
+
         private void Awake()
         {
             if(!Instance)
@@ -25,6 +27,14 @@ namespace _Scripts.Managers
             {
                 Destroy(gameObject);
             }
+            
+            _audioSource = GetComponent<AudioSource>();
+        }
+
+        public void Start()
+        {
+            HideAllUI();
+            ShowPanel(UIState.Start);
         }
 
         public void ShowPanel(UIState panel)
@@ -48,10 +58,13 @@ namespace _Scripts.Managers
         {
             GameManager.Instance.StartGame();
             ShowPanel(UIState.Game);
+            _audioSource.Play();
         } 
         
         public void OnRestartButtonClick()
         {
+            ShowPanel(UIState.Start);
+            _audioSource.Stop();
             SceneManager.LoadScene(0);
         }
         
