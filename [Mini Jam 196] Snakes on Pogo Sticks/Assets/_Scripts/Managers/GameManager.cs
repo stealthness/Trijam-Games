@@ -10,6 +10,8 @@ namespace _Scripts.Managers
         
         public GameObject EmptyBoard;
         public TurnType gameTurn;
+        
+        [SerializeField] private float enemyTurnDelay = 2f;
 
         private void Awake()
         {
@@ -47,19 +49,18 @@ namespace _Scripts.Managers
             if (gameTurn == TurnType.PlayerTurn)
             {
                 gameTurn = TurnType.EnemyTurn;
-                MenuManager.Instance.ShowTurnMenu(gameTurn);
                 StartEnemyTurn();
             }
             else if (gameTurn == TurnType.EnemyTurn)
             {
                 gameTurn = TurnType.PlayerTurn;
-                MenuManager.Instance.ShowTurnMenu(gameTurn);
             }
+            MenuManager.Instance.ShowTurnMenu(gameTurn);
         }
 
         private void StartEnemyTurn()
         {
-            Invoke(nameof(PlayerTurn), 2f);
+            Invoke(nameof(PlayerTurn), enemyTurnDelay);
         }
 
         public void PlayerTurn()

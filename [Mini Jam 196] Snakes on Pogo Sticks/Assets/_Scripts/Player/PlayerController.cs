@@ -93,12 +93,15 @@ namespace _Scripts.Player
 
         public void OnMove(InputValue value)
         {
-            if (GameManager.Instance == null) return;
+            if (moveMade || _isMoving)
+            {
+                return;
+            }
             
+            if (GameManager.Instance == null) return;
             
             if (GameManager.Instance.gameTurn != TurnType.PlayerTurn) return;
 
-            if (moveMade && !_isMoving) return;
 
             
             var inputDirection = value.Get<Vector2>();
@@ -107,17 +110,24 @@ namespace _Scripts.Player
                 direction = Vector2.zero;
             }
 
+            moveMade = true;
+
             if (!CheckForValidMove(inputDirection))
             {
                 Debug.Log("Invalid move");
                 direction = Vector2.zero;
+                moveMade = false;
                 return;
             }
+            
             MakeMove(inputDirection);
         }
 
         private void MakeMove(Vector2 dir)
         {
+            
+            if (!moveMade) return;
+            
             if (Mathf.Abs(dir.y) > Mathf.Abs(dir.x))
             {
                 if (dir.y > 0)
@@ -180,10 +190,9 @@ namespace _Scripts.Player
 
         private IEnumerator MoveByDirection(float distance, float duration)
         {
-            Debug.Log("Player moving " + direction);
             _isMoving = true;
-            Vector3 startPos = transform.position;
-            Vector3 targetPos = startPos + (Vector3)direction.normalized * distance;
+            var startPos = transform.position;
+            var targetPos = startPos + (Vector3)direction.normalized * distance;
             
             UpdateBoardPosition();
 
@@ -197,10 +206,10 @@ namespace _Scripts.Player
             }
 
             transform.position = targetPos;
-            GameManager.Instance.EnemyTurn();
             _isMoving = false;
             moveMade = false;
             direction = Vector2.zero;
+            GameManager.Instance.EnemyTurn();
         }
 
         private void UpdateBoardPosition()
