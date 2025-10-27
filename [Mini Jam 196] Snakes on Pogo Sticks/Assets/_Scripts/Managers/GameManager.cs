@@ -59,13 +59,12 @@ namespace _Scripts.Managers
             MenuManager.Instance.ShowTurnMenu(TurnType.PlayerTurn);
         }
 
-        /// <summary>
+        /*/// <summary>
         /// Starts the enemy's turn after a specified delay.
         /// </summary>
         private void StartEnemyTurn()
         {
-            Invoke(nameof(PlayerTurn), enemyTurnDelay);
-        }
+        }*/
 
         /// <summary>
         /// Starts the player's turn and updates the UI accordingly.
@@ -83,7 +82,7 @@ namespace _Scripts.Managers
         {
             gameTurn = TurnType.EnemyTurn;
             MenuManager.Instance.ShowTurnMenu(gameTurn);
-            StartEnemyTurn();
+            Invoke(nameof(PlayerTurn), enemyTurnDelay);
         }
 
         public void GameOver()
