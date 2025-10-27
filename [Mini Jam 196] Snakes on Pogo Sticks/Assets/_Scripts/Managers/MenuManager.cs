@@ -5,16 +5,22 @@ using UnityEngine.SceneManagement;
 
 namespace _Scripts.Managers
 {
+    /// <summary>
+    /// Manages the game menus including main menu, end menu, and turn indicators.
+    /// </summary>
     public class MenuManager : MonoBehaviour
     {
+        /// <summary>
+        /// Creates a singleton instance of the MenuManager.
+        /// </summary>
         public static MenuManager Instance;
-        
-        public GameObject menu;
+
+        public GameObject startMenu;
         public GameObject endMenu;
         public GameObject enemyTurnPanel;
         public GameObject playerTurnPanel;
         public GameObject noTurnPanel;
-        
+
         public TextMeshProUGUI responseText;
 
         private void Awake()
@@ -32,28 +38,41 @@ namespace _Scripts.Managers
         public void ShowMainMenu()
         {
             Debug.Log("Main Menu Shown");
-            menu.SetActive(true);
+            startMenu.SetActive(true);
             ShowTurnMenu(TurnType.NoTurn);
         }
-        
-        
+
+        /// <summary>
+        /// Handles the Start button click event to begin the game.
+        /// </summary>
         public void OnStartButtonClicked()
         {
             Debug.Log("Start Button Clicked");
-            menu.SetActive(false);
+            startMenu.SetActive(false);
             GameManager.Instance.StartGame();
         }
 
+        /// <summary>
+        /// Displays the restart menu at the end of the game.
+        /// </summary>
         public void ShowRestartMenu()
         {
             endMenu.SetActive(true);
         }
-        
+
+        /// <summary>
+        /// Handles the Restart button click event to restart the game.
+        /// </summary>
         public void OnRestartButtonClicked()
         {
             SceneManager.LoadScene("TurnGameScene");
         }
+
         
+        /// <summary>
+        /// Shows the turn menu based on the current game turn.
+        /// </summary>
+        /// <param name="gameTurn"></param>
         public void ShowTurnMenu(TurnType gameTurn)
         {
             enemyTurnPanel.SetActive(false);
@@ -70,9 +89,7 @@ namespace _Scripts.Managers
                 default:
                     noTurnPanel.SetActive(false);
                     break;
-                        
             }
-            menu.SetActive(true);
         }
 
         public void ShowEndMenu(string eatonByASnake)

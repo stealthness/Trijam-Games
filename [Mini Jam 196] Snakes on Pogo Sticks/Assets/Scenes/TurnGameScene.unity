@@ -2000,8 +2000,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b68b808e272e484cb321ae90775bd83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_Scripts.Managers.GameManager
-  EmptyBoard: {fileID: 1748998640}
+  emptyBoard: {fileID: 1748998640}
   gameTurn: 0
+  enemyTurnDelay: 2
 --- !u!114 &699867379
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8641,7 +8642,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f215d1d0e3e42929d067a930cc82279, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_Scripts.Managers.MenuManager
-  menu: {fileID: 1210205175}
+  startMenu: {fileID: 1210205175}
   endMenu: {fileID: 1246055369}
   enemyTurnPanel: {fileID: 414203006}
   playerTurnPanel: {fileID: 1599003294}
