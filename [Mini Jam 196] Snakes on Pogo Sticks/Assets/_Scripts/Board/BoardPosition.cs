@@ -11,18 +11,35 @@ namespace _Scripts.Board
     public class BoardPosition
     {
         
-        private static int MaxRows = 8;
-        private static int MaxCols = 8;
+        private static int _maxRows = 8;
+        private static int _maxCols = 8;
 
+        /// <summary>
+        /// The row index of the board position (1 to 8). with 1 being the bottom row.
+        /// </summary>
         public int Row { get; private set; }
+        /// <summary>
+        /// The column index of the board position (1 to 8). with 1 being the leftmost column.
+        /// </summary>
         public int Col { get; private set; }
 
+        /// <summary>
+        /// Creates a BoardPosition with the given row and column. This constructor is private; use CreateBoardPosition
+        /// to create instances.
+        /// </summary>
+        /// <param name="row"></param>
+        /// <param name="col"></param>
         private BoardPosition(int row, int col)
         {
             Row = row;
             Col = col;
         }
 
+        /// <summary>
+        /// Sets the position to the given row and column if they are valid.
+        /// </summary>
+        /// <param name="row"></param>
+        /// <param name="col"></param>
         public void SetPosition(int row, int col)
         {
             if (IsValidPosition(row, col)) return;
@@ -32,16 +49,33 @@ namespace _Scripts.Board
 
         }
         
+        /// <summary>
+        /// Creates a BoardPosition if the given row and column are valid; otherwise, returns null.
+        /// </summary>
+        /// <param name="row"></param>
+        /// <param name="col"></param>
+        /// <returns></returns>
         public static BoardPosition CreateBoardPosition(int row, int col)
         {
             return !IsValidPosition(row, col) ? null : new BoardPosition(row, col);
         }
 
+        /// <summary>
+        /// Returns true if the given row and column are within the valid range of the board.
+        /// </summary>
+        /// <param name="row"></param>
+        /// <param name="col"></param>
+        /// <returns></returns>
         public static bool IsValidPosition(int row, int col)
         {
-            return row > 0 && row <= MaxRows && col > 0 && col <= MaxCols;
+            return row > 0 && row <= _maxRows && col > 0 && col <= _maxCols;
         }
 
+        
+        /// <summary>
+        /// Moves the position in the given direction if the new position is valid.
+        /// </summary>
+        /// <param name="direction"></param>
         public void MovePosition(Vector2 direction)
         {
             if (direction == Vector2.up)
