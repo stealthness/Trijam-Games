@@ -91,12 +91,5 @@ namespace _Scripts.Managers
                     break;
             }
         }
-
-        public void ShowEndMenu(string eatonByASnake)
-        {
-            ShowTurnMenu(TurnType.NoTurn);
-            endMenu.SetActive(true);
-            responseText.text = eatonByASnake;
-        }
     }
 }
