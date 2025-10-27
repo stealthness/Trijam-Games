@@ -22,6 +22,8 @@ namespace _Scripts.Player
         private BoardPosition _position;
         private bool _isMoving = false;
         private Vector3 _previousPosition;
+        public Sprite deadSprite;
+        private bool _isDead = false;
 
 
         private void Start()
@@ -38,6 +40,8 @@ namespace _Scripts.Player
 
         private void Update()
         {
+            if (_isDead) return;
+            
             CheckForCollisions();
             
             if (GameManager.Instance.gameTurn != TurnType.PlayerTurn) return;
@@ -66,6 +70,8 @@ namespace _Scripts.Player
                 if (hit.gameObject.CompareTag("Snake"))
                 {
                     Debug.Log("Player collided with Snake!");
+                    GetComponent<SpriteRenderer>().sprite = deadSprite;
+                    _isDead = true;
                     GameManager.Instance.GameOver();
                    
                 }
@@ -87,6 +93,9 @@ namespace _Scripts.Player
 
         public void OnMove(InputValue value)
         {
+            if (GameManager.Instance == null) return;
+            
+            
             if (GameManager.Instance.gameTurn != TurnType.PlayerTurn) return;
 
             if (moveMade && !_isMoving) return;

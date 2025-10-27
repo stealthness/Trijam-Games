@@ -7,6 +7,8 @@ namespace _Scripts.Managers
     public class GameManager : MonoBehaviour
     {
         public static GameManager Instance;
+        
+        public GameObject EmptyBoard;
         public TurnType gameTurn;
 
         private void Awake()
@@ -14,7 +16,6 @@ namespace _Scripts.Managers
             if (!Instance)
             {
                 Instance = this;
-                DontDestroyOnLoad(gameObject);
             }
             else
             {
@@ -27,6 +28,7 @@ namespace _Scripts.Managers
             Debug.Log("Game Manager Started");
             Time.timeScale = 0;
             gameTurn = TurnType.NoTurn;
+            EmptyBoard.SetActive(true);
             MenuManager.Instance.ShowMainMenu();
             
         }
@@ -34,9 +36,9 @@ namespace _Scripts.Managers
         public void StartGame()
         {
             Debug.Log("Game Started");
-            SceneManager.LoadScene("TurnGameScene");
             Time.timeScale = 1;
             gameTurn = TurnType.PlayerTurn;
+            EmptyBoard.SetActive(false);
             MenuManager.Instance.ShowTurnMenu(TurnType.PlayerTurn);
         }
 
@@ -76,8 +78,8 @@ namespace _Scripts.Managers
 
         public void GameOver()
         {
-            Time.timeScale = 0;
-            MenuManager.Instance.ShowEndMenu("eaton by a snake");
+            gameTurn = TurnType.NoTurn;
+            MenuManager.Instance.ShowRestartMenu();
         }
 
         public void NextWave()

@@ -5,7 +5,7 @@ namespace _Scripts.Core
     public class Health : MonoBehaviour
     {
         [SerializeField] protected int maxHealth = 100;
-        [SerializeField] protected int currentHealth =100;
+        [SerializeField] public int currentHealth =100;
         
         private void Start()
         {

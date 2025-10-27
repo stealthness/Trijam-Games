@@ -17,6 +17,7 @@ namespace _Scripts.Snakes
         [SerializeField] private float playerTimeToMove = 0.5f;
         [SerializeField] private int startRow = 1;
         [SerializeField] private int startCol = 1;
+        
         private bool _isMoving = false;
         private BoardPosition _position;
 

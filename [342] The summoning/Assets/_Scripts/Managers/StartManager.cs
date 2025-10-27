@@ -1,6 +1,7 @@
 ﻿using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace _Scripts.Managers
 {
@@ -47,6 +48,11 @@ namespace _Scripts.Managers
         {
             GameManager.Instance.StartGame();
             ShowPanel(UIState.Game);
+        } 
+        
+        public void OnRestartButtonClick()
+        {
+            SceneManager.LoadScene(0);
         }
         
         private void HideAllUI()

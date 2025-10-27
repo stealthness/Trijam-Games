@@ -55,5 +55,10 @@ namespace _Scripts.Monk
             GetComponent<SpriteRenderer>().sprite = deadMonkSprite;
             GetComponent<Collider2D>().enabled = false;
         }
+
+        public int GetHealth()
+        {
+            return currentHealth;
+        }
     }
 }

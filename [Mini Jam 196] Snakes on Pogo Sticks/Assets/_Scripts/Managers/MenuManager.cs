@@ -40,10 +40,15 @@ namespace _Scripts.Managers
         public void OnStartButtonClicked()
         {
             Debug.Log("Start Button Clicked");
-            GameManager.Instance.StartGame();
             menu.SetActive(false);
+            GameManager.Instance.StartGame();
         }
 
+        public void ShowRestartMenu()
+        {
+            endMenu.SetActive(true);
+        }
+        
         public void OnRestartButtonClicked()
         {
             SceneManager.LoadScene("TurnGameScene");

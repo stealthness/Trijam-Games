@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using _Scripts.Managers;
+using _Scripts.Snakes;
 using TMPro;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -9,9 +10,10 @@ namespace _Scripts.Core
 {
     public class WaveManager : MonoBehaviour
     {
-        public TextMeshProUGUI waveText;
         public static WaveManager Instance;
-        [SerializeField] private int currentWave = 0;
+        
+        public TextMeshProUGUI waveText;
+        [SerializeField] private int currentWave = 1;
         [SerializeField] private int coinsCollected = 0;
         [SerializeField] private int coinsPerWave = 5;
 
@@ -20,7 +22,6 @@ namespace _Scripts.Core
             if (!Instance)
             {
                 Instance = this;
-                DontDestroyOnLoad(gameObject);
             }
             else
             {
@@ -42,6 +43,7 @@ namespace _Scripts.Core
         private void Start()
         {
             SpawnCoins(5);
+            SnakeManager.Instance.SpawnSnakes(currentWave);
             coinsPerWave = 5;
             coinsCollected = 0;
         }
@@ -82,7 +84,7 @@ namespace _Scripts.Core
         public void CollectCoin(GameObject coin)
         {
             coin.SetActive(false);
-            // Additional logic for collecting a coin can be added here
+            ScoreManager.Instance.AddScore(100);
             coinsCollected++;
 
         }
@@ -91,9 +93,11 @@ namespace _Scripts.Core
         {
             coinsCollected = 0;
             currentWave++;
-            SpawnCoins(5 + currentWave * 2);
+            coinsPerWave = Math.Min(5 + currentWave * 2, coins.Length);
+            SpawnCoins(coinsPerWave);
+            SnakeManager.Instance.SpawnSnakes(currentWave);
             
-            waveText.text = "Wave: " + currentWave;
+            waveText.text = "Level: " + currentWave;
         }
     }
 }
