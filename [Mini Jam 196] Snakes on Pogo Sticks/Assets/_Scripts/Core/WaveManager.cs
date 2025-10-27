@@ -8,8 +8,14 @@ using Random = UnityEngine.Random;
 
 namespace _Scripts.Core
 {
+    /// <summary>
+    /// Handles wave management, including spawning coins and tracking collected coins.
+    /// </summary>
     public class WaveManager : MonoBehaviour
     {
+        /// <summary>
+        /// Creates a singleton instance of the WaveManager.
+        /// </summary>
         public static WaveManager Instance;
         
         public TextMeshProUGUI waveText;
@@ -17,6 +23,11 @@ namespace _Scripts.Core
         [SerializeField] private int coinsCollected = 0;
         [SerializeField] private int coinsPerWave = 5;
 
+        private AudioSource _audioSource;
+        
+        public AudioClip coinSound;
+        public AudioClip waveEndSound;
+        
          private void Awake()
         {
             if (!Instance)
@@ -27,6 +38,7 @@ namespace _Scripts.Core
             {
                 Destroy(gameObject);
             }
+            _audioSource = GetComponent<AudioSource>();
         }
 
         private void Update()
@@ -42,10 +54,10 @@ namespace _Scripts.Core
         
         private void Start()
         {
-            SpawnCoins(5);
-            SnakeManager.Instance.SpawnSnakes(currentWave);
             coinsPerWave = 5;
             coinsCollected = 0;
+            SpawnCoins(coinsPerWave * currentWave);
+            SnakeManager.Instance.SpawnSnakes(currentWave);
         }
 
         private void SpawnCoins(int numberOfCoins = 5)
@@ -74,6 +86,7 @@ namespace _Scripts.Core
 
         public void CollectCoin(GameObject coin)
         {
+            _audioSource.PlayOneShot(coinSound);
             coin.SetActive(false);
             ScoreManager.Instance.AddScore(100);
             coinsCollected++;
@@ -82,6 +95,7 @@ namespace _Scripts.Core
 
         public void StartNextWave()
         {
+            _audioSource.PlayOneShot(waveEndSound);
             coinsCollected = 0;
             currentWave++;
             coinsPerWave = Math.Min(5 + currentWave * 2, coins.Length);

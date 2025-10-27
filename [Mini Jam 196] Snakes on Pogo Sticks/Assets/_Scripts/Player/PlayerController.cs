@@ -10,30 +10,29 @@ namespace _Scripts.Player
 {
     public class PlayerController : MonoBehaviour
     {
+        public GameObject SheildEffect;
+        public Sprite deadSprite;
+        
         [SerializeField] private Vector2 direction = Vector2.up;
         [SerializeField] private float speed = 3f;
         [SerializeField] private bool moveMade = false;
         [SerializeField] private float playerMoveDistance = 1.5f;
         [SerializeField] private float playerTimeToMove = 0.5f;
-        [SerializeField] private int startRow = 1;
-        [SerializeField] private int startCol = 1;
-        [SerializeField] private int currentRow = 0;
-        [SerializeField] private int currentCol = 0;
-        private BoardPosition _position;
+        [Tooltip("Starting Row Position (1-indexed), Starting at Bottom, followed by Columns position [1-indexed], starting at Left")]
+        [SerializeField] private Vector2Int startPos = Vector2Int.one;
+        [SerializeField] private Vector2Int currentPos = Vector2Int.zero;
+        
+        //private BoardPosition _position;
         private bool _isMoving = false;
-        private Vector3 _previousPosition;
-        public Sprite deadSprite;
         private bool _isDead = false;
 
 
         private void Start()
         {
-            _position = BoardPosition.CreateBoardPosition(startRow, startCol);
-            var x = (startCol - 1) * 1.5f;
-            var y = (startRow - 1) * 1.5f;
-            currentRow = startRow;
-            currentCol = startCol;
-
+            //_position = BoardPosition.CreateBoardPosition(startPos.x, startPos.y);
+            var x = (startPos.x - 1) * 1.5f;
+            var y = (startPos.y - 1) * 1.5f;
+            currentPos = startPos;
             transform.position = new Vector3(x, y, 0);
         }
 
@@ -54,8 +53,6 @@ namespace _Scripts.Player
                     moveMade = false;
                     return;
                 }
-
-                _previousPosition = transform.position;
                 StartCoroutine(MoveByDirection(playerMoveDistance, playerTimeToMove));
             }
         }
@@ -69,11 +66,7 @@ namespace _Scripts.Player
             {
                 if (hit.gameObject.CompareTag("Snake"))
                 {
-                    Debug.Log("Player collided with Snake!");
-                    GetComponent<SpriteRenderer>().sprite = deadSprite;
-                    _isDead = true;
-                    GameManager.Instance.GameOver();
-                   
+                    Die("Player collided with Snake");
                 }
 
                 if (hit.gameObject.CompareTag("Coin"))
@@ -84,10 +77,23 @@ namespace _Scripts.Player
                 
                 if (hit.gameObject.CompareTag("PowerUp"))
                 {
-                    Debug.Log("Player collided with PowerUp!");
-                    Destroy(hit.gameObject);
+                    CollectPowerUp(hit.gameObject);
                 }
             }
+        }
+
+        private void CollectPowerUp(GameObject powerUp)
+        {
+            Debug.Log("Player collided with PowerUp!");
+            Destroy(powerUp);
+        }
+
+        private void Die(string msg)
+        {
+            Debug.Log(msg);
+            GetComponent<SpriteRenderer>().sprite = deadSprite;
+            _isDead = true;
+            GameManager.Instance.GameOver();
         }
 
 
@@ -133,11 +139,11 @@ namespace _Scripts.Player
                 if (dir.y > 0)
                 {
                     direction = Vector2.up;
-                    currentRow += 1;
+                    currentPos.y++;
                 }
                 else
                 {
-                    currentRow -= 1;
+                    currentPos.y--;
                     direction = Vector2.down;
                 }
                 moveMade = true;
@@ -147,18 +153,18 @@ namespace _Scripts.Player
                 if (dir.x > 0)
                 {
                     direction = Vector2.right;
-                    currentCol += 1;
+                    currentPos.x++;
                 }
                 else
                 {
                     direction = Vector2.left;
-                    currentCol -= 1;
+                    currentPos.x--;
                 }
                     
                 moveMade = true;
             }
             
-            _position = BoardPosition.CreateBoardPosition(currentRow, currentCol);
+            //_position = BoardPosition.CreateBoardPosition(currentPos.x, currentPos.y);
         }
 
         private bool CheckForValidMove(Vector2 inputDirection)
@@ -167,11 +173,11 @@ namespace _Scripts.Player
             {
                 if (inputDirection.y > 0)
                 {
-                    return BoardPosition.IsValidPosition(_position.Row + 1, _position.Col);
+                    return BoardPosition.IsValidPosition(currentPos.x , currentPos.y+ 1);
                 }
                 else
                 {
-                    return BoardPosition.IsValidPosition(_position.Row - 1, _position.Col);
+                    return BoardPosition.IsValidPosition(currentPos.x , currentPos.y- 1);
                 }
 
             }
@@ -179,11 +185,11 @@ namespace _Scripts.Player
             {
                 if (inputDirection.x > 0)
                 {
-                    return BoardPosition.IsValidPosition(_position.Row, _position.Col + 1);
+                    return BoardPosition.IsValidPosition(currentPos.x + 1, currentPos.y);
                 }
                 else
                 {
-                    return  BoardPosition.IsValidPosition(_position.Row, _position.Col - 1);
+                    return  BoardPosition.IsValidPosition(currentPos.x - 1, currentPos.y);
                 }
             }
         }
@@ -193,8 +199,6 @@ namespace _Scripts.Player
             _isMoving = true;
             var startPos = transform.position;
             var targetPos = startPos + (Vector3)direction.normalized * distance;
-            
-            UpdateBoardPosition();
 
             float elapsed = 0f;
             while (elapsed < duration)
@@ -212,10 +216,6 @@ namespace _Scripts.Player
             GameManager.Instance.EnemyTurn();
         }
 
-        private void UpdateBoardPosition()
-        {
-            _position.SetPosition(currentRow, currentCol);
-            Debug.Log("Player Board Position updated to: Row " + _position.Row + ", Col " + _position.Col);
-        }
+
     }
 }
