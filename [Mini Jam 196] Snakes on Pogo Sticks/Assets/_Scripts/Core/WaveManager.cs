@@ -53,16 +53,7 @@ namespace _Scripts.Core
             DeactivateAllCoins();
 
             // create index list and shuffle (Fisher-Yates)
-            List<int> indices = new List<int>(coins.Length);
-            for (int i = 0; i < coins.Length; i++) indices.Add(i);
-
-            for (int i = indices.Count - 1; i > 0; i--)
-            {
-                var j = Random.Range(0, i + 1);
-                int tmp = indices[i];
-                indices[i] = indices[j];
-                indices[j] = tmp;
-            }
+            var indices = GameObjectUtils.ShuffleGameObjectsIndices(coins);
             
             for (var i = 0; i < numberOfCoins; i++)
             {
