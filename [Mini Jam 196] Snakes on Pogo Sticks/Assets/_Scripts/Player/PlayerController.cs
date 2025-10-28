@@ -226,5 +226,12 @@ namespace _Scripts.Player
         }
 
 
+        public void ResetPosition()
+        {
+            var x = (startPos.x - 1) * 1.5f;
+            var y = (startPos.y - 1) * 1.5f;
+            currentPos = startPos;
+            transform.position = new Vector3(x, y, 0);
+        }
     }
 }

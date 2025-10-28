@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using _Scripts.Managers;
+using _Scripts.Player;
 using _Scripts.Snakes;
 using TMPro;
 using UnityEngine;
@@ -96,6 +97,7 @@ namespace _Scripts.Core
         public void StartNextWave()
         {
             _audioSource.PlayOneShot(waveEndSound);
+            FindAnyObjectByType<PlayerController>().ResetPosition();
             coinsCollected = 0;
             currentWave++;
             coinsPerWave = Math.Min(5 + currentWave * 2, coins.Length);
