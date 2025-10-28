@@ -28,10 +28,14 @@ namespace _Scripts.Player
         private bool _isDead = false;
         
         private AudioSource _audioSource;
+        private PlayerShield _playerShield;
+        private PlayerCollisionDetection _collisionDetection;
 
         private void Awake()
         {
             _audioSource = GetComponent<AudioSource>();
+            _playerShield = GetComponent<PlayerShield>();
+            _collisionDetection = GetComponent<PlayerCollisionDetection>();
         }
 
 
@@ -47,9 +51,9 @@ namespace _Scripts.Player
 
         private void Update()
         {
-            if (_isDead) return;
+            if (_isDead || _isMoving) return;
             
-            CheckForCollisions();
+            _collisionDetection.CheckForCollisions();
             
             if (GameManager.Instance.gameTurn != TurnType.PlayerTurn) return;
             
@@ -64,48 +68,7 @@ namespace _Scripts.Player
                 StartCoroutine(MoveByDirection(playerMoveDistance, playerTimeToMove));
             }
         }
-
-        private void CheckForCollisions()
-        {
-            if (_isMoving) return;
-
-            var hits = Physics2D.OverlapCircleAll(transform.position, 0.1f);
-            foreach (var hit in hits)
-            {
-                if (hit.gameObject.CompareTag("Snake"))
-                {
-                    Die("Player collided with Snake");
-                }
-
-                if (hit.gameObject.CompareTag("Coin"))
-                {
-                    Debug.Log("Player collided with Coin!");
-                    WaveManager.Instance.CollectCoin(hit.gameObject);
-                }
-                
-                if (hit.gameObject.CompareTag("PowerUp"))
-                {
-                    CollectPowerUp(hit.gameObject);
-                }
-            }
-        }
-
-        private void CollectPowerUp(GameObject powerUp)
-        {
-            Debug.Log("Player collided with PowerUp!");
-            Destroy(powerUp);
-        }
-
-        private void Die(string msg)
-        {
-            Debug.Log(msg);
-            _audioSource.Play();
-            GetComponent<SpriteRenderer>().sprite = deadSprite;
-            _isDead = true;
-            GameManager.Instance.GameOver();
-        }
-
-
+        
         public void OnMove(InputValue value)
         {
             if (moveMade || _isMoving)
@@ -142,6 +105,8 @@ namespace _Scripts.Player
         {
             
             if (!moveMade) return;
+            
+            _playerShield.Tick();
             
             if (Mathf.Abs(dir.y) > Mathf.Abs(dir.x))
             {
@@ -224,7 +189,14 @@ namespace _Scripts.Player
             direction = Vector2.zero;
             GameManager.Instance.EnemyTurn();
         }
-
+        public void Die(string msg)
+        {
+            Debug.Log(msg);
+            _audioSource.Play();
+            GetComponent<SpriteRenderer>().sprite = deadSprite;
+            _isDead = true;
+            GameManager.Instance.GameOver();
+        }
 
         public void ResetPosition()
         {
