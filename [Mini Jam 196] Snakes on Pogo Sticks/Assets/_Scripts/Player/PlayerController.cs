@@ -1,4 +1,5 @@
 ﻿
+using System;
 using System.Collections;
 using _Scripts.Board;
 using _Scripts.Core;
@@ -25,6 +26,13 @@ namespace _Scripts.Player
         //private BoardPosition _position;
         private bool _isMoving = false;
         private bool _isDead = false;
+        
+        private AudioSource _audioSource;
+
+        private void Awake()
+        {
+            _audioSource = GetComponent<AudioSource>();
+        }
 
 
         private void Start()
@@ -91,6 +99,7 @@ namespace _Scripts.Player
         private void Die(string msg)
         {
             Debug.Log(msg);
+            _audioSource.Play();
             GetComponent<SpriteRenderer>().sprite = deadSprite;
             _isDead = true;
             GameManager.Instance.GameOver();
