@@ -11,7 +11,6 @@ namespace _Scripts.Player
 {
     public class PlayerController : MonoBehaviour
     {
-        public GameObject SheildEffect;
         public Sprite deadSprite;
         
         [SerializeField] private Vector2 direction = Vector2.up;

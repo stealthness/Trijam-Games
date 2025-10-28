@@ -1,5 +1,5 @@
 ﻿using _Scripts.Core;
-using _Scripts.Managers;
+using _Scripts.Snakes;
 using UnityEngine;
 
 namespace _Scripts.Player
@@ -14,6 +14,13 @@ namespace _Scripts.Player
             {
                 if (hit.gameObject.CompareTag("Snake"))
                 {
+                    if (GetComponent<PlayerShield>().isShieldActive)
+                    {
+                        Debug.Log("Player collided with Snake but shield is active!");
+                        hit.gameObject.GetComponent<SnakeController>().Stun();
+                        continue;
+                    }
+                    
                     GetComponent<PlayerController>().Die("Player collided with Snake");
                 }
 
@@ -33,8 +40,8 @@ namespace _Scripts.Player
         private void CollectPowerUp(GameObject powerUp)
         {
             Debug.Log("Player collided with PowerUp!");
-            PlayerShield shield = powerUp.GetComponent<PlayerShield>();
-            shield.ActivateShield();
+            
+            GetComponent<PlayerShield>().ActivateShield();
             Destroy(powerUp);
         }
 

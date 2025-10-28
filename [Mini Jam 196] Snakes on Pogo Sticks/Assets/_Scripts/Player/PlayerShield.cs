@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace _Scripts.Player
 {
@@ -10,12 +9,8 @@ namespace _Scripts.Player
         
         [SerializeField] private int turnsPerShield = 3;
         [SerializeField] private int remainingShieldTurns = 0;
-        private SpriteRenderer _spriteRenderer;
-
-        private void Awake()
-        {
-            _spriteRenderer = GetComponent<SpriteRenderer>();
-        }
+        public SpriteRenderer _spriteRenderer;
+        
 
         public void Tick()
         {
@@ -29,6 +24,7 @@ namespace _Scripts.Player
         
         public void ActivateShield()
         {
+            Debug.Log("Shield activated");
             isShieldActive = true;
             _spriteRenderer.enabled = true;
             remainingShieldTurns = turnsPerShield;
@@ -36,6 +32,7 @@ namespace _Scripts.Player
 
         public void DeactivateShield()
         {
+            Debug.Log("Shield deactivated");
             isShieldActive = false;
             _spriteRenderer.enabled = false;
         }

@@ -70,7 +70,6 @@ namespace _Scripts.Snakes
             {
                 Debug.Log(v);
             }
-            Debug.Log("Snake: random direction" + randomDirection + ", from position: " + _position.Row );
             direction = randomDirection;
 
         }
@@ -98,6 +97,10 @@ namespace _Scripts.Snakes
         }
 
 
-
+        public void Stun()
+        {
+            Debug.Log("Snake stunned!");
+            gameObject.SetActive(false);
+        }
     }
 }
