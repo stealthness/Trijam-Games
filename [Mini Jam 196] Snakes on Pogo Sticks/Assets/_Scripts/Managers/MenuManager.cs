@@ -22,6 +22,11 @@ namespace _Scripts.Managers
         public GameObject noTurnPanel;
 
         public TextMeshProUGUI responseText;
+        
+        public AudioClip startSound;
+        public AudioClip restartSound;
+        
+        private AudioSource _audioSource;
 
         private void Awake()
         {
@@ -33,6 +38,8 @@ namespace _Scripts.Managers
             {
                 Destroy(gameObject);
             }
+
+            _audioSource = GetComponent<AudioSource>();
         }
 
         public void ShowMainMenu()
@@ -47,6 +54,7 @@ namespace _Scripts.Managers
         /// </summary>
         public void OnStartButtonClicked()
         {
+            _audioSource.PlayOneShot(startSound);
             Debug.Log("Start Button Clicked");
             startMenu.SetActive(false);
             GameManager.Instance.StartGame();
@@ -65,6 +73,7 @@ namespace _Scripts.Managers
         /// </summary>
         public void OnRestartButtonClicked()
         {
+            _audioSource.PlayOneShot(restartSound);
             SceneManager.LoadScene("TurnGameScene");
         }
 

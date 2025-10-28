@@ -8846,6 +8846,8 @@ MonoBehaviour:
   playerTurnPanel: {fileID: 1599003294}
   noTurnPanel: {fileID: 208527581}
   responseText: {fileID: 1518548172}
+  startSound: {fileID: 8300000, guid: 6a5dca1278ad4f74f9d79720987c10a5, type: 3}
+  restartSound: {fileID: 8300000, guid: d45225bb7aedb7647ab3a45b69c8c62c, type: 3}
 --- !u!82 &2041614947
 AudioSource:
   m_ObjectHideFlags: 0
