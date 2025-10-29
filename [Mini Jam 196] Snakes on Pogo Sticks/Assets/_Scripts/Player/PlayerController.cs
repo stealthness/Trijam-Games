@@ -4,6 +4,7 @@ using System.Collections;
 using _Scripts.Board;
 using _Scripts.Core;
 using _Scripts.Managers;
+using _Scripts.Snakes;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -106,6 +107,13 @@ namespace _Scripts.Player
             if (!moveMade) return;
             
             _playerShield.Tick();
+            // replace later with event handler
+            SnakeController[] snakes = FindObjectsByType<SnakeController>(FindObjectsSortMode.None);
+            foreach (var snake in snakes)
+            {
+                snake.Tick();
+            }
+            
             
             if (Mathf.Abs(dir.y) > Mathf.Abs(dir.x))
             {

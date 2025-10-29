@@ -7,7 +7,7 @@ namespace _Scripts.Player
         
         public bool isShieldActive = false;
         
-        [SerializeField] private int turnsPerShield = 3;
+        [SerializeField] private int turnsPerShield = 5;
         [SerializeField] private int remainingShieldTurns = 0;
         public SpriteRenderer _spriteRenderer;
         

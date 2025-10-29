@@ -17,6 +17,8 @@ namespace _Scripts.Snakes
         [SerializeField] private float playerTimeToMove = 0.5f;
         [SerializeField] private int startRow = 1;
         [SerializeField] private int startCol = 1;
+        [SerializeField] private int stunDurationTicks = 5;
+        [SerializeField] private int ticksStunned = 0;
         
         private bool _isMoving = false;
         private BoardPosition _position;
@@ -37,6 +39,11 @@ namespace _Scripts.Snakes
 
             if (_isMoving) return;
             
+            if (ticksStunned > 0)
+            {
+                Debug.Log("Snake is still stunned : " + ticksStunned);
+                return;
+            }
             
             SelectDirection();
             StartCoroutine(MoveByDirection(playerMoveDistance, playerTimeToMove));
@@ -96,11 +103,27 @@ namespace _Scripts.Snakes
             GameManager.Instance.PlayerTurn();
         }
 
+        public void Tick()
+        {
+            if (ticksStunned > 0)
+            {
+                ticksStunned--;            
+                if (ticksStunned == 0)
+               {
+                   GetComponent<BoxCollider2D>().enabled = true;
+                   GetComponent<SpriteRenderer>().color = Color.white;
+                   Debug.Log("Snake recovered from stun!");
+               }
+            }
+
+        }
 
         public void Stun()
         {
             Debug.Log("Snake stunned!");
-            gameObject.SetActive(false);
+            GetComponent<BoxCollider2D>().enabled = false;
+            GetComponent<SpriteRenderer>().color = Color.brown;
+            ticksStunned = stunDurationTicks;
         }
     }
 }
