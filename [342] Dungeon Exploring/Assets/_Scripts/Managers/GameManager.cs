@@ -75,6 +75,9 @@ namespace _Scripts.Managers
             
         }
 
+        /// <summary>
+        /// Show the Game Over with Player Won screen and pause the game.
+        /// </summary>
         public void GameOverWon()
         {
             Time.timeScale = 0;
