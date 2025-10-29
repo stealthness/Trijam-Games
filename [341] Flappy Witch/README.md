@@ -3,7 +3,7 @@
 
 Link: [Flappy Witch](https://stealthness.itch.io/flappy-witch-trijam-341 "Flappy Witch")
 
-
+Speedup Devlog video: [here](https://youtu.be/PzcnRLqC8_E)
 
 ### Build-2.1
 
