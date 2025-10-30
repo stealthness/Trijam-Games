@@ -1,4 +1,5 @@
 ﻿using System;
+using _Scripts.Manager;
 using UnityEngine;
 
 namespace _Scripts.Core
@@ -9,7 +10,7 @@ namespace _Scripts.Core
         {
             if (other.CompareTag("Player"))
             {
-                Destroy(gameObject);
+                PumpkinSpawner.Instance.DestroyPumpkin(this.gameObject);
             }
         }
     }
