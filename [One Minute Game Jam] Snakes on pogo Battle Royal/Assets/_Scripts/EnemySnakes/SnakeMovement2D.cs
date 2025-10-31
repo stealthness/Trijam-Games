@@ -1,13 +1,12 @@
 ﻿using UnityEngine;
 
-namespace _Scripts.Player
+namespace _Scripts.EnemySnakes
 {
-    public class PlayerMovement2D : MonoBehaviour
+    public class SnakeMovement2D : MonoBehaviour
     {
-
         private Rigidbody2D _rigidbody2D;
         
-        [SerializeField] private float playerSpeed = 5f;
+        [SerializeField] private float enemySnakeSpeed = 5f;
         [SerializeField] private Vector2 movementDirection;
 
         private void Awake()
@@ -25,7 +24,7 @@ namespace _Scripts.Player
 
         private void LateUpdate()
         {
-            _rigidbody2D.linearVelocity = movementDirection * playerSpeed;
+            _rigidbody2D.linearVelocity = movementDirection * enemySnakeSpeed;
         }
     }
 }

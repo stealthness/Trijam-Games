@@ -46,5 +46,23 @@ namespace _Scripts.Manager
             poolDeactivePumpkins.Add(pumpkin);
             pumpkin.SetActive(false);
         }
+
+        public Vector3 GetNearestPumpkin(Vector3 transformPosition)
+        {
+            GameObject nearestPumpkin = null;
+            float minDistance = Mathf.Infinity;
+
+            foreach (var pumpkin in activePumpkins)
+            {
+                float distance = Vector3.Distance(transformPosition, pumpkin.transform.position);
+                if (distance < minDistance)
+                {
+                    minDistance = distance;
+                    nearestPumpkin = pumpkin;
+                }
+            }
+
+            return nearestPumpkin ? nearestPumpkin.transform.position : Vector3.zero;
+        }
     }
 }
