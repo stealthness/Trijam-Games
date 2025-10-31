@@ -1,6 +1,4 @@
-using System;
 using _Scripts.Core;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace _Scripts.Player
@@ -11,9 +9,11 @@ namespace _Scripts.Player
         [SerializeField] private int maxJumps = 2;
         [SerializeField] private int currentJumps = 2;
         
+        private SpriteRenderer _spriteRenderer;
         
         private void Awake()
         {
+            _spriteRenderer = GetComponent<SpriteRenderer>();
             _rigidbody2D = GetComponent<Rigidbody2D>();
             _rigidbody2D.bodyType = RigidbodyType2D.Dynamic;
             _rigidbody2D.constraints = RigidbodyConstraints2D.FreezeRotation;
@@ -30,7 +30,22 @@ namespace _Scripts.Player
         
         public void SetMoveDirection(Vector2 inputVector)
         {
-            moveDirection = new Vector2(inputVector.x, inputVector.y); 
+            if (inputVector.sqrMagnitude < 0.1f)
+            {
+                moveDirection = Vector2.zero;
+                return;
+            }
+            
+            moveDirection = new Vector2(inputVector.x, inputVector.y);
+            
+            if (moveDirection.x > 0)
+            {
+                _spriteRenderer.flipX = false;
+            }
+            else if (moveDirection.x < 0)
+            {
+                _spriteRenderer.flipX = true;
+            }
         }
         
         
