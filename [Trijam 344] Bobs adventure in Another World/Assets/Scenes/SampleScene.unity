@@ -475,6 +475,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_Scripts.Manager.MenuManager
   startMenuPanel: {fileID: 1782553478}
+  infoPanel: {fileID: 1891039657}
+  diedMenuPanel: {fileID: 1842458576}
 --- !u!4 &139915497 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5811865307587118873, guid: 5482e8f9ed7f47d449ed02ecae7613a6, type: 3}
@@ -6337,7 +6339,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 772729831}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 136152690}
+        m_TargetAssemblyTypeName: _Scripts.Manager.MenuManager, Assembly-CSharp
+        m_MethodName: OnDiedOkButtonPressed
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &772729831
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7120,7 +7134,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1323133817}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 136152690}
+        m_TargetAssemblyTypeName: _Scripts.Manager.MenuManager, Assembly-CSharp
+        m_MethodName: OnStartOkButtonClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1323133817
 MonoBehaviour:
   m_ObjectHideFlags: 0

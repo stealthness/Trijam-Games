@@ -29,7 +29,12 @@ namespace _Scripts.Manager
         {
             Time.timeScale = 1;
         }
-    
-    
+
+
+        public void GameOverPlayerDied()
+        {
+            Time.timeScale = 0;
+            MenuManager.Instance.ShowPlayerDied();
+        }
     }
 }

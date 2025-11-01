@@ -1,4 +1,5 @@
 ﻿using System;
+using _Scripts.Manager;
 using UnityEngine;
 
 namespace _Scripts.Player
@@ -36,12 +37,9 @@ namespace _Scripts.Player
         {
             Debug.Log("Player is Dameged");
             GetComponent<SpriteRenderer>().color = Color.red;
-            Invoke("ResetColor", 0.1f);
+            GameManager.Instance.GameOverPlayerDied();
         }
         
-        private void ResetColor()
-        {
-            GetComponent<SpriteRenderer>().color = Color.white;
-        }
+
     }
 }
