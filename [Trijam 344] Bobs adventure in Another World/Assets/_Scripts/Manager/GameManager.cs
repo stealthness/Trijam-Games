@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace _Script
+namespace _Scripts.Manager
 {
     public class GameManager : MonoBehaviour
     {
@@ -22,6 +22,12 @@ namespace _Script
         private void Start()
         {
             Debug.Log("GameManager is Started");
+            Time.timeScale = 0;
+        }
+        
+        public void StartGame()
+        {
+            Time.timeScale = 1;
         }
     
     
