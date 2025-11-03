@@ -11,6 +11,7 @@ namespace _Scripts.Manager
         public GameObject startMenuPanel;
         public GameObject infoPanel;
         public GameObject diedMenuPanel;
+        public GameObject gameUIPanel;
 
         private void Awake()
         {
@@ -35,6 +36,7 @@ namespace _Scripts.Manager
         {
             GameManager.Instance.StartGame();
             startMenuPanel.SetActive(false);
+            gameUIPanel.SetActive(true);
         }
 
         public void OnStartOkButtonClicked()
@@ -51,6 +53,7 @@ namespace _Scripts.Manager
 
         public void ShowPlayerDied()
         {
+            gameUIPanel.SetActive(false);
             diedMenuPanel.SetActive(true);
         }
     }
