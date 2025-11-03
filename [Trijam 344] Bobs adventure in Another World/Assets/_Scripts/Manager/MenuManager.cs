@@ -8,9 +8,21 @@ namespace _Scripts.Manager
     {
         public static MenuManager Instance;
         
+        /// <summary>
+        /// The panel that contains the start menu UI elements.
+        /// </summary>
         public GameObject startMenuPanel;
+        /// <summary>
+        /// Is sub panel inside Start Menu that contains the info about Trijam.
+        /// </summary>
         public GameObject infoPanel;
+        /// <summary>
+        /// The panel that contains the Player has died message
+        /// </summary>
         public GameObject diedMenuPanel;
+        /// <summary>
+        /// The in game UI panel.
+        /// </summary>
         public GameObject gameUIPanel;
 
         private void Awake()
