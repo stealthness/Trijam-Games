@@ -24,6 +24,8 @@ namespace _Scripts.Manager
         /// The in game UI panel.
         /// </summary>
         public GameObject gameUIPanel;
+        
+        public GameObject winPanel;
 
         private void Awake()
         {
@@ -42,6 +44,7 @@ namespace _Scripts.Manager
         {
             startMenuPanel.SetActive(true);
             diedMenuPanel.SetActive(false);
+            winPanel.SetActive(false);
         }
         
         public void OnStartButtonPressed()
@@ -67,6 +70,11 @@ namespace _Scripts.Manager
         {
             gameUIPanel.SetActive(false);
             diedMenuPanel.SetActive(true);
+        }
+
+        public void ShowPlayerWon()
+        {
+            winPanel.SetActive(true);
         }
     }
 }

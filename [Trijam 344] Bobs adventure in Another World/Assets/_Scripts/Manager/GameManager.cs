@@ -5,7 +5,11 @@ namespace _Scripts.Manager
     public class GameManager : MonoBehaviour
     {
 
+
+        
         public static GameManager Instance;
+
+        public GameObject startLevel;
 
         private void Awake()
         {
@@ -23,11 +27,14 @@ namespace _Scripts.Manager
         {
             Debug.Log("GameManager is Started");
             Time.timeScale = 0;
+            startLevel.SetActive(false);
+            
         }
         
         public void StartGame()
         {
             Time.timeScale = 1;
+            startLevel.SetActive(true);
         }
 
 
@@ -35,6 +42,13 @@ namespace _Scripts.Manager
         {
             Time.timeScale = 0;
             MenuManager.Instance.ShowPlayerDied();
+        }
+
+        public void GameWon()
+        {
+            Time.timeScale = 0;
+            MenuManager.Instance.ShowPlayerWon();
+            
         }
     }
 }

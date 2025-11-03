@@ -1,11 +1,12 @@
-﻿using UnityEngine;
+﻿using _Scripts.Manager;
+using UnityEngine;
 
 namespace _Scripts.Core
 {
     public class ShipPart : MonoBehaviour
    	{
 
-		public static int totalShipParts = 3;
+		public static int totalShipParts = 4;
 
 
         private void OnTriggerEnter2D(Collider2D other)
@@ -26,6 +27,7 @@ namespace _Scripts.Core
             {
                 Debug.Log("All Ship Parts Collected! You Win!");
                 // Implement win condition logic here (e.g., load next level, show win screen, etc.)
+                GameManager.Instance.GameWon();
             }
         }
 	}
