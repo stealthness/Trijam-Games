@@ -51,11 +51,11 @@ namespace _Scripts.Core
             if (!_rigidbody2D) return;
 
 
-            if (_rigidbody2D.linearVelocityX > 0)
+            if (_rigidbody2D.linearVelocityX > 0.1f)
             {
                 transform.localScale = new Vector3(1, 1, 1);
             }
-            else if (_rigidbody2D.linearVelocityX < 0)
+            else if (_rigidbody2D.linearVelocityX < -0.1f)
             {
                 transform.localScale = new Vector3(-1, 1, 1);
             }

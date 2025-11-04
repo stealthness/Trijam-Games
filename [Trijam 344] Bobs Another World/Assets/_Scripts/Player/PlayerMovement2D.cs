@@ -28,12 +28,13 @@ namespace _Scripts.Player
         {
             currentJumps = maxJumps;
             _rigidbody2D.constraints = RigidbodyConstraints2D.FreezeRotation;
+            _rigidbody2D.linearVelocity = Vector2.zero;
         }
         
         
         public void SetMoveDirection(Vector2 inputVector)
         {
-            if (inputVector.sqrMagnitude < 0.3f)
+            if (inputVector.sqrMagnitude < 0.1f)
             {
                 moveDirection = Vector2.zero;
                 _animator.SetBool(IsMoving, false);
@@ -42,14 +43,6 @@ namespace _Scripts.Player
             _animator.SetBool(IsMoving, true);
             moveDirection = new Vector2(inputVector.x, inputVector.y);
             
-            if (moveDirection.x > 0)
-            {
-                _spriteRenderer.flipX = false;
-            }
-            else if (moveDirection.x < 0)
-            {
-                _spriteRenderer.flipX = true;
-            }
         }
         
         
