@@ -1,4 +1,4 @@
-﻿using _Scripts.Manager;
+﻿using _Scripts.ImprovedTrijam.Manager;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
