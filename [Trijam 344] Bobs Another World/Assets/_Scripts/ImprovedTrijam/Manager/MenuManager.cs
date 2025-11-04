@@ -60,6 +60,7 @@ namespace _Scripts.ImprovedTrijam
         {
             GameManager.Instance.StartGame();
             startMenuPanel.SetActive(false);
+            infoPanel.SetActive(false);
             gameUIPanel.SetActive(true);
         }
 

@@ -509,7 +509,6 @@ RectTransform:
   m_Children:
   - {fileID: 340596171}
   - {fileID: 81128677}
-  - {fileID: 1900036048}
   - {fileID: 958015588}
   - {fileID: 1818527794}
   m_Father: {fileID: 0}
@@ -1851,6 +1850,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1966404376}
+  - {fileID: 1900036048}
   m_Father: {fileID: 30183670}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -5881,12 +5881,12 @@ GameObject:
   - component: {fileID: 1639082948}
   - component: {fileID: 1639082947}
   - component: {fileID: 1639082946}
-  - component: {fileID: 1639082951}
-  - component: {fileID: 1639082950}
   - component: {fileID: 1639082952}
-  - component: {fileID: 1639082953}
-  - component: {fileID: 1639082954}
   - component: {fileID: 1639082955}
+  - component: {fileID: 1639082959}
+  - component: {fileID: 1639082958}
+  - component: {fileID: 1639082957}
+  - component: {fileID: 1639082956}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -6070,40 +6070,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1639082950
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1639082944}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db84e9b9f843cae49bb1274ac685b174, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::_Scripts.Player.PlayerController
-  disabled: 0
---- !u!114 &1639082951
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1639082944}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72ec8c2d4f9e6b34bab34c8acdc5bc0a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::_Scripts.Player.PlayerMovement2D
-  moveSpeed: 5
-  jumpForce: 10
-  moveDirection: {x: 1, y: 1}
-  jumpDirection: {x: 0, y: 1}
-  isGrounded: 0
-  disabled: 0
-  jumpCooldown: 0.5
-  maxJumps: 2
-  currentJumps: 2
 --- !u!95 &1639082952
 Animator:
   serializedVersion: 7
@@ -6126,33 +6092,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &1639082953
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1639082944}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b3a8fe27b9a43247995762d6acd1451, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::_Scripts.Player.PlayerCollision
---- !u!114 &1639082954
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1639082944}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a8f6b16e94e45449101059002bcd23c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::_Scripts.Player.PlayerHealth
-  playerHurt: {fileID: 8300000, guid: c42eaad2ec827b84d932ab530729a735, type: 3}
-  playerMaxLives: 3
-  playerCurrentLives: 3
 --- !u!82 &1639082955
 AudioSource:
   m_ObjectHideFlags: 0
@@ -6250,6 +6189,67 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1639082956
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1639082944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fdd881deba24b0da8ec642e42d4498f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_Scripts.ImprovedTrijam.Player.PlayerCollision
+--- !u!114 &1639082957
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1639082944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8cbe3f0855e4576b029546fca7b28e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_Scripts.ImprovedTrijam.Player.PlayerHealth
+  playerHurt: {fileID: 8300000, guid: c42eaad2ec827b84d932ab530729a735, type: 3}
+  playerMaxLives: 3
+  playerCurrentLives: 3
+--- !u!114 &1639082958
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1639082944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8d3e145051b4979b6e4724951facc73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_Scripts.ImprovedTrijam.Player.PlayerController
+  disabled: 0
+--- !u!114 &1639082959
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1639082944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85ab5185514f4b2fb0b328f4721db366, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_Scripts.ImprovedTrijam.Player.PlayerMovement2D
+  moveSpeed: 5
+  jumpForce: 10
+  moveDirection: {x: 1, y: 1}
+  jumpDirection: {x: 0, y: 1}
+  isGrounded: 0
+  disabled: 0
+  jumpCooldown: 0.5
+  maxJumps: 2
+  currentJumps: 2
 --- !u!1 &1686367963
 GameObject:
   m_ObjectHideFlags: 0
@@ -7342,14 +7342,14 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1900036045}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1121950834}
   - {fileID: 1828579351}
-  m_Father: {fileID: 30183670}
+  m_Father: {fileID: 340596171}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
