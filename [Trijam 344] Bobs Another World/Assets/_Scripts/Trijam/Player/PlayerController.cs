@@ -1,7 +1,8 @@
+using _Scripts.Player;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace _Scripts.Player
+namespace _Scripts.Trijam.Player
 {
     [RequireComponent(typeof(PlayerMovement2D))]
     public class PlayerController : MonoBehaviour
@@ -28,6 +29,8 @@ namespace _Scripts.Player
         public void OnMove(InputValue value)
         {
             if(disabled) return;
+
+            if (!_playerMovement) return;
             
             var inputVector = value.Get<Vector2>();
             _playerMovement.SetMoveDirection(inputVector);

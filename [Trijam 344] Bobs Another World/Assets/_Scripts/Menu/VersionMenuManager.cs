@@ -18,17 +18,10 @@ namespace _Scripts.Menu
         /// It loads the corresponding scene based on the selected version.
         /// </summary>
         /// <param name="selection"></param>
-        public void OnSelectionClick(GameVersion selection)
+        public void OnSelectionClick(string selection)
         {
-            var selectedVersion = selection switch
-            {
-                GameVersion.TrijamOriginal => "TrijamOriginal",
-                GameVersion.TrijamRemastered => "TrijamRemastered",
-                GameVersion.UntitledOriginal => "UntitledOriginal",
-                GameVersion.UntitledRemastered => "UntitledRemastered",
-                _ => "TrijamOriginal"
-            };
-            SceneManager.LoadScene(selectedVersion);
+
+            SceneManager.LoadScene(selection);
         }
     }
 
