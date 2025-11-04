@@ -3,12 +3,16 @@ using UnityEngine.SceneManagement;
 
 namespace _Scripts.Managers
 {
+    /// <summary>
+    /// This class manages the overall game state, including starting, restarting, and ending the game.
+    /// </summary>
     public class GameManager : MonoBehaviour
     {
         public static GameManager Instance;
 
         private void Awake()
         {
+            // Ensure only one instance of GameManager exists (Singleton pattern)
             if (!Instance)
             {
                 Instance = this;
@@ -19,6 +23,9 @@ namespace _Scripts.Managers
             }
         }
 
+        /// <summary>
+        /// Checks if this is the first time the game is being run and shows the First Time Run message screen if so.
+        /// </summary>
         private void CheckFirstRun()
         {
             if (!PlayerPrefs.HasKey("FirstRun"))
@@ -46,6 +53,9 @@ namespace _Scripts.Managers
             CheckFirstRun();
         }
 
+        /// <summary>
+        /// Restarts the game by reloading the main game scene.
+        /// </summary>
         public void RestartGame()
         {
             // Logic to restart the game
@@ -54,7 +64,9 @@ namespace _Scripts.Managers
             SceneManager.LoadScene("BWGameScene");
         }
         
-        
+        /// <summary>
+        /// Show the Game Over with Player Died screen screen and pause the game.
+        /// </summary>
         public void GameOver()
         {
             Debug.Log("Game Over");
@@ -63,6 +75,9 @@ namespace _Scripts.Managers
             
         }
 
+        /// <summary>
+        /// Show the Game Over with Player Won screen and pause the game.
+        /// </summary>
         public void GameOverWon()
         {
             Time.timeScale = 0;

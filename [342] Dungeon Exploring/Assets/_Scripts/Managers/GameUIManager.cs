@@ -5,6 +5,10 @@ using UnityEngine;
 
 namespace _Scripts.Managers
 {
+    /// <summary>
+    /// This class manages the game's user interface (UI), including updating key and coin counts,
+    /// displaying game over screens, and updating weapon images.
+    /// </summary>
     public class GameUIManager : MonoBehaviour
     {
      
@@ -44,32 +48,42 @@ namespace _Scripts.Managers
             
         }
         
-
+        /// <summary>
+        /// Uses a key if available, by decrementing the key count and updating the UI.
+        /// </summary>
         public void UseKey()
         {
-            if (keyCount > 0)
+            if (HasAvailableKey())
             {
                 keyCount--;
-                Debug.Log("Key Used. Remaining Keys: " + keyCount);
                 keyText.text = "Keys: " + keyCount;
-            }
-            else
-            {
-                Debug.Log("No keys available to use.");
             }
         }
         
+        /// <summary>
+        /// Returns true if there is at least one available key, false otherwise.
+        /// </summary>
+        /// <returns>Returns true if there is at least one available key, false otherwise.</returns>
         public bool HasAvailableKey()
         {
             return keyCount > 0;
         }
 
-
+        /// <summary>
+        /// Updates the coin text display with the current coin count.
+        /// </summary>
+        /// <param name="coinTextValue"></param>
+        /// <returns></returns>
         public void UpdateCoinText(int coinTextValue)
         {
             coinText.text = "Coins: " + coinTextValue;
         }
 
+        
+        /// <summary>
+        /// Activates the winning screen and displays the percentage of coins collected.
+        /// </summary>
+        /// <returns></returns>
         public void ShowWinningScreen()
         {
             var percentCompleted = (int)((CoinCollectorManager.Instance.GetCoinCount()/ 20f) * 100);
@@ -77,17 +91,30 @@ namespace _Scripts.Managers
             gameOverWonScreen.SetActive(true);
         }
 
+        /// <summary>
+        /// Shows or hides the first time screen based on the provided boolean value.
+        /// </summary>
+        /// <param name="show"></param>
+        /// <returns></returns>
         public void ShowFirstTimeScreen(bool show)
         {
-            Debug.Log("ShowFirstTime(" + show + ")");
             firstTimeScreen.SetActive(show);
         }
         
+        /// <summary>
+        /// Activates, and shows the died screen.
+        /// </summary>
+        /// <returns></returns>
         public void ShowDiedScreen()
         {
             gameOverDiedScreen.SetActive(true);
         }
         
+        /// <summary>
+        /// Activates and updates the weapon image based on the provided weapon type.
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
         public void UpdateWeaponImage(WeaponTypes type)
         {
             switch (type)
