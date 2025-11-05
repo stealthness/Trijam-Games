@@ -23,6 +23,7 @@ namespace _Scripts.ImprovedTrijam.Player
 
         private void Awake()
         {
+            Debug.Log("Improved:PlayerHealth Awake");
             _audioSource = GetComponent<AudioSource>();
             _spriteRenderer = GetComponent<SpriteRenderer>();
             playerCurrentLives = playerMaxLives;

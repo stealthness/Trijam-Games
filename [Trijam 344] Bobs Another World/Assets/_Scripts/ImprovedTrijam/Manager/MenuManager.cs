@@ -34,6 +34,7 @@ namespace _Scripts.ImprovedTrijam
 
         private void Awake()
         {
+            Debug.Log("Improved:MenuManager Awake");
             if (!Instance)
             {
                 Instance = this;

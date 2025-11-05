@@ -90,7 +90,7 @@ namespace _Scripts.ImprovedTrijam.Manager
 
         private void UpdatePlayerDeath()
         {
-            _Scripts.Manager.GameManager.Instance.GameOverPlayerDied();
+            GameManager.Instance.GameOverPlayerDied();
         }
 
         private void OnDisable()

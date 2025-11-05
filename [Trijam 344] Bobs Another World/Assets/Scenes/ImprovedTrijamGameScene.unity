@@ -406,7 +406,7 @@ GameObject:
   - component: {fileID: 30183669}
   - component: {fileID: 30183668}
   - component: {fileID: 30183667}
-  - component: {fileID: 30183666}
+  - component: {fileID: 30183672}
   - component: {fileID: 30183671}
   m_Layer: 5
   m_Name: Canvas
@@ -415,23 +415,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &30183666
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 30183665}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6bd7a6eef8624c1f81863d21a8e95e29, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::_Scripts.Manager.MenuManager
-  startMenuPanel: {fileID: 340596168}
-  infoPanel: {fileID: 1900036045}
-  diedMenuPanel: {fileID: 81128674}
-  gameUIPanel: {fileID: 1818527791}
-  winPanel: {fileID: 958015585}
 --- !u!114 &30183667
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -527,15 +510,32 @@ MonoBehaviour:
   m_GameObject: {fileID: 30183665}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b45548220984da3ac35b2c59f233196, type: 3}
+  m_Script: {fileID: 11500000, guid: e373ba1e00644010a9cfc0c14c064c43, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::_Scripts.Manager.PlayerLivesUI
+  m_EditorClassIdentifier: Assembly-CSharp::_Scripts.ImprovedTrijam.Manager.PlayerLivesUI
   lives:
   - {fileID: 1125852136}
   - {fileID: 699712120}
   - {fileID: 1416146476}
   activeSprite: {fileID: -357213843885970576, guid: 22a66efbd15689d468f5d8b8764adab9, type: 3}
   inactiveSprite: {fileID: -7835035112884395210, guid: 22a66efbd15689d468f5d8b8764adab9, type: 3}
+--- !u!114 &30183672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 30183665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4bf2f8d7b194a70b7879f669737adcb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_Scripts.ImprovedTrijam.MenuManager
+  startMenuPanel: {fileID: 340596168}
+  infoPanel: {fileID: 1900036045}
+  diedMenuPanel: {fileID: 81128674}
+  gameUIPanel: {fileID: 1818527791}
+  winPanel: {fileID: 958015585}
 --- !u!1 &47270388
 GameObject:
   m_ObjectHideFlags: 0
@@ -644,68 +644,6 @@ RectTransform:
   m_AnchoredPosition: {x: -66.4103, y: -22.3436}
   m_SizeDelta: {x: -413.3574, y: -295.4326}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1001 &105299289
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 1971749490}
-    m_Modifications:
-    - target: {fileID: 4259051904317243320, guid: b8840e7e6654f9240a5a602fe0670d19, type: 3}
-      propertyPath: m_Name
-      value: Exit Right
-      objectReference: {fileID: 0}
-    - target: {fileID: 8377010007535972014, guid: b8840e7e6654f9240a5a602fe0670d19, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 13
-      objectReference: {fileID: 0}
-    - target: {fileID: 8377010007535972014, guid: b8840e7e6654f9240a5a602fe0670d19, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8377010007535972014, guid: b8840e7e6654f9240a5a602fe0670d19, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8377010007535972014, guid: b8840e7e6654f9240a5a602fe0670d19, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8377010007535972014, guid: b8840e7e6654f9240a5a602fe0670d19, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8377010007535972014, guid: b8840e7e6654f9240a5a602fe0670d19, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8377010007535972014, guid: b8840e7e6654f9240a5a602fe0670d19, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8377010007535972014, guid: b8840e7e6654f9240a5a602fe0670d19, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8377010007535972014, guid: b8840e7e6654f9240a5a602fe0670d19, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8377010007535972014, guid: b8840e7e6654f9240a5a602fe0670d19, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: b8840e7e6654f9240a5a602fe0670d19, type: 3}
---- !u!4 &105299290 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8377010007535972014, guid: b8840e7e6654f9240a5a602fe0670d19, type: 3}
-  m_PrefabInstance: {fileID: 105299289}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &107323767
 GameObject:
   m_ObjectHideFlags: 0
@@ -1272,7 +1210,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 30183666}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: _Scripts.Manager.MenuManager, Assembly-CSharp
         m_MethodName: OnDiedOkButtonPressed
         m_Mode: 1
@@ -1363,7 +1301,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4259051904317243320, guid: b8840e7e6654f9240a5a602fe0670d19, type: 3}
       propertyPath: m_Name
-      value: Exit Left
+      value: Exit
       objectReference: {fileID: 0}
     - target: {fileID: 8377010007535972014, guid: b8840e7e6654f9240a5a602fe0670d19, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1798,7 +1736,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &340596169
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3310,7 +3248,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 30183666}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: _Scripts.Manager.MenuManager, Assembly-CSharp
         m_MethodName: OnDiedOkButtonPressed
         m_Mode: 1
@@ -3942,7 +3880,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1121950836}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 30183672}
+        m_TargetAssemblyTypeName: _Scripts.ImprovedTrijam.MenuManager, Assembly-CSharp
+        m_MethodName: OnStartOkButtonClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1121950836
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5814,6 +5764,18 @@ PrefabInstance:
       propertyPath: PreviousLevel
       value: 
       objectReference: {fileID: 1851649785}
+    - target: {fileID: 2427879189712311731, guid: b8840e7e6654f9240a5a602fe0670d19, type: 3}
+      propertyPath: NextLevel
+      value: 
+      objectReference: {fileID: 1385190753}
+    - target: {fileID: 2427879189712311731, guid: b8840e7e6654f9240a5a602fe0670d19, type: 3}
+      propertyPath: SpawnPoint
+      value: 
+      objectReference: {fileID: 2036464385}
+    - target: {fileID: 2427879189712311731, guid: b8840e7e6654f9240a5a602fe0670d19, type: 3}
+      propertyPath: PreviousLevel
+      value: 
+      objectReference: {fileID: 1851649785}
     - target: {fileID: 4259051904317243320, guid: b8840e7e6654f9240a5a602fe0670d19, type: 3}
       propertyPath: m_Name
       value: Exit Right
@@ -7165,7 +7127,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1851649786
 Transform:
   m_ObjectHideFlags: 0
@@ -7181,8 +7143,8 @@ Transform:
   m_Children:
   - {fileID: 642472596}
   - {fileID: 531998723}
-  - {fileID: 615406171}
   - {fileID: 1638397276}
+  - {fileID: 615406171}
   - {fileID: 2036464386}
   - {fileID: 1425153396}
   - {fileID: 1225002783}
@@ -7504,8 +7466,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 30183666}
-        m_TargetAssemblyTypeName: _Scripts.Manager.MenuManager, Assembly-CSharp
+      - m_Target: {fileID: 30183672}
+        m_TargetAssemblyTypeName: _Scripts.ImprovedTrijam.MenuManager, Assembly-CSharp
         m_MethodName: OnStartButtonPressed
         m_Mode: 1
         m_Arguments:
@@ -7649,7 +7611,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 219581998}
-  - {fileID: 105299290}
   - {fileID: 526374150}
   - {fileID: 1585407132}
   - {fileID: 419650833}
@@ -7845,8 +7806,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2117725182}
-  - component: {fileID: 2117725181}
   - component: {fileID: 2117725183}
+  - component: {fileID: 2117725184}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -7854,19 +7815,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &2117725181
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2117725180}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e62a7ef29074a7f4ba4f293e1c3ae46f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::_Scripts.Manager.GameManager
-  startLevel: {fileID: 1851649785}
 --- !u!4 &2117725182
 Transform:
   m_ObjectHideFlags: 0
@@ -7979,6 +7927,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &2117725184
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2117725180}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c35aecbba7f5454ebd233b204dfb6516, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_Scripts.ImprovedTrijam.Manager.GameManager
+  startLevel: {fileID: 1851649785}
 --- !u!1001 &2615905836530528827
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7996,6 +7957,18 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 615406170}
     - target: {fileID: 1288719959095583746, guid: b8840e7e6654f9240a5a602fe0670d19, type: 3}
+      propertyPath: PreviousLevel
+      value: 
+      objectReference: {fileID: 1851649785}
+    - target: {fileID: 2427879189712311731, guid: b8840e7e6654f9240a5a602fe0670d19, type: 3}
+      propertyPath: NextLevel
+      value: 
+      objectReference: {fileID: 657642587}
+    - target: {fileID: 2427879189712311731, guid: b8840e7e6654f9240a5a602fe0670d19, type: 3}
+      propertyPath: SpawnPoint
+      value: 
+      objectReference: {fileID: 615406170}
+    - target: {fileID: 2427879189712311731, guid: b8840e7e6654f9240a5a602fe0670d19, type: 3}
       propertyPath: PreviousLevel
       value: 
       objectReference: {fileID: 1851649785}
