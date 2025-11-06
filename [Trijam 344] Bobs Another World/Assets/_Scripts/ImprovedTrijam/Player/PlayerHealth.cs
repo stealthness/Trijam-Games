@@ -9,6 +9,7 @@ namespace _Scripts.ImprovedTrijam.Player
     {
         private AudioSource _audioSource;
         private SpriteRenderer _spriteRenderer;
+        public ParticleSystem bloodEffect;
         
         
         public static event Action<int> OnHealthChanged;
@@ -65,6 +66,7 @@ namespace _Scripts.ImprovedTrijam.Player
             playerCurrentLives--;
             _audioSource.PlayOneShot(playerHurt);
             OnHealthChanged?.Invoke(playerCurrentLives);
+            bloodEffect.Play();
             if (playerCurrentLives <= 0)
             {
                 OnPlayerDeath?.Invoke();
