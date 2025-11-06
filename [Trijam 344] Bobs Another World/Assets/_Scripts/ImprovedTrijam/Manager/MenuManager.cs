@@ -1,8 +1,7 @@
-﻿using _Scripts.ImprovedTrijam.Manager;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace _Scripts.ImprovedTrijam
+namespace _Scripts.ImprovedTrijam.Manager
 {
     
     /// <summary>
@@ -70,6 +69,7 @@ namespace _Scripts.ImprovedTrijam
         /// </summary>
         public void OnStartOkButtonClicked()
         {
+            Debug.Log("Improved:MenuManager OnStartOkButtonClicked, infoPanel SetActive false");
             infoPanel.SetActive(false);
         }
         

@@ -22,6 +22,7 @@ namespace _Scripts.ImprovedTrijam.Core
                 Debug.Log("Ship Part Collected");
                 gameObject.SetActive(false);
 				totalShipParts--;
+                ShipPartsUI.Instance.ShipPartsFound();
 				CheckWinCondition();
             }
         }
