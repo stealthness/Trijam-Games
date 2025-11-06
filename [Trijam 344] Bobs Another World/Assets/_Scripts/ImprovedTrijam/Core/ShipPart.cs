@@ -23,19 +23,10 @@ namespace _Scripts.ImprovedTrijam.Core
                 gameObject.SetActive(false);
 				totalShipParts--;
                 ShipPartsUI.Instance.ShipPartsFound();
-				CheckWinCondition();
             }
         }
 		
 
-		private void CheckWinCondition()
-        {
-            if (totalShipParts <= 0)
-            {
-                Debug.Log("All Ship Parts Collected! You Win!");
-                // Implement win condition logic here (e.g., load next level, show win screen, etc.)
-                GameManager.Instance.GameWon();
-            }
-        }
+
 	}
 }

@@ -27,13 +27,10 @@ namespace _Scripts.ImprovedTrijam.Manager
 
         private void Start()
         {
+            shipPartsFound = 0;
             foreach (var shipPart in shipParts)
             {
-
-                if (shipPart != null && shipPart.active)
-                {
-                    shipPart.GetComponent<SpriteRenderer>().color = Color.gray2;
-                }
+                    shipPart.GetComponent<Image>().color = Color.gray2;
                 
             }
         }
@@ -49,8 +46,14 @@ namespace _Scripts.ImprovedTrijam.Manager
             
             shipParts[shipPartsFound].GetComponent<Image>().color = Color.white;
             shipPartsFound++;
+            CheckWinCondition();
         }
 
-
+        private void CheckWinCondition()
+        {
+            if (shipPartsFound < shipParts.Length) return;
+            
+            GameManager.Instance.GameWon();
+        }
     }
 }
