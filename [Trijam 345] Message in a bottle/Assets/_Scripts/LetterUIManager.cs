@@ -9,7 +9,7 @@ namespace _Scripts
 	    public Sprite[] lettersSprites;
 	    public GameObject letterButtonPrefab;
 	    public RectTransform letterPanel;
-	    [SerializeField] private float distanceBetweenLetters = 0.4f;
+	    [SerializeField] private float distanceBetweenLetters = 5f;
 	    
 		public void Start(){
 			Debug.Log("Letter UI Manager Started");	
@@ -48,26 +48,27 @@ namespace _Scripts
 				}
 				else
 				{
-					rt.anchoredPosition = new Vector2((i - 13) * (rt.sizeDelta.x + distanceBetweenLetters), -50);
+					rt.anchoredPosition = new Vector2((i - 13) * (rt.sizeDelta.x + distanceBetweenLetters), -60);
 				}
 				
 				Button btn = letterButton.GetComponent<Button>();
 				if (btn != null)
 				{
 					int index = i; // Capture the index for the lambda
-					btn.onClick.AddListener(() => OnLetterClicked(btn, index));
+					btn.onClick.AddListener(() => OnLetterClicked(btn, (char)('A' + index)));
 				}
 				
 			}
 		}
 
-		private void OnLetterClicked(Button clickedButton, int index)
+		private void OnLetterClicked(Button clickedButton, char letter)
 		{
-			Debug.Log("Letter Clicked: " + ('A' + index));
+			Debug.Log("Letter Clicked: " + letter);
 			
 			clickedButton.interactable = false;
 			clickedButton.GetComponent<UnityEngine.UI.Image>().color = Color.gray;
 			
+			MessageManager.Instance.HandleLetterSelection(letter);
 		}
     }
 }
