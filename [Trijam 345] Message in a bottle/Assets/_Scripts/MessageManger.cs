@@ -34,12 +34,12 @@ namespace _Scripts
         void Start()
         {
             Debug.Log("Message Manager Started");
-            if (messagePanel == null)
+            if (!messagePanel)
             {
                 Debug.LogWarning("Message panel is not assigned in the inspector.");
                 return;
             }
-            if (letterImagePrefab == null)
+            if (!letterImagePrefab)
             {
                 Debug.LogWarning("Letter image prefab is not assigned in the inspector.");
                 return;
@@ -61,9 +61,9 @@ namespace _Scripts
                 Destroy(child.gameObject);
             }
 
-            int letterCount = 0;
+            var letterCount = 0;
             var lineCount = 0;
-            foreach (char letterChar in message.ToUpper())
+            foreach (var letterChar in message.ToUpper())
             {
                 Debug.Log("letterChar: " + letterChar);
                 if (letterChar == '+')
@@ -74,14 +74,14 @@ namespace _Scripts
                     continue;
                 }
                 
-                int letterIndex = 0;
+                var letterIndex = 0;
                 if (letterChar != ' ')
                 {
                     letterIndex = letterChar - 'A' + 1;
                 }
                 
-                Sprite letterSprite = letterSprites[letterIndex];
-                if (letterSprite != null)
+                var letterSprite = letterSprites[letterIndex];
+                if (letterSprite)
                 {
                     var letterImage = Instantiate(letterImagePrefab, messagePanel);
                     letterImage.name = "LetterImage_" + letterChar;
