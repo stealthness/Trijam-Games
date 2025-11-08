@@ -40,6 +40,7 @@ namespace _Scripts.Messages
             if (MessageManager.Instance.IsMessageComplete())
             {
                 Debug.Log("You Win!");
+                ScoreManager.Instance.AddScore(100);
                 ScoreManager.Instance.UpdateScoreUI();
                 StartCoroutine(nameof(WaitAndReset), 3f);
             }

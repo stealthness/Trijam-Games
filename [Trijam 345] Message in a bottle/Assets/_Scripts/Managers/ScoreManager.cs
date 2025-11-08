@@ -21,8 +21,7 @@ namespace _Scripts.Managers
         
         public void AddScore(int points)
         {
-            Debug.Log("Added " + points + " points to the score.");
-            // Implement score addition logic here
+            score += points;
         }
 
         public void UpdateScoreUI()
@@ -32,7 +31,6 @@ namespace _Scripts.Managers
                 Debug.LogWarning("Score Text is not assigned in the inspector.");
                 return;
             }
-            AddScore(100);
             scoreText.text = "Score: " + score;
         }
 

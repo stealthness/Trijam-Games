@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Messages
   m_EditorClassIdentifier: Assembly-CSharp::_Scripts.Messages.MessageDatabase
   messages:
-  - To Be Or +Not To Be
-  - All That +Glitters Is +Not Gold
-  - I think, +therefore I +am
-  - Thats one +small step
+  - To Be Or+Not To Be
+  - All That+Glitters Is+Not Gold
+  - I think+therefore I+am
+  - Thats one+small step
