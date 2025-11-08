@@ -25,5 +25,10 @@ namespace _Scripts
             GetComponentsInChildren<Image>()[0].enabled = true;
             GetComponentsInChildren<Image>()[1].enabled = false;
         }
+
+        public char GetLetter()
+        {
+            return _letter;
+        }
     }
 }
