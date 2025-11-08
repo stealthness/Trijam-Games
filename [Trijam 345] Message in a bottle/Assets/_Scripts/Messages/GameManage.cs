@@ -1,3 +1,4 @@
+using _Scripts;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,6 +11,12 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("Game Manage Started");
 
+    }
+
+
+    public void ResetMessage()
+    {
+        MessageManager.Instance.ResetMessage();
     }
 
 

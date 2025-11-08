@@ -1,6 +1,7 @@
 ﻿
 using System.Collections.Generic;
 using System.Linq;
+using _Scripts.Messages;
 using UnityEngine;
 
 namespace _Scripts
@@ -8,10 +9,13 @@ namespace _Scripts
     public class MessageManager : MonoBehaviour
     {
         public static MessageManager Instance;
-        
-        
+        [Tooltip("Reference to the Message Database ScriptableObject.")]
+        public MessageDatabase messageDatabase;
+        [Tooltip("Panel where the message letters will be displayed.")]
         public RectTransform messagePanel;
+        [Tooltip("Prefab for the letter image UI element.")]
         public GameObject letterImagePrefab;
+        [Tooltip("Array of letter sprites from A-Z and a blank sprite at index 0.")]
         public Sprite[] letterSprites;
         
         [SerializeField] private float distanceBetweenLetters = 0.0f;
@@ -53,6 +57,7 @@ namespace _Scripts
                 return;
             }
 
+            message = messageDatabase.GetRandomMessage();
             CreateMessageLetters();
         }
 
@@ -124,6 +129,11 @@ namespace _Scripts
             {
                 letterDisplay.ShowLetter(letter);
             }
+        }
+
+        public void ResetMessage()
+        {
+            throw new System.NotImplementedException();
         }
     }
     

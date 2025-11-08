@@ -862,6 +862,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 423fa53734fb4674bec683f382e09afb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_Scripts.MessageManger
+  messageDatabase: {fileID: 11400000, guid: c012d7f2d2bf0b048ac15e378f50b98c, type: 2}
   messagePanel: {fileID: 729585799}
   letterImagePrefab: {fileID: 361873501597969196, guid: eed879bcc677fc1448f6802a45186df8, type: 3}
   letterSprites:
@@ -893,6 +894,7 @@ MonoBehaviour:
   - {fileID: 9130777471320168125, guid: d3ca8d573d2369b4ea3bdb3d7baee131, type: 3}
   - {fileID: -7500931499536337148, guid: 700b0dfecd71d854ab320fd4da6bc738, type: 3}
   distanceBetweenLetters: 10
+  distanceBetweenLines: 0
   message: To Be Or +Not To Be
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
