@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Analytics;
 using UnityEngine.UI;
 
 namespace _Scripts.Messages
@@ -62,7 +63,11 @@ namespace _Scripts.Messages
 
         private void CreateMessageLetters()
         {
-            ClearOldLetters();
+            if (_letterDisplays.Count > 0)
+            {
+                ClearOldLetters();
+            }
+            
 
             var letterCount = 0;
             var lineCount = 0;
@@ -80,6 +85,7 @@ namespace _Scripts.Messages
                 if (letterChar != ' ')
                 {
                     letterIndex = letterChar - 'A' + 1;
+                    
                 }
                 
                 var letterSprite = letterSprites[letterIndex];
@@ -101,6 +107,7 @@ namespace _Scripts.Messages
         private void ClearOldLetters()
         {
             _letterDisplays.Clear();
+            _letterDisplays.Capacity = 0;
             // clear existing letters
             foreach (var buttoneLetter in messagePanel.GetComponentsInChildren<Button>())
             {
@@ -110,6 +117,7 @@ namespace _Scripts.Messages
 
         private void CreateLetterImage(char letterChar, Sprite letterSprite, int lineCount, int letterCount)
         {
+             
             var letterImage = Instantiate(letterImagePrefab, messagePanel);
             letterImage.name = "LetterImage_" + letterChar;
             var letterDisplay = letterImage.GetComponent<LetterDisplay>();
@@ -119,6 +127,11 @@ namespace _Scripts.Messages
             var rt = letterImage.GetComponent<RectTransform>();
             rt.anchoredPosition = new Vector2(letterCount * (rt.sizeDelta.x + distanceBetweenLetters),
                 0 - lineCount * (rt.sizeDelta.y + distanceBetweenLines));
+            if (letterChar == ' ')
+            {
+                letterImage.SetActive(false);
+            }
+            
 
             _letterDisplays.Add(letterImage.GetComponent<LetterDisplay>());
         }
