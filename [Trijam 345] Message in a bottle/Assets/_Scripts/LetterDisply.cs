@@ -30,5 +30,14 @@ namespace _Scripts
         {
             return _letter;
         }
+
+        public void Initialise(char letterChar, Sprite letterSprite)
+        {
+            _letter = letterChar;
+            var images = GetComponentsInChildren<Image>();
+            images[0].sprite = letterSprite; // Letter image
+            images[0].enabled = false; // Hide letter initially
+            images[1].enabled = true; // Shows Blank tile
+        }
     }
 }

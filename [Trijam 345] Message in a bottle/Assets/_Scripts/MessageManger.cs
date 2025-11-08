@@ -1,5 +1,6 @@
 ﻿
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace _Scripts
@@ -81,39 +82,47 @@ namespace _Scripts
                 }
                 
                 var letterSprite = letterSprites[letterIndex];
-                if (letterSprite)
-                {
-                    var letterImage = Instantiate(letterImagePrefab, messagePanel);
-                    letterImage.name = "LetterImage_" + letterChar;
-                    var img0 = letterImage.GetComponentsInChildren<UnityEngine.UI.Image>()[0];
-                    img0.sprite = letterSprite;
-                    img0.enabled = false;
-                    letterImage.GetComponent<LetterDisplay>().SetLetter(letterChar);
-                    
-                    
-                    
-                    RectTransform rt = letterImage.GetComponent<RectTransform>();
-                    rt.anchoredPosition = new Vector2(letterCount * (rt.sizeDelta.x + distanceBetweenLetters), 0 - lineCount * rt.sizeDelta.y);
-                    
-                    letterDisplays.Add(letterImage.GetComponent<LetterDisplay>());
-                }
-                else
+
+
+                if (!letterSprite)
                 {
                     Debug.LogWarning("No sprite found for letter: " + letterChar);
+                    continue;
                 }
-
+                
+                CreateLetterImage(letterChar, letterSprite, lineCount, letterCount);
+                
                 letterCount++;
             }
             
         }
 
+        private void CreateLetterImage(char letterChar, Sprite letterSprite, int lineCount, int letterCount)
+        {
+            var letterImage = Instantiate(letterImagePrefab, messagePanel);
+            letterImage.name = "LetterImage_" + letterChar;
+            var letterDisplay = letterImage.GetComponent<LetterDisplay>();
+            letterDisplay.Initialise(letterChar, letterSprite);
+
+
+            RectTransform rt = letterImage.GetComponent<RectTransform>();
+            rt.anchoredPosition = new Vector2(letterCount * (rt.sizeDelta.x + distanceBetweenLetters),
+                0 - lineCount * rt.sizeDelta.y);
+
+            letterDisplays.Add(letterImage.GetComponent<LetterDisplay>());
+        }
+        
+
+        /// <summary>
+        /// Handle the letter selection and reveal the corresponding letters in the message.
+        /// </summary>
+        /// <param name="letter"></param> to be revealed, if present in the message
         public void HandleLetterSelection(char letter)
         {
-            foreach (var letterDisplay in letterDisplays)
+            foreach (var letterDisplay in letterDisplays.Where(letterDisplay => letterDisplay.GetLetter() == letter))
             {
                 letterDisplay.ShowLetter(letter);
             }
-            
         }
     }
     
