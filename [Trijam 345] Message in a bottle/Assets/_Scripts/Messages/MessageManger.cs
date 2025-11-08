@@ -8,6 +8,10 @@ namespace _Scripts.Messages
 {
     public class MessageManager : MonoBehaviour
     {
+        private AudioSource _audioSource;
+        public AudioClip successAudioClip;
+        public AudioClip failureAudioClip;
+        
         public static MessageManager Instance;
         [Tooltip("Reference to the Message Database ScriptableObject.")]
         public MessageDatabase messageDatabase;
@@ -21,7 +25,7 @@ namespace _Scripts.Messages
         [SerializeField] private float distanceBetweenLetters = 0.0f;
         [SerializeField] private float distanceBetweenLines = 0.0f;
         [Tooltip("Use '+' to indicate line breaks in the message.")]
-        [SerializeField] private string message = "To Be Or +Not To Be";
+        [SerializeField] private string message = "To Be Or+Not To Be";
         
         private readonly List<LetterDisplay> _letterDisplays = new List<LetterDisplay>();
 
@@ -35,6 +39,7 @@ namespace _Scripts.Messages
             {
                 Destroy(gameObject);
             }
+            _audioSource = GetComponent<AudioSource>();
         }
 
 
@@ -61,12 +66,17 @@ namespace _Scripts.Messages
             CreateMessageLetters();
         }
 
+        /// <summary>
+        /// Creates the message letters based on the current message.
+        /// </summary>
         private void CreateMessageLetters()
         {
+            Debug.Log("message length: " + message.Replace('+', ' ').Length);
             if (_letterDisplays.Count > 0)
             {
                 ClearOldLetters();
             }
+            Debug.Log("_letterDisplays count after clear: " + _letterDisplays.Count);
             
 
             var letterCount = 0;
@@ -108,6 +118,20 @@ namespace _Scripts.Messages
         {
             _letterDisplays.Clear();
             _letterDisplays.Capacity = 0;
+            
+            if (messagePanel == null) return;
+
+            var letterObjects = messagePanel
+                .GetComponentsInChildren<Transform>(true)
+                .Where(t => t.gameObject.name.StartsWith("LetterImage_"))
+                .Select(t => t.gameObject)
+                .ToList();
+
+            foreach (var go in letterObjects)
+            {
+                Destroy(go);
+            }
+            
             // clear existing letters
             foreach (var buttoneLetter in messagePanel.GetComponentsInChildren<Button>())
             {
@@ -143,6 +167,7 @@ namespace _Scripts.Messages
         /// <param name="letter"></param> to be revealed, if present in the message
         public void HandleLetterSelection(char letter)
         {
+            bool foundLetterInMessage = false;
             foreach (var letterDisplay in _letterDisplays)
             {
                 if (!letterDisplay)    
@@ -156,10 +181,20 @@ namespace _Scripts.Messages
                     continue;
                 }
                 
-                
+                foundLetterInMessage = true;
                 letterDisplay.ShowLetter(letter);
             }
             
+            if (!foundLetterInMessage)
+            {
+                Debug.Log("Letter " + letter + " not found in the message.");
+                _audioSource.PlayOneShot(failureAudioClip);
+            }
+            else
+            {
+                Debug.Log("Letter " + letter + " found in the message.");
+                _audioSource.PlayOneShot(successAudioClip);
+            }
             
             // foreach (var letterDisplay in _letterDisplays.Where(letterDisplay => letterDisplay.GetLetter() == letter))
             // {
