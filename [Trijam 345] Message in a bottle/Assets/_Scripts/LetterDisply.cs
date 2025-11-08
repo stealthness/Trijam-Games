@@ -39,5 +39,10 @@ namespace _Scripts
             images[0].enabled = false; // Hide letter initially
             images[1].enabled = true; // Shows Blank tile
         }
+
+        public bool isRevealed()
+        {
+            return GetComponentsInChildren<Image>()[0].enabled;
+        }
     }
 }

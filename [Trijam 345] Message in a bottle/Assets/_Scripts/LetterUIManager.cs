@@ -82,8 +82,8 @@ namespace _Scripts
 			
 			clickedButton.interactable = false;
 			clickedButton.GetComponent<UnityEngine.UI.Image>().color = Color.gray;
-			
 			MessageManager.Instance.HandleLetterSelection(letter);
+			GameManager.Instance.CheckForWin();
 		}
 
 		public void ResetLetters()

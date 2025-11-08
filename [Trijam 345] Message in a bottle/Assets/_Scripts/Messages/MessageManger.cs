@@ -173,6 +173,23 @@ namespace _Scripts.Messages
             message = messageDatabase.GetRandomMessage();
             CreateMessageLetters();
         }
+
+        public bool IsMessageComplete()
+        {
+            foreach (var letterDisplay in _letterDisplays)
+            {
+                if (letterDisplay.GetLetter() == ' ')
+                {
+                    continue;
+                }
+                
+                if (letterDisplay.isRevealed() == false)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
     }
     
 }
