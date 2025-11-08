@@ -1,10 +1,9 @@
-﻿
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using _Scripts.Messages;
 using UnityEngine;
+using UnityEngine.UI;
 
-namespace _Scripts
+namespace _Scripts.Messages
 {
     public class MessageManager : MonoBehaviour
     {
@@ -23,7 +22,7 @@ namespace _Scripts
         [Tooltip("Use '+' to indicate line breaks in the message.")]
         [SerializeField] private string message = "To Be Or +Not To Be";
         
-        private List<LetterDisplay> letterDisplays = new List<LetterDisplay>();
+        private readonly List<LetterDisplay> _letterDisplays = new List<LetterDisplay>();
 
         private void Awake()
         {
@@ -63,11 +62,7 @@ namespace _Scripts
 
         private void CreateMessageLetters()
         {
-            // clear existing letters
-            foreach (Transform child in messagePanel)
-            {
-                Destroy(child.gameObject);
-            }
+            ClearOldLetters();
 
             var letterCount = 0;
             var lineCount = 0;
@@ -103,6 +98,16 @@ namespace _Scripts
             
         }
 
+        private void ClearOldLetters()
+        {
+            _letterDisplays.Clear();
+            // clear existing letters
+            foreach (var buttoneLetter in messagePanel.GetComponentsInChildren<Button>())
+            {
+                Destroy(buttoneLetter.gameObject);
+            }
+        }
+
         private void CreateLetterImage(char letterChar, Sprite letterSprite, int lineCount, int letterCount)
         {
             var letterImage = Instantiate(letterImagePrefab, messagePanel);
@@ -115,7 +120,7 @@ namespace _Scripts
             rt.anchoredPosition = new Vector2(letterCount * (rt.sizeDelta.x + distanceBetweenLetters),
                 0 - lineCount * (rt.sizeDelta.y + distanceBetweenLines));
 
-            letterDisplays.Add(letterImage.GetComponent<LetterDisplay>());
+            _letterDisplays.Add(letterImage.GetComponent<LetterDisplay>());
         }
         
 
@@ -125,15 +130,35 @@ namespace _Scripts
         /// <param name="letter"></param> to be revealed, if present in the message
         public void HandleLetterSelection(char letter)
         {
-            foreach (var letterDisplay in letterDisplays.Where(letterDisplay => letterDisplay.GetLetter() == letter))
+            foreach (var letterDisplay in _letterDisplays)
             {
+                if (!letterDisplay)    
+                {
+                    Debug.LogWarning("LetterDisplay component missing on a letter image.");
+                    continue;
+                }
+
+                if (letterDisplay.GetLetter() != letter)
+                {
+                    continue;
+                }
+                
+                
                 letterDisplay.ShowLetter(letter);
             }
+            
+            
+            // foreach (var letterDisplay in _letterDisplays.Where(letterDisplay => letterDisplay.GetLetter() == letter))
+            // {
+            //     letterDisplay.ShowLetter(letter);
+            // }
         }
 
         public void ResetMessage()
         {
-            throw new System.NotImplementedException();
+            ClearOldLetters();
+            message = messageDatabase.GetRandomMessage();
+            CreateMessageLetters();
         }
     }
     

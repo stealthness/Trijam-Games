@@ -1,4 +1,6 @@
-﻿using TMPro;
+﻿using System;
+using _Scripts.Messages;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,12 +8,25 @@ namespace _Scripts
 {
     public class LetterUIManager : MonoBehaviour
     {
+	    public static LetterUIManager Instance;
+	    
 	    public Sprite[] lettersSprites;
 	    public GameObject letterButtonPrefab;
 	    public RectTransform letterPanel;
 	    [SerializeField] private float distanceBetweenLetters = 5f;
-	    
-		public void Start(){
+
+
+	    private void Awake()
+	    {
+		    if (!Instance || Instance != this)
+		    {
+			    Destroy(Instance);
+		    }
+		    Instance = this;
+		    
+	    }
+
+	    public void Start(){
 			Debug.Log("Letter UI Manager Started");	
 			if (lettersSprites == null || lettersSprites.Length == 0)
 			{
@@ -69,6 +84,18 @@ namespace _Scripts
 			clickedButton.GetComponent<UnityEngine.UI.Image>().color = Color.gray;
 			
 			MessageManager.Instance.HandleLetterSelection(letter);
+		}
+
+		public void ResetLetters()
+		{
+			
+			var letterButtons = letterPanel.GetComponentsInChildren<Button>();
+			Debug.Log(letterButtons.Length);
+			foreach (var button in letterButtons)
+			{
+				button.interactable = true;
+				button.GetComponent<UnityEngine.UI.Image>().color = Color.white;
+			}
 		}
     }
 }
