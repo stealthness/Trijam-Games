@@ -15,6 +15,8 @@ namespace _Scripts
         public Sprite[] letterSprites;
         
         [SerializeField] private float distanceBetweenLetters = 0.0f;
+        [SerializeField] private float distanceBetweenLines = 0.0f;
+        [Tooltip("Use '+' to indicate line breaks in the message.")]
         [SerializeField] private string message = "To Be Or +Not To Be";
         
         private List<LetterDisplay> letterDisplays = new List<LetterDisplay>();
@@ -66,7 +68,6 @@ namespace _Scripts
             var lineCount = 0;
             foreach (var letterChar in message.ToUpper())
             {
-                Debug.Log("letterChar: " + letterChar);
                 if (letterChar == '+')
                 {
                     // Move to next line
@@ -105,9 +106,9 @@ namespace _Scripts
             letterDisplay.Initialise(letterChar, letterSprite);
 
 
-            RectTransform rt = letterImage.GetComponent<RectTransform>();
+            var rt = letterImage.GetComponent<RectTransform>();
             rt.anchoredPosition = new Vector2(letterCount * (rt.sizeDelta.x + distanceBetweenLetters),
-                0 - lineCount * rt.sizeDelta.y);
+                0 - lineCount * (rt.sizeDelta.y + distanceBetweenLines));
 
             letterDisplays.Add(letterImage.GetComponent<LetterDisplay>());
         }
