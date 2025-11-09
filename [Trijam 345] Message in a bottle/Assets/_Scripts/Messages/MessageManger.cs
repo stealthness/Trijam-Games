@@ -165,7 +165,7 @@ namespace _Scripts.Messages
         /// Handle the letter selection and reveal the corresponding letters in the message.
         /// </summary>
         /// <param name="letter"></param> to be revealed, if present in the message
-        public void HandleLetterSelection(char letter)
+        public bool HandleLetterSelection(char letter)
         {
             bool foundLetterInMessage = false;
             foreach (var letterDisplay in _letterDisplays)
@@ -200,6 +200,7 @@ namespace _Scripts.Messages
             // {
             //     letterDisplay.ShowLetter(letter);
             // }
+            return foundLetterInMessage;
         }
 
         public void ResetMessage()

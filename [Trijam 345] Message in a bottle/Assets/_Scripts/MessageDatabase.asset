@@ -1,0 +1,96 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4ca10547be8445e8bb08815c5e38dc3, type: 3}
+  m_Name: MessageDatabase
+  m_EditorClassIdentifier: Assembly-CSharp::_Scripts.Messages.MessageDatabase
+  messages:
+  - TO BE OR+NOT TO BE
+  - UNITY IS FUN
+  - CODE AND PLAY
+  - GAME DEV LIFE
+  - MAKE IT WORK
+  - PLAY TO WIN
+  - STAY CURIOUS
+  - LEARN MORE
+  - NEVER GIVE UP
+  - WORK HARD
+  - STAY HUMBLE
+  - CREATE MORE
+  - DREAM BIG
+  - KEEP GOING
+  - TRUST SELF
+  - FOCUS UP
+  - SMILE DAILY
+  - BE POSITIVE
+  - STAY STRONG
+  - MOVE FORWARD
+  - GOOD VIBES
+  - DO YOUR BEST
+  - THINK BIG
+  - BE KIND
+  - HAVE FUN
+  - ENJOY LIFE
+  - LIVE HAPPY
+  - TRY AGAIN
+  - WIN THE DAY
+  - WORK SMART
+  - GO FOR IT
+  - KEEP MOVING
+  - SHINE BRIGHT
+  - BELIEVE MORE
+  - JUST START
+  - PLAY HARD
+  - FIND PEACE
+  - CHOOSE JOY
+  - LOVE LIFE
+  - STAY TRUE
+  - STAND TALL
+  - BE BRAVE
+  - NEVER QUIT
+  - CHASE DREAMS
+  - KEEP FAITH
+  - BE CREATIVE
+  - WORK TO WIN
+  - AIM HIGH
+  - BUILD STRONG
+  - CREATE JOY
+  - FOCUS NOW
+  - STAY HAPPY
+  - DO IT NOW
+  - BE BETTER
+  - TRUST FLOW
+  - TRY YOUR BEST
+  - KEEP HOPE
+  - RISE UP
+  - WORK TOGETHER
+  - CODE CREATE
+  - UNITY WINS
+  - PLAY MORE
+  - GO CREATE
+  - MAKE MAGIC
+  - BUILD MORE
+  - HAVE COURAGE
+  - ENJOY TODAY
+  - STAY CALM
+  - TEAM WORK
+  - NEVER FEAR
+  - LOVE WINS
+  - LIVE KIND
+  - WORK HARDER
+  - SMILE MORE
+  - CREATE FUN
+  - SHARE JOY
+  - TRY AGAIN+DO BETTER
+  - DREAM MORE+WORK HARD
+  - STAY COOL+KEEP GOING
+  - BE HONEST+WORK TRUE
+  - CHOOSE LOVE+STAY STRONG

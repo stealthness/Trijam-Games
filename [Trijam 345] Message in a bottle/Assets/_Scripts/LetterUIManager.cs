@@ -14,6 +14,7 @@ namespace _Scripts
 	    public GameObject letterButtonPrefab;
 	    public RectTransform letterPanel;
 	    [SerializeField] private float distanceBetweenLetters = 5f;
+	    [SerializeField] private float xOffSet = 400f;
 
 
 	    private void Awake()
@@ -28,27 +29,33 @@ namespace _Scripts
 
 	    public void Start(){
 			Debug.Log("Letter UI Manager Started");	
-			if (lettersSprites == null || lettersSprites.Length == 0)
-			{
-				Debug.LogWarning("No letter sprites assigned in the inspector.");
-				return;
-			}
-			if (letterButtonPrefab == null)
-			{
-				Debug.LogWarning("Letter button prefab is not assigned in the inspector.");
-				return;
-			}
-			if (letterPanel == null)
-			{
-				Debug.LogWarning("Letter panel is not assigned in the inspector.");
-				return;
-			}
-
+			if (DoNullChecks()) return;
 			CreatLetterButtons();
 
 		}
 
-		private void CreatLetterButtons()
+	    private bool DoNullChecks()
+	    {
+		    if (lettersSprites == null || lettersSprites.Length == 0)
+		    {
+			    Debug.LogWarning("No letter sprites assigned in the inspector.");
+			    return true;
+		    }
+		    if (!letterButtonPrefab)
+		    {
+			    Debug.LogWarning("Letter button prefab is not assigned in the inspector.");
+			    return true;
+		    }
+		    if (!letterPanel)
+		    {
+			    Debug.LogWarning("Letter panel is not assigned in the inspector.");
+			    return true;
+		    }
+
+		    return false;
+	    }
+
+	    private void CreatLetterButtons()
 		{
 			for (int i = 0; i < lettersSprites.Length; i++)
 			{
@@ -59,11 +66,11 @@ namespace _Scripts
 				RectTransform rt = letterButton.GetComponent<RectTransform>();
 				if (i < 13)
 				{
-					rt.anchoredPosition = new Vector2(i * (rt.sizeDelta.x + distanceBetweenLetters), 0);
+					rt.anchoredPosition = new Vector2(i * (rt.sizeDelta.x + distanceBetweenLetters) - xOffSet, 0);
 				}
 				else
 				{
-					rt.anchoredPosition = new Vector2((i - 13) * (rt.sizeDelta.x + distanceBetweenLetters), -60);
+					rt.anchoredPosition = new Vector2((i - 13) * (rt.sizeDelta.x + distanceBetweenLetters) -xOffSet, -60);
 				}
 				
 				Button btn = letterButton.GetComponent<Button>();
@@ -81,8 +88,15 @@ namespace _Scripts
 			Debug.Log("Letter Clicked: " + letter);
 			
 			clickedButton.interactable = false;
-			clickedButton.GetComponent<UnityEngine.UI.Image>().color = Color.gray;
-			MessageManager.Instance.HandleLetterSelection(letter);
+			if (MessageManager.Instance.HandleLetterSelection(letter))
+			{
+				clickedButton.GetComponent<UnityEngine.UI.Image>().color = Color.green;
+			}
+			else
+			{
+				
+			clickedButton.GetComponent<UnityEngine.UI.Image>().color = Color.red;
+			}
 			GameManager.Instance.CheckForWin();
 		}
 
