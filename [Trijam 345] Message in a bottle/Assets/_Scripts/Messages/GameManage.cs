@@ -33,9 +33,14 @@ namespace _Scripts.Messages
 
         public void ResetMessage()
         {
-            ScoreManager.Instance.ResetScore();
             MessageManager.Instance.ResetMessage();
             LetterUIManager.Instance.ResetLetters();
+        }
+        
+        public void OnClickResetButton()
+        {
+            ResetMessage();
+            ScoreManager.Instance.ResetScore();
         }
 
         public void HandleGameFail()
