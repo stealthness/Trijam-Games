@@ -62,7 +62,7 @@ namespace _Scripts
 				var letterButton = Instantiate(letterButtonPrefab, letterPanel);
 				letterButton.name = "LetterButton_" + lettersSprites[i].name;
 				letterButton.GetComponentInChildren<TextMeshProUGUI>().enabled = false;
-				letterButton.GetComponent<UnityEngine.UI.Image>().sprite = lettersSprites[i];
+				letterButton.GetComponent<Image>().sprite = lettersSprites[i];
 				RectTransform rt = letterButton.GetComponent<RectTransform>();
 				if (i < 13)
 				{
@@ -88,15 +88,7 @@ namespace _Scripts
 			Debug.Log("Letter Clicked: " + letter);
 			
 			clickedButton.interactable = false;
-			if (MessageManager.Instance.HandleLetterSelection(letter))
-			{
-				clickedButton.GetComponent<UnityEngine.UI.Image>().color = Color.green;
-			}
-			else
-			{
-				
-			clickedButton.GetComponent<UnityEngine.UI.Image>().color = Color.red;
-			}
+			clickedButton.GetComponent<Image>().color = MessageManager.Instance.HandleLetterSelection(letter) ? Color.green : Color.red;
 			GameManager.Instance.CheckForWin();
 		}
 
@@ -108,7 +100,7 @@ namespace _Scripts
 			foreach (var button in letterButtons)
 			{
 				button.interactable = true;
-				button.GetComponent<UnityEngine.UI.Image>().color = Color.white;
+				button.GetComponent<Image>().color = Color.white;
 			}
 		}
     }
