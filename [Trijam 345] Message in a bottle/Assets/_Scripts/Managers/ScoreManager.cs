@@ -31,9 +31,14 @@ namespace _Scripts.Managers
                 Debug.LogWarning("Score Text is not assigned in the inspector.");
                 return;
             }
-            scoreText.text = "Score: " + score;
+            scoreText.text = "Score\n" + score;
         }
 
 
+        public void ResetScore()
+        {
+            score = 0;
+            UpdateScoreUI();
+        }
     }
 }
