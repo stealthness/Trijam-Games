@@ -46,6 +46,7 @@ namespace _Scripts.Messages
         public void HandleGameFail()
         {
             Debug.Log("Game Over!");
+            EndMenuManager.Instance.ShowEndMenu();
             _audioSource.PlayOneShot(failureClip);
         }
         
@@ -56,7 +57,7 @@ namespace _Scripts.Messages
             {
                 Debug.Log("You Win!");
                 _audioSource.PlayOneShot(successClip);
-                ScoreManager.Instance.AddScore(100);
+                ScoreManager.Instance.AddMessageScore();
                 ScoreManager.Instance.UpdateScoreUI();
                 StartCoroutine(nameof(WaitAndReset), 3f);
             }

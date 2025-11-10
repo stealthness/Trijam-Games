@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using _Scripts.Managers;
 using UnityEngine;
 using UnityEngine.Analytics;
 using UnityEngine.UI;
@@ -188,6 +189,14 @@ namespace _Scripts.Messages
             if (!foundLetterInMessage)
             {
                 Debug.Log("Letter " + letter + " not found in the message.");
+                ScoreManager.Instance.DecreaseMessageScore();
+                if (ScoreManager.Instance.IsMessageScoreDepleted())
+                {
+                    MusicManager.Instance.ToggleMusic(false);
+                    Debug.Log("Message score depleted.");
+                    GameManager.Instance.HandleGameFail();
+                    return false;
+                }
                 _audioSource.PlayOneShot(failureAudioClip);
             }
             else

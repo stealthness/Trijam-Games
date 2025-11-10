@@ -9,6 +9,9 @@ namespace _Scripts.Managers
         public static ScoreManager Instance;
         public TextMeshProUGUI scoreText;
         [SerializeField] private int score;
+        [SerializeField] private int messageScoreDecreaseAmount = 10;
+        [SerializeField] private int messageScoreMaxAmount = 100;
+        [SerializeField] private int currentMessageScore = 100;
 
         private void Awake()
         {
@@ -26,6 +29,8 @@ namespace _Scripts.Managers
 
         public void UpdateScoreUI()
         {
+            ResetMessageScore();
+            Debug.Log("Updating Score UI: " + score + "Message Score: " + currentMessageScore);
             if (!scoreText)
             {
                 Debug.LogWarning("Score Text is not assigned in the inspector.");
@@ -35,9 +40,32 @@ namespace _Scripts.Managers
         }
 
 
+        public void DecreaseMessageScore()
+        {
+            currentMessageScore -= messageScoreDecreaseAmount;
+        }
+
+        public void AddMessageScore()
+        {
+            AddScore(currentMessageScore);
+        }
+
+        public void ResetMessageScore()
+        {
+            currentMessageScore = messageScoreMaxAmount;
+        }
+        
+        public bool IsMessageScoreDepleted()
+        {
+            return currentMessageScore <= 0;
+        }
+        
+
         public void ResetScore()
         {
+            
             score = 0;
+            currentMessageScore = messageScoreMaxAmount;
             UpdateScoreUI();
         }
     }
