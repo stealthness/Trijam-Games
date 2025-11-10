@@ -27,7 +27,7 @@ namespace _Scripts.Messages
         void Start()
         {
             Debug.Log("Game Manage Started");
-
+            Time.timeScale = 0;
         }
 
 
@@ -68,5 +68,9 @@ namespace _Scripts.Messages
             ResetMessage();
         }
 
+        public void StartGame()
+        {
+            Time.timeScale = 1;
+        }
     }
 }
