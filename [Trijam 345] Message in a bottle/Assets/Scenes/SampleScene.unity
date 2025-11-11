@@ -3007,6 +3007,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50b478c2d2de4fe19e38c4a3b9471a6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_Scripts.LetterUIManager
+  particlePrefab: {fileID: 0}
+  particle: {fileID: 6747347069394769586, guid: e82d06fd807a9fb47bb6203cc11f26d6, type: 3}
   lettersSprites:
   - {fileID: 6408029474437657535, guid: e2b7dcaa12287fa4cae0492324ff6262, type: 3}
   - {fileID: -6983116224656839642, guid: c39d8f8a08f898f43bfea883ffe98b5c, type: 3}

@@ -14,6 +14,7 @@ namespace _Scripts.Messages
         public AudioClip failureAudioClip;
         
         public static MessageManager Instance;
+        
         [Tooltip("Reference to the Message Database ScriptableObject.")]
         public MessageDatabase messageDatabase;
         [Tooltip("Panel where the message letters will be displayed.")]
@@ -41,6 +42,7 @@ namespace _Scripts.Messages
                 Destroy(gameObject);
             }
             _audioSource = GetComponent<AudioSource>();
+
         }
 
 
@@ -202,6 +204,7 @@ namespace _Scripts.Messages
             else
             {
                 Debug.Log("Letter " + letter + " found in the message.");
+                
                 _audioSource.PlayOneShot(successAudioClip);
             }
             
