@@ -6,9 +6,9 @@ using UnityEngine.UI;
 
 namespace _Scripts
 {
-    public class LetterUIManager : MonoBehaviour
+    public class LetterButtonsUIManager : MonoBehaviour
     {
-	    public static LetterUIManager Instance;
+	    public static LetterButtonsUIManager Instance;
 	    public GameObject particlePrefab;
 	    public Sprite[] lettersSprites;
 	    public GameObject letterButtonPrefab;
@@ -89,6 +89,17 @@ namespace _Scripts
 			clickedButton.interactable = false;
 			clickedButton.GetComponent<Image>().color = MessageManager.Instance.HandleLetterSelection(letter) ? Color.green : Color.red;
 			GameManager.Instance.CheckForWin();
+		}
+
+		public void DisableAllLetterButtons()
+		{
+			foreach (var letterButton in letterPanel.GetComponentsInChildren<Button>())
+			{
+				if (letterButton != null && letterButton.interactable)
+				{
+					letterButton.interactable = false;
+				}
+			}
 		}
 
 		public void ResetLetters()
