@@ -10,7 +10,6 @@ namespace _Scripts
     {
 	    public static LetterUIManager Instance;
 	    public GameObject particlePrefab;
-	    public ParticleSystem particle;
 	    public Sprite[] lettersSprites;
 	    public GameObject letterButtonPrefab;
 	    public RectTransform letterPanel;
@@ -25,7 +24,6 @@ namespace _Scripts
 			    Destroy(Instance);
 		    }
 		    Instance = this;
-		    particle = Instantiate(particlePrefab, Vector3.zero, Quaternion.identity).GetComponent<ParticleSystem>();
 	    }
 
 	    public void Start(){
@@ -64,7 +62,6 @@ namespace _Scripts
 				letterButton.name = "LetterButton_" + lettersSprites[i].name;
 				letterButton.GetComponentInChildren<TextMeshProUGUI>().enabled = false;
 				letterButton.GetComponent<Image>().sprite = lettersSprites[i];
-				letterButton.AddComponent<ParticleSystem>();
 				
 				RectTransform rt = letterButton.GetComponent<RectTransform>();
 				if (i < 13)
@@ -89,7 +86,6 @@ namespace _Scripts
 		private void OnLetterClicked(Button clickedButton, char letter)
 		{
 			Debug.Log("Letter Clicked: " + letter);
-			particle.Play();
 			clickedButton.interactable = false;
 			clickedButton.GetComponent<Image>().color = MessageManager.Instance.HandleLetterSelection(letter) ? Color.green : Color.red;
 			GameManager.Instance.CheckForWin();
