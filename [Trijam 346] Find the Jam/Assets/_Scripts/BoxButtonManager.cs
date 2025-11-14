@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 namespace _Scripts
 {
@@ -39,6 +40,15 @@ namespace _Scripts
 
         private void Start()
         {
+            for (int i = 0; i < jams.Length; i++)
+            {
+                // randomize jams array
+                var temp = jams[i];
+                var r = Random.Range(0, jams.Length);
+                jams[i] = jams[r];
+                jams[r] = temp;
+                Debug.Log("Jam at index " + i + ": " + jams[i]);
+            }
             CreateBoxArray();
         }
 
@@ -46,12 +56,19 @@ namespace _Scripts
         {
             Debug.Log("Creating Box Array");
             boxItems = new BoxItem[maxRowSize * maxColSize];
-            for (int i = 0; i < boxItems.Length; i = i + 2)
+            
+            for(int i = 0; i < boxItems.Length; i++)
+            {
+                Debug.Log("Creating Box Item for: " + jams[i]);
+                boxItems[i] = new BoxItem(jams[i]);
+            }
+            
+            /*for (int i = 0; i < boxItems.Length; i = i + 2)
             {
                 Debug.Log("Creating Box Item for: " + jams[i]);
                 boxItems[i] = new BoxItem(jams[i]);
                 boxItems[i + 1] = new BoxItem(jams[i]);
-            }
+            }*/
         }
 
         public void CreateBoxes()
@@ -74,7 +91,7 @@ namespace _Scripts
         private void CreateBoxButton(int boxId, Vector2 anchorPoint)
         {
             var boxText = Instantiate(boxButtonTextPrefab, transform);
-            boxText.name = "BoxButton_" + boxText;
+            boxText.name = "BoxButton_" + boxItems[boxId].GetJamsType() + "_" + ((boxId<10)?("0" + boxId):boxId);
             boxText.AddComponent<Box>().Initialize(boxItems[boxId], GetImageForJamsType(boxItems[boxId].GetJamsType()));
             
             // set images
@@ -104,8 +121,51 @@ namespace _Scripts
 
         private void OnBoxButtonClicked(Button btn, int boxId)
         {
+            if (GameManager.Instance.isPaused)
+            {
+                return;
+            }
+            
             Debug.Log("Box Button Clicked: " + boxId);
-            btn.GetComponent<Box>().OnShowBox();
+            var box = btn.GetComponent<Box>();
+            box.OnShowBox();
+            ScoreManager.Instance.AddOnePoint();
+            GameManager.Instance.BoxOpened(boxId, box.name);
+        }
+
+        
+        public void HideAllBoxes()
+        {
+            Debug.Log("Hiding All Boxes");
+            foreach (Transform child in transform)
+            {
+                var box = child.GetComponent<Box>();
+                if (box != null)
+                {
+                    var images = box.GetComponentsInChildren<Image>();
+                    images[1].enabled = true;
+                }
+            }
+        }
+        
+        public bool BoxesAreAllRemoved()
+        {
+            return transform.childCount == 0;
+        }
+        
+        public void RemoveBoxes(string boxName1, string boxName2)
+        {
+            Debug.Log("Removing Boxes: " + boxName1 + " and " + boxName2);
+            var box1 = transform.Find(boxName1);
+            var box2 = transform.Find(boxName2);
+            if (box1 != null)
+            {
+                Destroy(box1.gameObject);
+            }
+            if (box2 != null)
+            {
+                Destroy(box2.gameObject);
+            }
         }
     }
 }
