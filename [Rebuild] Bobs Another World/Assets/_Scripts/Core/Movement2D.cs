@@ -11,16 +11,22 @@ namespace _Scripts.Core
         protected float Speed  = 3f;
         
         private Rigidbody2D _rb;
-        [SerializeField] private Vector2 dir;
+        [SerializeField] internal Vector2 dir;
 
         private void Awake()
         {
             _rb = GetComponent<Rigidbody2D>();
         }
 
-        private void FixedUpdate()
+        protected virtual void FixedUpdate()
         {
-            _rb.linearVelocityX = dir.x * (Speed * Time.fixedDeltaTime);
+            _rb.linearVelocityX = dir.x * Speed;
+            Debug.Log(_rb.linearVelocity);
+        }
+        
+        protected internal virtual void Jump(float jumpForce, Vector2 jumpDir)
+        {
+            _rb.AddForce(jumpDir * jumpForce, ForceMode2D.Impulse);
         }
     }
 }
