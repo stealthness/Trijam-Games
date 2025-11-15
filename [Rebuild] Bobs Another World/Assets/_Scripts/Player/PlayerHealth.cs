@@ -1,10 +1,11 @@
+using _Scripts.Core;
 using UnityEngine;
 
 namespace _Scripts.Player
 {
     
     [RequireComponent(typeof(PlayerController))]
-    public class PlayerHealth : MonoBehaviour
+    public class PlayerHealth : MonoBehaviour, IDamageable
     {
         private PlayerController _pc;
         
@@ -27,6 +28,11 @@ namespace _Scripts.Player
                 Debug.Log("Player Dead");
             }
             Debug.Log("Player Take Damage -> current health" + currentHealth);
+        }
+
+        public bool IsDamageable()
+        {
+            return true;
         }
     }
 }
