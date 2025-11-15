@@ -6,6 +6,8 @@ namespace _Scripts
 {
     public class ScoreManager : MonoBehaviour
     {
+        private const string LowestScoreKey = "LowestScore";
+        
         public static ScoreManager Instance;
         
         public TextMeshProUGUI scoreText;
@@ -21,6 +23,9 @@ namespace _Scripts
                 Destroy(gameObject);
             }
             Instance = this;
+            // Load persisted lowest score
+            lowestScore = PlayerPrefs.GetInt(LowestScoreKey, 0);
+            UpdateScoreText();
         }
         
         public void AddOnePoint()
@@ -44,6 +49,25 @@ namespace _Scripts
             }
             score = 0;
             UpdateScoreText();
+        }
+
+        public bool IsLowestScore()
+        {
+            if (lowestScore == 0 || score > lowestScore)
+            {
+                return false;
+            }
+            
+            Debug.Log("New Lowest Score Achieved: " + score);
+            lowestScore = score;
+            PlayerPrefs.SetInt(LowestScoreKey, lowestScore);
+            PlayerPrefs.Save();
+            return true;
+        }
+
+        public string GetScore()
+        {
+            return "" + score;
         }
     }
 }

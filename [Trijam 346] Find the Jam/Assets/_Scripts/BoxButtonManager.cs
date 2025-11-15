@@ -12,8 +12,10 @@ namespace _Scripts
         [SerializeField] private int maxRowSize = 4;
         [SerializeField] private int maxColSize = 4;
         [SerializeField] private Vector2 offSet = new Vector2(-180, 180);
+        [SerializeField] private int boxNumbers;
         public Sprite[] itemImages;
-        public Image strawberryImage;
+        public Sprite[] boxImages;
+        
         
         private BoxItem[] boxItems;
         private JamsType[] jams = new JamsType[]{
@@ -40,6 +42,28 @@ namespace _Scripts
 
         private void Start()
         {
+
+            CreateBoxArray();
+        }
+
+        private void CreateBoxArray()
+        {
+            RandomizeBoxes();
+            Debug.Log("Creating Box Array");
+            boxItems = new BoxItem[maxRowSize * maxColSize];
+            
+            for(int i = 0; i < boxItems.Length; i++)
+            {
+                Debug.Log("Creating Box Item for: " + jams[i]);
+                boxItems[i] = new BoxItem(jams[i]);
+            }
+            boxNumbers = maxRowSize * maxColSize;
+           
+            
+        }
+
+        private void RandomizeBoxes()
+        {
             for (int i = 0; i < jams.Length; i++)
             {
                 // randomize jams array
@@ -49,30 +73,11 @@ namespace _Scripts
                 jams[r] = temp;
                 Debug.Log("Jam at index " + i + ": " + jams[i]);
             }
-            CreateBoxArray();
-        }
-
-        private void CreateBoxArray()
-        {
-            Debug.Log("Creating Box Array");
-            boxItems = new BoxItem[maxRowSize * maxColSize];
-            
-            for(int i = 0; i < boxItems.Length; i++)
-            {
-                Debug.Log("Creating Box Item for: " + jams[i]);
-                boxItems[i] = new BoxItem(jams[i]);
-            }
-            
-            /*for (int i = 0; i < boxItems.Length; i = i + 2)
-            {
-                Debug.Log("Creating Box Item for: " + jams[i]);
-                boxItems[i] = new BoxItem(jams[i]);
-                boxItems[i + 1] = new BoxItem(jams[i]);
-            }*/
         }
 
         public void CreateBoxes()
         {
+            boxNumbers = maxRowSize * maxColSize;
             Debug.Log("Boxes Created");
             // Add logic to create boxes
             
@@ -85,6 +90,7 @@ namespace _Scripts
                     CreateBoxButton(boxId, anchorPoint);
                 }
             }
+            
 
         }
 
@@ -97,6 +103,8 @@ namespace _Scripts
             // set images
             var images = boxText.GetComponentsInChildren<Image>();
             images[0].sprite = GetImageForJamsType(boxItems[boxId].GetJamsType()).sprite;
+            
+            images[1].sprite = boxImages[Random.Range(0,boxImages.Length)]; // box closed image
             
             
             // Set button listener
@@ -148,9 +156,10 @@ namespace _Scripts
             }
         }
         
-        public bool BoxesAreAllRemoved()
+        public bool AreAllBoxesRemoved()
         {
-            return transform.childCount == 0;
+            Debug.Log("AreAllBoxesRemoved Called. Remaining Boxes: " + boxNumbers);
+            return boxNumbers <= 0;
         }
         
         public void RemoveBoxes(string boxName1, string boxName2)
@@ -166,6 +175,7 @@ namespace _Scripts
             {
                 Destroy(box2.gameObject);
             }
+            boxNumbers -=2;
         }
     }
 }

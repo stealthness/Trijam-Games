@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -10,9 +11,9 @@ namespace _Scripts
         
         [SerializeField] private int boxId1 = -1;
         [SerializeField] private int boxId2 = -1;
-        [SerializeField] private String boxName1 = "";
-        [SerializeField] private String boxName2 = "";
+        [SerializeField] private string firstBoxName = "";
         public bool isPaused = false;
+        public bool isOver = false;
 
         private void Awake()
         {
@@ -46,34 +47,30 @@ namespace _Scripts
         public void BoxOpened(int boxId, string boxName)
         {
             
-            
-            
             if (boxId1 == -1)
             {
                 boxId1 = boxId;
-                boxName1 = boxName;
-                Debug.Log("First Box Opened: " + boxName1);
+                firstBoxName = boxName;
+                Debug.Log("First Box Opened: " + firstBoxName);
             }
             else if (boxId2 == -1)
             {
                 boxId2 = boxId;
-                boxName2 = boxName;
-                Debug.Log("Second Box Opened: " + boxName2);
+                Debug.Log("Second Box Opened: " + boxName);
                 
                 // Check for match
-                CheckForMatch();
+                CheckForMatch(firstBoxName, boxName);
             }
             if (boxId1 != -1 && boxId2 != -1)
             {
                 // Reset for next turn
                 boxId1 = -1;
                 boxId2 = -1;
-                boxName1 = "";
-                boxName2 = "";
+                firstBoxName = "";
             }
         }
 
-        private void CheckForMatch()
+        private void CheckForMatch(string boxName1, string boxName2)
         {
             
             var name_part1 = boxName1.Substring(0, boxName1.Length - 2);
@@ -81,14 +78,9 @@ namespace _Scripts
             if (boxName1 != boxName2 && name_part2 == name_part1)
             {
                 Debug.Log("Boxes Matched: " + boxName1);
-                BoxButtonManager.Instance.RemoveBoxes(boxName1, boxName2);
-                if (BoxButtonManager.Instance.BoxesAreAllRemoved())
-                {
-                    Debug.Log("All Boxes Removed! You Win!");
-                    // You can add additional logic here for winning the game
-                    ScoreManager.Instance.ResetScore();
-                    Invoke(nameof(StartGame), 2f);
-                }
+                isPaused = true;
+
+                StartCoroutine(DelayedRemoveBoxes( boxName1, boxName2));
             }
             else
             {
@@ -99,10 +91,40 @@ namespace _Scripts
             isPaused = true;
         }
 
+        private IEnumerator DelayedRemoveBoxes(string boxName1, string boxName2)
+        {
+            yield return new WaitForSeconds(1f);
+            BoxButtonManager.Instance.RemoveBoxes(boxName1, boxName2);
+            if (BoxButtonManager.Instance.AreAllBoxesRemoved())
+            {
+                Debug.Log("All Boxes Removed! You Win!");
+                isOver = true;
+            }
+            if (isOver)
+            {
+                EndMenuManager.Instance.ShowEndMenu();
+            }
+            else
+            {
+                isPaused = false;
+            }
+                    
+        }
+        
+        
         private void DelayOver()
         {
             isPaused = false;
             BoxButtonManager.Instance.HideAllBoxes();
+        }
+
+        public void NewGame()
+        {
+            Debug.Log("Starting New Game");
+            isOver = false;
+            isPaused = false;
+            ScoreManager.Instance.ResetScore();
+            BoxButtonManager.Instance.CreateBoxes();
         }
     }
 }
