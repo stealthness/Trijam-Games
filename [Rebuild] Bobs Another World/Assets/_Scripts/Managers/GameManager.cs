@@ -1,16 +1,24 @@
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+namespace _Scripts.Managers
 {
-    public static GameManager Instance { get; private set; }
-
-    private void Awake()
+    public class GameManager : MonoBehaviour
     {
-        if (!Instance)
+        public static GameManager Instance { get; private set; }
+
+        private void Awake()
         {
-            Destroy(Instance);
+            if (!Instance)
+            {
+                Destroy(Instance);
+            }
+
+            Instance = this;
         }
 
-        Instance = this;
+        public void Start()
+        {
+            Debug.Log("Game Start");
+        }
     }
 }
