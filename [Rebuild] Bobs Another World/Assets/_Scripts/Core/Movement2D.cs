@@ -21,7 +21,6 @@ namespace _Scripts.Core
         protected virtual void FixedUpdate()
         {
             _rb.linearVelocityX = dir.x * Speed;
-            Debug.Log(_rb.linearVelocity);
         }
         
         protected internal virtual void Jump(float jumpForce, Vector2 jumpDir)
