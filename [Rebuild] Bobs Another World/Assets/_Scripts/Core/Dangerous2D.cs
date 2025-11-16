@@ -11,6 +11,10 @@ namespace _Scripts.Core
         private Rigidbody2D _rb;
         private Collider2D _col;
         
+        [SerializeField] private int initialDamage = 10;
+        [SerializeField] private int tickDamage = 5;
+        [SerializeField] private float tickInterval = 1f;
+        
         List<IDamageable> _damageables;
 
 
@@ -28,31 +32,25 @@ namespace _Scripts.Core
             // Check if the other object has a component that implements IDamageable
             if (other.TryGetComponent(out IDamageable damageable) && damageable.IsDamageable())
             {
-                damageable.TakeDamage(10);
+                damageable.TakeDamage(initialDamage);
                 if (!_damageables.Contains(damageable))
                 {
                     _damageables.Add(damageable);
+                    // Start a coroutine to apply tick damage
                     StartCoroutine(ApplyTickDamage(damageable));
                 }
             }
         }
         
-        /*private void OnTriggerStay2D(Collider2D other)
-        {
-            // Check if the other object has a component that implements IDamageable
-            if (other.TryGetComponent(out IDamageable damageable) && damageable.IsDamageable())
-            {
-                
-                
-            }
-        }*/
+
 
         private IEnumerator ApplyTickDamage(IDamageable damageable)
         {
             while (_damageables.Count > 0 && _damageables.Contains(damageable))
             {
-                damageable.TakeDamage(5);
-                yield return new WaitForSeconds(1f);
+                yield return new WaitForSeconds(tickInterval);
+                // Apply tick damage at the end of the interval
+                damageable.TakeDamage(tickDamage);
             }
         }
         
@@ -62,6 +60,7 @@ namespace _Scripts.Core
             if (other.TryGetComponent(out IDamageable damageable))
             {
                 _damageables.Remove(damageable);
+                // Stop the coroutine for this damageable
                 StopCoroutine(ApplyTickDamage(damageable));
             }
         }
