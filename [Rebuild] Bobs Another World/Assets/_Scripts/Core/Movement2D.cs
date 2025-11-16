@@ -8,9 +8,11 @@ namespace _Scripts.Core
     [RequireComponent(typeof(Rigidbody2D))]
     public class Movement2D : MonoBehaviour
     {
-        protected float Speed  = 3f;
+        [Tooltip("The base speed of the GameObject.")]
+        protected float BaseSpeed  = 3f;
         
         private Rigidbody2D _rb;
+        
         [SerializeField] internal Vector2 dir;
 
         private void Awake()
@@ -20,7 +22,7 @@ namespace _Scripts.Core
 
         protected virtual void FixedUpdate()
         {
-            _rb.linearVelocityX = dir.x * Speed;
+            _rb.linearVelocityX = dir.x * BaseSpeed;
         }
         
         protected internal virtual void Jump(float jumpForce, Vector2 jumpDir)
